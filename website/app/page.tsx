@@ -443,6 +443,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Under the Hood */}
+      <section className="py-16">
+        <div className="container mx-auto px-6 md:px-10 max-w-4xl">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-2"><span className="text-white/40">&#10095;</span> Under the Hood</h2>
+          <div className="bg-[#1a1a2e]/60 backdrop-blur-sm rounded-2xl border border-white/10 p-8 space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-1">Built on temporal-semantic linking</h3>
+              <p className="text-white/60">Summaries link back to exact conversations through verifiable provenance, not lossy embeddings. Every decision, problem, and code change traces to the messages that produced it.</p>
+            </div>
+            <div className="border-t border-white/5 pt-6">
+              <h3 className="text-lg font-semibold mb-1">Tri-layer memory architecture</h3>
+              <p className="text-white/60"><span className="text-white/80">.devproject</span> (project features) &#8594; <span className="text-white/80">.devsession summary</span> (compacted working memory) &#8594; <span className="text-white/80">.devsession conversation</span> (source of truth). Semantic linking between layers, temporal linking within.</p>
+            </div>
+            <div className="border-t border-white/5 pt-6">
+              <h3 className="text-lg font-semibold mb-1">Hybrid retrieval</h3>
+              <p className="text-white/60">Dense embeddings + BM25 sparse search + reciprocal rank fusion. Not just vector similarity — keyword precision when it matters.</p>
+            </div>
+            <div className="border-t border-white/5 pt-6">
+              <h3 className="text-lg font-semibold mb-1">Open formats</h3>
+              <p className="text-white/60"><a href="https://github.com/reccli/reccli/blob/main/docs/specs/DEVSESSION_FORMAT.md" className="text-[#ff5757] hover:underline">.devsession</a> and <a href="https://github.com/reccli/reccli/blob/main/docs/specs/DEVPROJECT_FORMAT.md" className="text-[#ff5757] hover:underline">.devproject</a> are CC0-licensed specifications. JSON, human-readable, designed for any tool to implement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16 bg-white/5">
         <div className="container mx-auto px-10 max-w-3xl">
