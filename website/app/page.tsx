@@ -178,7 +178,7 @@ export default function Home() {
             {/* Commands */}
             <div className="p-6 font-mono text-sm space-y-5">
               <div>
-                <div className="text-gray-500 mb-2"># Install reccli</div>
+                <div className="text-green-400 mb-2"># Install reccli</div>
                 <div
                   onClick={() => handleCopy(installCommand, 'install')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
@@ -199,7 +199,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <div className="text-gray-500 mb-2"># Add to Claude Code (or any MCP-compatible tool)</div>
+                <div className="text-green-400 mb-2"># Add to Claude Code (or any MCP-compatible tool)</div>
                 <div
                   onClick={() => handleCopy(mcpCommand, 'mcp')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
@@ -219,7 +219,7 @@ export default function Home() {
                   )}
                 </div>
               </div>
-              <div className="text-gray-500"># Done. Your AI now has persistent memory.</div>
+              <div className="text-green-400"># Done. Your AI now has persistent memory.</div>
             </div>
           </div>
           <p className="text-center text-sm text-white/50 mt-4">Works with Claude Code, Cursor, Windsurf, and any MCP-compatible tool.</p>
