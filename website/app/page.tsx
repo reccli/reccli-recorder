@@ -233,17 +233,17 @@ export default function Home() {
           <p className="text-xl text-center opacity-70 mb-16 max-w-2xl mx-auto">Two commands. Then your AI remembers everything.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4 flex items-center justify-center gap-3">1 <ScanSearch className="w-10 h-10 text-white/20" strokeWidth={1.5} /></div>
+              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">1 <ScanSearch className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">First session</h3>
               <p className="text-lg opacity-90">reccli scans your codebase with Tree-sitter, clusters files into features, and creates a structured project map.</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4 flex items-center justify-center gap-3">2 <RefreshCw className="w-10 h-10 text-white/20" strokeWidth={1.5} /></div>
+              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">2 <RefreshCw className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">Every session after</h3>
               <p className="text-lg opacity-90">Your AI loads the project map + last session's decisions, problems solved, and next steps. No re-explaining.</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4 flex items-center justify-center gap-3">3 <TrendingUp className="w-10 h-10 text-white/20" strokeWidth={1.5} /></div>
+              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">3 <TrendingUp className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">It compounds</h3>
               <p className="text-lg opacity-90">Session #10 is dramatically better than #1. Your AI accumulates structured memory instead of starting cold.</p>
             </div>
