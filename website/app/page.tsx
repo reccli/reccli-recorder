@@ -100,7 +100,7 @@ export default function Home() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            opacity: 0.4,
+            opacity: 0.2,
           }}
         />
 
@@ -124,7 +124,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center text-center px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
           {/* Brand with dot */}
           <h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 flex items-center gap-4 justify-center">
-            <div className="w-10 h-10 lg:w-14 lg:h-14 bg-[#ff5757] rounded-full shadow-lg shadow-red-500/30 flex-shrink-0"></div>
+            <div className="w-6 h-6 lg:w-8 lg:h-8 bg-[#ff5757] rounded-full flex-shrink-0"></div>
             reccli
           </h1>
 
