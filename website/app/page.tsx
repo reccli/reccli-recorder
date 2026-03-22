@@ -126,7 +126,7 @@ export default function Home() {
             {/* Left Column */}
             <div>
               <h1 className="text-2xl lg:text-4xl opacity-90 leading-snug font-normal mb-8 mt-16 lg:-mt-12">
-                Stop re-explaining your project every session.
+                Every session starts where the last one left off.
               </h1>
               <p className="text-lg lg:text-xl opacity-70 mb-8 -mt-4">
                 Persistent memory for AI coding tools.
