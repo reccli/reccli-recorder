@@ -6,6 +6,7 @@ import { Brain, Search, FolderTree, Save, Zap, GitBranch } from 'lucide-react'
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedMcp, setCopiedMcp] = useState(false)
+  const [terminalRecordingStarted, setTerminalRecordingStarted] = useState(false)
   const [showWaitlistForm, setShowWaitlistForm] = useState(false)
   const [waitlistEmail, setWaitlistEmail] = useState('')
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false)
@@ -29,6 +30,11 @@ export default function Home() {
     } catch (err) {
       console.error('Failed to copy:', err)
     }
+  }
+
+  const handleTerminalRecordingClick = () => {
+    setTerminalRecordingStarted(true)
+    setTimeout(() => setTerminalRecordingStarted(false), 2000)
   }
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
@@ -84,25 +90,134 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-16 pb-12">
-        <div className="container mx-auto px-6 md:px-10 max-w-7xl">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Your AI agent forgets everything between sessions.
-            </h1>
-            <p className="text-xl lg:text-2xl opacity-90 mb-12 leading-relaxed">
-              reccli is a memory engine that gives AI coding agents persistent project context.
-              Install once, and every session starts where the last one left off.
-            </p>
+      {/* Hero Section - identical layout to original */}
+      <section className="py-8 pb-8 relative overflow-x-hidden">
+        {/* Background Image - Desktop only */}
+        <div
+          className="absolute inset-0 z-0 hidden lg:block"
+          style={{
+            backgroundImage: 'url(/datatothought.PNG)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
 
-            {/* Install Commands */}
-            <div className="space-y-4 max-w-2xl mx-auto">
+        {/* Wave Overlay at Top - Desktop only */}
+        <div className="absolute left-0 right-0 pointer-events-none hidden lg:block" style={{ top: '-35px', zIndex: 20 }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full" style={{ display: 'block', height: '100px' }} preserveAspectRatio="none">
+            <path
+              fill="url(#wave-gradient)"
+              fillOpacity="1"
+              d="M0,10 L1440,10 L1440,45 C1380,47 1320,49 1260,48 C1200,47 1140,43 1080,44 C1020,45 960,51 900,53 C840,55 780,53 720,50 C660,47 600,43 540,44 C480,45 420,51 360,54 C300,57 240,57 180,55 C120,53 60,49 30,47 L0,45 Z"
+            ></path>
+            <defs>
+              <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#5b6ef7" stopOpacity="1" />
+                <stop offset="100%" stopColor="#6b5bb8" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center lg:mt-0 -mt-8">
+            {/* Left Column */}
+            <div>
+              <h1 className="text-2xl lg:text-4xl opacity-90 leading-snug font-normal mb-8 mt-16 lg:-mt-12">
+                Persistent memory for AI coding agents. Your agent never forgets.
+              </h1>
+
+              {/* Social Buttons - Hidden on mobile, shown on desktop */}
+              <div className="hidden lg:flex gap-4 mb-4">
+                <a
+                  href="https://github.com/reccli/reccli"
+                  className="bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all inline-flex items-center gap-2 shadow-lg"
+                >
+                  Star on GitHub
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://twitter.com/intent/tweet?text=reccli%20-%20persistent%20memory%20for%20AI%20coding%20agents.%20Your%20agent%20never%20starts%20cold%20again.&url=https://reccli.com"
+                  className="bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all inline-flex items-center gap-2 shadow-lg"
+                >
+                  <span>Share on</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+              </div>
+
+            </div>
+
+            {/* Right Column - Terminal Demo */}
+            <div className="relative max-w-xl mx-auto lg:mx-0 lg:pr-11 z-[50] -mt-8 lg:mt-[45px]">
+              <div className="space-y-6">
+              <div className="bg-[#1e1e1e] rounded-2xl shadow-2xl overflow-visible border border-white/10 relative z-[50]">
+                {/* Terminal Header */}
+                <div className="bg-[#2d2d2d] px-4 py-3 flex items-center gap-2 relative rounded-t-2xl">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+
+                  {/* RecCli Floating Popup Window */}
+                  <div className="absolute -top-[22px] -right-px bg-transparent rounded-lg shadow-[-2px_0_8px_rgba(0,0,0,0.3)]" style={{ zIndex: 100 }}>
+                    {/* Mini window header */}
+                    <div className="bg-[#2d2d2d] px-2 py-1 pb-1.5 flex items-center gap-1.5 rounded-t-lg shadow-sm relative">
+                      <div className="w-3 h-3 rounded-full bg-[#5c5c5c] relative top-[1px]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#5c5c5c] relative top-[1px]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#5c5c5c] relative top-[1px]"></div>
+                      <div className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-[#1a1a1a]"></div>
+                    </div>
+                    {/* RecCli button content */}
+                    <div className="w-[90px] h-10 bg-[#2c2c2c] flex items-center px-2 gap-1.5 rounded-b-lg shadow-lg relative">
+                      <span className="text-white font-normal text-lg relative top-0.5">Rec</span>
+                      <div
+                        onClick={handleTerminalRecordingClick}
+                        className={`w-8 h-8 bg-white border-2 border-black flex items-center justify-center flex-shrink-0 relative top-0.5 cursor-pointer hover:scale-105 transition-all ${terminalRecordingStarted ? 'rounded-full' : 'rounded-sm'}`}
+                      >
+                        <div className={`w-2.5 h-2.5 bg-[#ff3b30] transition-all ${terminalRecordingStarted ? 'rounded-full' : 'rounded-none'}`}></div>
+                      </div>
+                    </div>
+                  </div>
+                  {terminalRecordingStarted && (
+                    <div className="absolute -top-[38px] right-[45px] bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap shadow-lg border border-white/10" style={{ zIndex: 101 }}>
+                      Session saved
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+                        <div className="border-4 border-transparent border-t-black/70"></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Terminal Content - MCP themed */}
+                <div className="p-6 font-mono text-sm space-y-4 pb-16">
+                  <div className="text-gray-500"># reccli MCP server active</div>
+                  <div className="mt-4">
+                    <span className="text-green-400">$</span>
+                    <span className="text-white ml-2">pip install reccli</span>
+                  </div>
+                  <div className="text-green-400">&#10003; Installed reccli 0.9.0</div>
+                  <div className="mt-4">
+                    <span className="text-green-400">$</span>
+                    <span className="text-white ml-2">claude mcp add reccli</span>
+                  </div>
+                  <div className="text-green-400">&#10003; MCP server registered</div>
+                  <div className="text-gray-400 mt-2">5 tools available: load_project_context,</div>
+                  <div className="text-gray-400">project_init, search_history, expand_search_result,</div>
+                  <div className="text-gray-400">save_session_notes</div>
+                </div>
+              </div>
+
+              {/* Install Command - Below Terminal */}
               <div
                 onClick={() => handleCopy(installCommand, 'install')}
-                className="bg-black/30 backdrop-blur-sm p-5 rounded-2xl border border-white/10 cursor-pointer hover:bg-black/40 transition-all relative group"
+                className="bg-black/30 backdrop-blur-sm p-6 rounded-2xl border border-white/10 cursor-pointer hover:bg-black/40 transition-all relative group"
               >
-                <code className="text-lg lg:text-xl font-mono text-white">{installCommand}</code>
+                <code className="text-xl font-mono text-white">{installCommand}</code>
                 <button className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-lg transition-all">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -110,7 +225,7 @@ export default function Home() {
                   </svg>
                 </button>
                 {copiedInstall && (
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap shadow-lg z-10">
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap shadow-lg z-[100]">
                     Copied!
                     <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
                       <div className="border-4 border-transparent border-t-white"></div>
@@ -119,60 +234,163 @@ export default function Home() {
                 )}
               </div>
 
-              <div
-                onClick={() => handleCopy(mcpCommand, 'mcp')}
-                className="bg-black/30 backdrop-blur-sm p-5 rounded-2xl border border-white/10 cursor-pointer hover:bg-black/40 transition-all relative group"
-              >
-                <code className="text-base lg:text-lg font-mono text-white">{mcpCommand}</code>
-                <button className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-lg transition-all">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              {/* Social Buttons - Only visible on mobile */}
+              <div className="flex lg:hidden gap-4 mt-12 justify-center">
+                <a
+                  href="https://github.com/reccli/reccli"
+                  className="bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all inline-flex items-center gap-2 shadow-lg"
+                >
+                  Star on GitHub
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                   </svg>
-                </button>
-                {copiedMcp && (
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap shadow-lg z-10">
-                    Copied!
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-                      <div className="border-4 border-transparent border-t-white"></div>
-                    </div>
-                  </div>
-                )}
+                </a>
+                <a
+                  href="https://twitter.com/intent/tweet?text=reccli%20-%20persistent%20memory%20for%20AI%20coding%20agents.%20Your%20agent%20never%20starts%20cold%20again.&url=https://reccli.com"
+                  className="bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all inline-flex items-center gap-2 shadow-lg"
+                >
+                  <span>Share on</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
               </div>
-              <p className="text-sm text-white/60 mt-2">Works with Claude Code, Cursor, Windsurf, and any MCP-compatible agent</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="py-20 bg-white/5">
-        <div className="container mx-auto px-6 md:px-10 max-w-7xl">
-          <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">How it works</h2>
-          <p className="text-xl text-center opacity-80 mb-16 max-w-2xl mx-auto">Two commands. Then your agent remembers everything.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4">1</div>
-              <h3 className="text-xl font-bold mb-3">First session</h3>
-              <p className="text-lg opacity-90">reccli scans your codebase and builds a project map — features, file ownership, folder structure. One command.</p>
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 hidden lg:block bg-white/10 backdrop-blur-md z-0" />
+        <div className="absolute inset-0 z-10 lg:hidden" style={{ backgroundImage: 'url(/datatothought.PNG)', backgroundSize: 'cover', backgroundPosition: '5% center', backgroundRepeat: 'no-repeat', opacity: 0.7, transform: 'rotate(90deg)', transformOrigin: 'center center' }} />
+        <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
+          <h2 className="text-5xl font-bold text-center mb-16">How it works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="lg:bg-white/10 lg:backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+              <div className="mb-4 bg-green-500/20 w-16 h-16 rounded-xl flex items-center justify-center">
+                <FolderTree className="w-8 h-8 text-green-400" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">First session</h3>
+              <p className="text-lg opacity-90 bg-white/10 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none px-4 py-2 rounded-lg">reccli scans your codebase with Tree-sitter, clusters files into features, and creates a structured project map.</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4">2</div>
-              <h3 className="text-xl font-bold mb-3">Every session after</h3>
-              <p className="text-lg opacity-90">Your agent loads the project map + last session's decisions, problems, and next steps. No re-explaining.</p>
+            <div className="lg:bg-white/10 lg:backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+              <div className="mb-4 bg-blue-500/20 w-16 h-16 rounded-xl flex items-center justify-center">
+                <Brain className="w-8 h-8 text-blue-400" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Every session after</h3>
+              <p className="text-lg opacity-90 bg-white/10 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none px-4 py-2 rounded-lg">Your agent loads the project map + last session's decisions, problems solved, and next steps. No re-explaining.</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-5xl font-bold text-white/20 mb-4">3</div>
-              <h3 className="text-xl font-bold mb-3">It compounds</h3>
-              <p className="text-lg opacity-90">Session #10 is dramatically better than #1. Your agent accumulates structured memory instead of starting cold.</p>
+            <div className="lg:bg-white/10 lg:backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+              <div className="mb-4 bg-orange-500/20 w-16 h-16 rounded-xl flex items-center justify-center">
+                <Zap className="w-8 h-8 text-orange-400" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">It compounds</h3>
+              <p className="text-lg opacity-90 bg-white/10 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none px-4 py-2 rounded-lg">Session #10 is dramatically better than #1. Your agent accumulates structured memory instead of starting cold.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features / Tools */}
+      {/* The Problem */}
       <section className="py-20">
+        <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+          <div className="bg-white/5 backdrop-blur-sm px-4 pt-8 pb-6 md:p-12 rounded-3xl border border-white/10">
+            <h2 className="text-3xl font-bold mb-8 text-center">The cold start problem is costing you 20 minutes per session</h2>
+
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
+              <div className="space-y-3">
+                <div className="text-gray-300 text-lg mb-2">Every session <span className="text-red-300">without reccli</span></div>
+                <div className="bg-black/40 px-4 py-4 rounded-xl border border-white/10 font-mono text-sm space-y-1.5">
+                  <div className="text-white">"This is a Next.js app with Stripe..."</div>
+                  <div className="text-white">"We decided to use Connect because..."</div>
+                  <div className="text-white">"The auth middleware is in src/..."</div>
+                  <div className="text-white">"Last time we fixed the webhook by..."</div>
+                  <div className="text-red-400 mt-3">20 min re-explaining every time</div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="text-gray-300 text-lg mb-2">Session #10 <span className="text-green-300">with reccli</span></div>
+                <div className="bg-black/40 px-4 py-4 rounded-xl border border-white/10 font-mono text-sm space-y-1.5">
+                  <div className="text-green-400">Project: 8 features, 47 files</div>
+                  <div className="text-green-400">Last session: fixed webhook retry</div>
+                  <div className="text-green-400">Open issue: transfer error handling</div>
+                  <div className="text-green-400">Next step: add idempotency keys</div>
+                  <div className="text-green-400 mt-3">Ready to work in 0 seconds</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 md:mt-12">
+              <div className="border-b border-white/20 pb-4">
+                <table className="text-left" style={{width: 'auto', tableLayout: 'fixed'}}>
+                  <colgroup>
+                    <col style={{width: '150px'}} />
+                    <col style={{width: '300px'}} />
+                    <col style={{width: '300px'}} />
+                  </colgroup>
+                </table>
+              </div>
+              <div className="border-b border-white/10 py-4">
+                <table className="text-left" style={{width: 'auto', tableLayout: 'fixed'}}>
+                  <colgroup>
+                    <col style={{width: '150px'}} />
+                    <col style={{width: '300px'}} />
+                    <col style={{width: '300px'}} />
+                  </colgroup>
+                  <tbody className="text-lg">
+                    <tr>
+                      <td className="pr-2 text-gray-300">Context</td>
+                      <td className="pl-8 md:pl-4 pr-8 text-green-300 text-left md:text-right">Auto-loaded from memory</td>
+                      <td className="pl-4 pr-8 text-left md:text-right">Re-explained every session</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="border-b border-white/10 py-4">
+                <table className="text-left" style={{width: 'auto', tableLayout: 'fixed'}}>
+                  <colgroup>
+                    <col style={{width: '150px'}} />
+                    <col style={{width: '300px'}} />
+                    <col style={{width: '300px'}} />
+                  </colgroup>
+                  <tbody className="text-lg">
+                    <tr>
+                      <td className="pr-2 text-gray-300">Past decisions</td>
+                      <td className="pl-4 pr-8 text-green-300 text-left md:text-right">Searchable across sessions</td>
+                      <td className="pl-4 pr-8 text-left md:text-right">Lost when context compacts</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="py-4">
+                <table className="text-left" style={{width: 'auto', tableLayout: 'fixed'}}>
+                  <colgroup>
+                    <col style={{width: '150px'}} />
+                    <col style={{width: '300px'}} />
+                    <col style={{width: '300px'}} />
+                  </colgroup>
+                  <tbody className="text-lg">
+                    <tr>
+                      <td className="pr-2 text-gray-300">Project map</td>
+                      <td className="pl-12 md:pl-4 pr-8 text-green-300 text-left md:text-right">Auto-generated from code</td>
+                      <td className="pl-4 pr-8 text-left md:text-right">Manual CLAUDE.md</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <p className="text-2xl text-center mt-6 md:mt-12 opacity-90">
+              Your agent should get <strong>better</strong> with every session, not start from scratch.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* MCP Tools */}
+      <section className="py-20 bg-white/5">
         <div className="container mx-auto px-6 md:px-10 max-w-7xl">
           <h2 className="text-4xl lg:text-5xl font-bold text-center mb-16">Five MCP tools. Zero friction.</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -222,44 +440,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The Problem */}
-      <section className="py-20 bg-white/5">
-        <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-          <div className="bg-white/5 backdrop-blur-sm px-4 pt-8 pb-6 md:p-12 rounded-3xl border border-white/10">
-            <h2 className="text-3xl font-bold mb-8 text-center">The cold start problem is real</h2>
-            <div className="grid md:grid-cols-2 gap-8 mt-8">
-              <div className="space-y-4">
-                <div className="text-gray-300 text-lg mb-2">Session #1 <span className="text-red-300">without reccli</span></div>
-                <div className="bg-black/40 p-5 rounded-xl border border-white/10 font-mono text-sm space-y-2">
-                  <div className="text-gray-500"># Every. Single. Time.</div>
-                  <div className="text-white">"This is a Next.js app with Stripe..."</div>
-                  <div className="text-white">"We decided to use Connect because..."</div>
-                  <div className="text-white">"The auth middleware is in src/..."</div>
-                  <div className="text-white">"Last time we fixed the webhook by..."</div>
-                  <div className="text-red-400 mt-2">20 minutes of re-explaining</div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="text-gray-300 text-lg mb-2">Session #10 <span className="text-green-300">with reccli</span></div>
-                <div className="bg-black/40 p-5 rounded-xl border border-white/10 font-mono text-sm space-y-2">
-                  <div className="text-gray-500"># Agent already knows:</div>
-                  <div className="text-green-400">Project: 8 features, 47 files</div>
-                  <div className="text-green-400">Last session: fixed webhook retry logic</div>
-                  <div className="text-green-400">Open issue: error handling for transfers</div>
-                  <div className="text-green-400">Next step: add idempotency keys</div>
-                  <div className="text-green-400 mt-2">Ready to work in 0 seconds</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section className="py-20">
         <div className="container mx-auto px-6 md:px-10 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">Open source. Free forever.</h2>
+            <h2 className="text-5xl font-bold mb-4">Open source. Free forever.</h2>
             <p className="text-xl opacity-90">The memory engine is MIT licensed. Team features coming soon.</p>
           </div>
 
@@ -354,41 +539,15 @@ export default function Home() {
                   {!waitlistSubmitted ? (
                     <form onSubmit={handleWaitlistSubmit} className="space-y-4">
                       <p className="text-sm text-gray-300 mb-3">We'll only email you when Team launches. No spam.</p>
-                      <input
-                        type="email"
-                        name="confirm_email"
-                        value={confirmEmail}
-                        onChange={(e) => setConfirmEmail(e.target.value)}
-                        style={{ position: 'absolute', left: '-9999px' }}
-                        tabIndex={-1}
-                        autoComplete="off"
-                        aria-hidden="true"
-                      />
+                      <input type="email" name="confirm_email" value={confirmEmail} onChange={(e) => setConfirmEmail(e.target.value)} style={{ position: 'absolute', left: '-9999px' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
                       <div>
-                        <input
-                          type="email"
-                          value={waitlistEmail}
-                          onChange={(e) => setWaitlistEmail(e.target.value)}
-                          placeholder="Enter your email"
-                          required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        />
+                        <input type="email" value={waitlistEmail} onChange={(e) => setWaitlistEmail(e.target.value)} placeholder="Enter your email" required className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400" />
                       </div>
                       {waitlistError && <p className="text-red-300 text-sm">{waitlistError}</p>}
-                      <button
-                        type="submit"
-                        disabled={waitlistLoading}
-                        className="block w-full bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-6 py-3 rounded-xl font-bold text-lg transition-all border border-orange-400/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
+                      <button type="submit" disabled={waitlistLoading} className="block w-full bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-6 py-3 rounded-xl font-bold text-lg transition-all border border-orange-400/30 disabled:opacity-50 disabled:cursor-not-allowed">
                         {waitlistLoading ? 'Adding you...' : 'Notify Me'}
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowWaitlistForm(false)}
-                        className="block w-full text-sm text-gray-300 hover:text-white transition-all"
-                      >
-                        Cancel
-                      </button>
+                      <button type="button" onClick={() => setShowWaitlistForm(false)} className="block w-full text-sm text-gray-300 hover:text-white transition-all">Cancel</button>
                     </form>
                   ) : (
                     <div className="text-center py-8">
@@ -397,12 +556,7 @@ export default function Home() {
                         You're on the list!
                       </p>
                       <p className="text-gray-300">We'll notify you when Team launches.</p>
-                      <button
-                        onClick={() => { setShowWaitlistForm(false); setWaitlistSubmitted(false) }}
-                        className="mt-4 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 hover:text-orange-300 px-6 py-3 rounded-xl font-bold text-lg transition-all border border-orange-500/30"
-                      >
-                        Close
-                      </button>
+                      <button onClick={() => { setShowWaitlistForm(false); setWaitlistSubmitted(false) }} className="mt-4 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 hover:text-orange-300 px-6 py-3 rounded-xl font-bold text-lg transition-all border border-orange-500/30">Close</button>
                     </div>
                   )}
                 </div>
@@ -415,14 +569,11 @@ export default function Home() {
       {/* Get Started Section */}
       <section className="py-20 bg-white/5" id="get-started">
         <div className="container mx-auto px-6 md:px-10 max-w-4xl text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-12">Get started in 30 seconds</h2>
+          <h2 className="text-5xl font-bold mb-12">Get started in 30 seconds</h2>
           <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10 text-left space-y-8">
             <div>
               <div className="mb-4 text-gray-300"># 1. Install reccli</div>
-              <div
-                onClick={() => handleCopy(installCommand, 'install')}
-                className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between"
-              >
+              <div onClick={() => handleCopy(installCommand, 'install')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
                 <code className="text-xl font-mono text-white break-all pr-12">{installCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors">
@@ -434,10 +585,7 @@ export default function Home() {
             </div>
             <div>
               <div className="mb-4 text-gray-300"># 2. Add to Claude Code (or any MCP-compatible agent)</div>
-              <div
-                onClick={() => handleCopy(mcpCommand, 'mcp')}
-                className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between"
-              >
+              <div onClick={() => handleCopy(mcpCommand, 'mcp')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
                 <code className="text-lg font-mono text-white break-all pr-12">{mcpCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors">
@@ -450,19 +598,17 @@ export default function Home() {
             <div>
               <div className="mb-4 text-gray-300"># 3. Done. Your agent now has persistent memory.</div>
             </div>
+            <p className="text-center text-sm text-gray-400 mt-6">Works with Claude Code, Cursor, Windsurf, and any MCP-compatible agent</p>
           </div>
           <div className="mt-12">
-            <a
-              href="https://github.com/reccli/reccli"
-              className="bg-white/20 backdrop-blur-md px-8 py-4 rounded-xl font-bold text-xl hover:bg-white/30 transition-all inline-block"
-            >
+            <a href="https://github.com/reccli/reccli" className="bg-white/20 backdrop-blur-md px-8 py-4 rounded-xl font-bold text-xl hover:bg-white/30 transition-all inline-block">
               View on GitHub
             </a>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ */}
       <section className="py-16">
         <div className="container mx-auto px-10 max-w-3xl">
           <h2 className="text-3xl font-bold text-center mb-10">FAQ</h2>
@@ -472,49 +618,35 @@ export default function Home() {
                 What agents does reccli work with?
                 <span className="text-2xl group-open:rotate-180 transition-transform ml-2">&#9660;</span>
               </summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">
-                Any agent that supports MCP (Model Context Protocol). Today that includes Claude Code, Cursor, and Windsurf. The list is growing — MCP is becoming the standard for agent tool integration.
-              </p>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">Any agent that supports MCP (Model Context Protocol). Today that includes Claude Code, Cursor, and Windsurf. The list is growing — MCP is becoming the standard for agent tool integration.</p>
             </details>
-
             <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
               <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">
                 Where is my data stored?
                 <span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span>
               </summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">
-                Locally on your machine. .devsession and .devproject files live in your project directory. Nothing is uploaded anywhere. Your conversations, decisions, and code context stay on your disk.
-              </p>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">Locally on your machine. .devsession and .devproject files live in your project directory. Nothing is uploaded anywhere. Your conversations, decisions, and code context stay on your disk.</p>
             </details>
-
+            <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
+              <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">
+                How is this different from CLAUDE.md?
+                <span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span>
+              </summary>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">CLAUDE.md is a static file you write and maintain by hand. reccli automatically builds and updates a structured project map from your codebase, accumulates session history with searchable decisions and code changes, and loads relevant context dynamically. It's the difference between a sticky note and a database.</p>
+            </details>
             <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
               <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">
                 Will this always be free?
                 <span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span>
               </summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">
-                The core memory engine is MIT licensed and free forever. Future team features (shared memory, cross-developer search, hosted storage) will be a paid product. The open source tool you install today will always work independently.
-              </p>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">The core memory engine is MIT licensed and free forever. Future team features (shared memory, cross-developer search, hosted storage) will be a paid product. The open source tool you install today will always work independently.</p>
             </details>
-
-            <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
-              <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">
-                How is this different from just using CLAUDE.md?
-                <span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span>
-              </summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">
-                CLAUDE.md is a static file you write and maintain by hand. reccli automatically builds and updates a structured project map from your codebase, accumulates session history with searchable decisions and code changes, and loads relevant context dynamically. It's the difference between a sticky note and a database.
-              </p>
-            </details>
-
             <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
               <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">
                 What are .devsession and .devproject files?
                 <span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span>
               </summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">
-                Open format specifications (CC0 licensed) for storing AI coding session memory. .devsession captures a session's conversation, summary, and linking structure. .devproject is the project-level feature map loaded at the start of every session. Both are JSON, human-readable, and designed to work with any AI tool.
-              </p>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">Open format specifications (CC0 licensed) for storing AI coding session memory. .devsession captures a session's conversation, summary, and linking structure. .devproject is the project-level feature map loaded at the start of every session. Both are JSON, human-readable, and designed to work with any AI tool.</p>
             </details>
           </div>
         </div>
