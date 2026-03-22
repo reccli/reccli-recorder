@@ -122,11 +122,11 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center text-center px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
-          {/* Logo */}
-          <div className="w-16 h-16 bg-[#ff5757] rounded-full mb-8 shadow-lg shadow-red-500/30"></div>
-
-          {/* Brand */}
-          <h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6">reccli</h1>
+          {/* Brand with dot */}
+          <h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 flex items-center gap-4 justify-center">
+            <div className="w-10 h-10 lg:w-14 lg:h-14 bg-[#ff5757] rounded-full shadow-lg shadow-red-500/30 flex-shrink-0"></div>
+            reccli
+          </h1>
 
           {/* Tagline */}
           <p className="text-xl lg:text-2xl font-semibold tracking-wide uppercase text-white/80 mb-6">
