@@ -70,7 +70,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#5b6ef7] to-[#6b5bb8] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-hidden">
       {/* Header */}
       <header className="py-1">
         <nav className="container mx-auto px-6 md:px-10 flex justify-between items-center max-w-7xl pt-2">
@@ -100,7 +100,7 @@ export default function Home() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            opacity: 0.2,
+            opacity: 0.7,
           }}
         />
 
