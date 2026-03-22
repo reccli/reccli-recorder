@@ -70,9 +70,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#5b6ef7] to-[#6b5bb8] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-hidden">
       {/* Header */}
-      <header className="py-1">
+      <header className="py-1 bg-gradient-to-r from-[#5b6ef7] to-[#6b5bb8]">
         <nav className="container mx-auto px-6 md:px-10 flex justify-between items-center max-w-7xl pt-2">
           <div className="flex items-center gap-3 text-4xl font-bold tracking-tight">
             <div className="w-5 h-5 bg-[#ff5757] rounded-full"></div>
