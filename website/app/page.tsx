@@ -126,8 +126,11 @@ export default function Home() {
             {/* Left Column */}
             <div>
               <h1 className="text-2xl lg:text-4xl opacity-90 leading-snug font-normal mb-8 mt-16 lg:-mt-12">
-                Persistent memory for AI coding agents. Your agent never forgets.
+                Stop re-explaining your project every session.
               </h1>
+              <p className="text-lg lg:text-xl opacity-70 mb-8 -mt-4">
+                Persistent memory for AI coding tools.
+              </p>
 
               {/* Social Buttons - Hidden on mobile, shown on desktop */}
               <div className="hidden lg:flex gap-4 mb-4">
