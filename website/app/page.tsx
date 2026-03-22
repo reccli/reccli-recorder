@@ -128,17 +128,17 @@ export default function Home() {
             reccli
           </h1>
 
-          {/* Tagline */}
-          <p className="text-xl lg:text-2xl font-semibold tracking-wide uppercase text-white/80 mb-6">
-            Every session starts informed.
-          </p>
-
-          {/* Description */}
-          <p className="text-lg lg:text-xl text-white/70 max-w-xl mb-12 leading-relaxed">
-            Persistent memory for AI coding tools.
-            <br />
-            Works with Claude Code, Cursor, and Windsurf.
-          </p>
+          {/* Tagline + Description */}
+          <div className="bg-black/30 backdrop-blur-md rounded-2xl px-8 py-6 mb-12 max-w-xl border border-white/10">
+            <p className="text-xl lg:text-2xl font-semibold tracking-wide uppercase text-white/90 mb-3">
+              Every session starts informed.
+            </p>
+            <p className="text-lg lg:text-xl text-white/60 leading-relaxed">
+              Persistent memory for AI coding tools.
+              <br />
+              Works with Claude Code, Cursor, and Windsurf.
+            </p>
+          </div>
 
           {/* Social buttons */}
           <div className="flex gap-4 mt-10">
