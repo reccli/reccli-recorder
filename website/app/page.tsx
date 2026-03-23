@@ -14,8 +14,8 @@ export default function Home() {
   const [waitlistLoading, setWaitlistLoading] = useState(false)
   const [confirmEmail, setConfirmEmail] = useState('')
 
-  const installCommand = 'pip install reccli'
-  const mcpCommand = 'claude mcp add reccli -- python -m reccli.mcp_server'
+  const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
+  const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python -m reccli.mcp_server'
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
     try {
@@ -178,16 +178,16 @@ export default function Home() {
             {/* Commands */}
             <div className="p-6 font-mono text-sm space-y-5">
               <div>
-                <div className="text-green-400 mb-2"># Install reccli</div>
+                <div className="text-green-400 mb-2"># Clone and install</div>
                 <div
-                  onClick={() => handleCopy(installCommand, 'install')}
+                  onClick={() => handleCopy(cloneCommand, 'install')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
                 >
                   <div>
                     <span className="text-green-400">$</span>
-                    <span className="text-white ml-2 text-base">{installCommand}</span>
+                    <span className="text-white ml-2 text-base break-all">{cloneCommand}</span>
                   </div>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0 ml-2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                   </svg>
@@ -419,9 +419,9 @@ export default function Home() {
           <h2 className="text-5xl font-bold mb-12">Get started in 30 seconds</h2>
           <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10 text-left space-y-8">
             <div>
-              <div className="mb-4 text-gray-300"># 1. Install reccli</div>
-              <div onClick={() => handleCopy(installCommand, 'install')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
-                <code className="text-xl font-mono text-white break-all pr-12">{installCommand}</code>
+              <div className="mb-4 text-gray-300"># 1. Clone and install</div>
+              <div onClick={() => handleCopy(cloneCommand, 'install')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
+                <code className="text-base font-mono text-white break-all pr-12">{cloneCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
@@ -430,7 +430,7 @@ export default function Home() {
             <div>
               <div className="mb-4 text-gray-300"># 2. Add to Claude Code (or any MCP-compatible tool)</div>
               <div onClick={() => handleCopy(mcpCommand, 'mcp')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
-                <code className="text-lg font-mono text-white break-all pr-12">{mcpCommand}</code>
+                <code className="text-base font-mono text-white break-all pr-12">{mcpCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 group-hover:text-white transition-colors"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
