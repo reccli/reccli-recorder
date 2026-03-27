@@ -177,36 +177,28 @@ export default function Home() {
               <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
             </div>
             {/* Commands */}
-            <div className="p-6 font-mono text-sm space-y-5">
-              <div>
-                <div className="text-green-400 mb-2"># Clone and install</div>
-                <div
-                  onClick={() => handleCopy(cloneCommand, 'install')}
-                  className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
-                >
-                  <div>
-                    <span className="text-white text-base break-all">{cloneCommand}</span>
+            <div className="p-6 font-mono text-sm space-y-4">
+              <div
+                onClick={() => handleCopy(cloneCommand, 'install')}
+                className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
+              >
+                <span className="text-white text-base break-all">{cloneCommand}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0 ml-2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                {copiedInstall && (
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg z-10">
+                    Copied!
                   </div>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0 ml-2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  {copiedInstall && (
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg z-10">
-                      Copied!
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
-              <div>
-                <div className="text-green-400 mb-2"># Add to Claude Code (or any MCP-compatible tool)</div>
-                <div
-                  onClick={() => handleCopy(mcpCommand, 'mcp')}
-                  className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
-                >
-                  <div>
-                    <span className="text-white text-base">{mcpCommand}</span>
-                  </div>
+              <div className="text-white/30 text-xs pl-3">then</div>
+              <div
+                onClick={() => handleCopy(mcpCommand, 'mcp')}
+                className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
+              >
+                <span className="text-white text-base">{mcpCommand}</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
