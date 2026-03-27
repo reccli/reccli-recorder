@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Brain, Search, FolderTree, Save, Zap, GitBranch, ScanSearch, RefreshCw, TrendingUp } from 'lucide-react'
 
 export default function Home() {
@@ -13,9 +13,29 @@ export default function Home() {
   const [waitlistError, setWaitlistError] = useState('')
   const [waitlistLoading, setWaitlistLoading] = useState(false)
   const [confirmEmail, setConfirmEmail] = useState('')
+  const howItWorksRef = useRef<HTMLElement | null>(null)
+  const [howItWorksActive, setHowItWorksActive] = useState(false)
 
   const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
   const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python3 -m reccli.mcp_server'
+
+  useEffect(() => {
+    const node = howItWorksRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHowItWorksActive(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
     try {
@@ -135,8 +155,6 @@ export default function Home() {
             </p>
             <p className="text-lg lg:text-xl text-white/60 leading-relaxed">
               Persistent memory for AI coding tools.
-              <br />
-              Works with Claude Code, Cursor, and Windsurf.
             </p>
           </div>
 
@@ -221,47 +239,177 @@ export default function Home() {
               <div className="text-green-400"># Done. Your AI now has persistent memory.</div>
             </div>
           </div>
-          <p className="text-center text-sm text-white/50 mt-4">Works with Claude Code, Cursor, Windsurf, and any MCP-compatible tool.</p>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="py-24 relative overflow-hidden">
+      <section
+        ref={howItWorksRef}
+        className={`py-24 relative overflow-hidden how-it-works-section ${howItWorksActive ? 'is-active' : ''}`}
+      >
         <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
+          <p className="how-it-works-eyebrow text-center mb-4">Memory flow</p>
           <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">How it works</h2>
-          <p className="text-xl text-center opacity-70 mb-20 max-w-2xl mx-auto">Two commands. Then your AI remembers everything.</p>
+          <p className="text-xl text-center opacity-70 mb-10 max-w-2xl mx-auto">One scan. Every session gets smarter.</p>
 
-          <div className="relative max-w-5xl mx-auto">
-            {/* Connector lines (desktop only) */}
-            <svg className="hidden md:block absolute top-[52px] left-0 w-full h-8 z-0 pointer-events-none" viewBox="0 0 1000 30" preserveAspectRatio="none">
-              <line x1="200" y1="15" x2="480" y2="15" className="step-connector" />
-              <line x1="520" y1="15" x2="800" y2="15" className="step-connector" />
+          <div className="how-it-works-visual max-w-6xl mx-auto mb-10 lg:mb-14" aria-hidden="true">
+            <div className="how-stage-label how-stage-label-1"><span>01</span> scan codebase</div>
+            <div className="how-stage-label how-stage-label-2"><span>02</span> recall decisions</div>
+            <div className="how-stage-label how-stage-label-3"><span>03</span> compound context</div>
+
+            <div className="how-stage-chip how-stage-chip-1">feature map</div>
+            <div className="how-stage-chip how-stage-chip-2">auth decisions</div>
+            <div className="how-stage-chip how-stage-chip-3">webhook retry</div>
+            <div className="how-stage-chip how-stage-chip-4">next step</div>
+
+            <div className="how-stage-scan"></div>
+
+            <svg viewBox="0 0 1000 320" preserveAspectRatio="none" className="how-stage-graph">
+              <defs>
+                <linearGradient id="memory-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" stopColor="#ff7b72" />
+                  <stop offset="45%" stopColor="#a78bfa" />
+                  <stop offset="100%" stopColor="#60a5fa" />
+                </linearGradient>
+              </defs>
+
+              <path
+                className="memory-graph-backdrop"
+                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
+              />
+              <path
+                className="memory-graph-glow"
+                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
+              />
+              <path
+                className="memory-graph-flow"
+                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
+              />
+
+              <path className="memory-graph-branch memory-graph-branch-left" d="M120 212C148 184 178 164 216 160" />
+              <path className="memory-graph-branch memory-graph-branch-left" d="M198 168C228 136 258 126 296 130" />
+              <path className="memory-graph-branch memory-graph-branch-mid" d="M452 202C500 184 554 176 612 192" />
+              <path className="memory-graph-branch memory-graph-branch-mid" d="M510 226C548 214 584 214 622 222" />
+              <path className="memory-graph-branch memory-graph-branch-right" d="M694 152C756 126 814 104 872 108" />
+              <path className="memory-graph-branch memory-graph-branch-right" d="M762 176C814 156 860 152 906 154" />
+
+              <g className="memory-node memory-node-1">
+                <circle className="memory-node-ring" cx="120" cy="212" r="18" />
+                <circle className="memory-node-core" cx="120" cy="212" r="6" />
+              </g>
+              <g className="memory-node memory-node-2">
+                <circle className="memory-node-ring" cx="216" cy="160" r="14" />
+                <circle className="memory-node-core" cx="216" cy="160" r="5" />
+              </g>
+              <g className="memory-node memory-node-3">
+                <circle className="memory-node-ring" cx="314" cy="156" r="14" />
+                <circle className="memory-node-core" cx="314" cy="156" r="5" />
+              </g>
+              <g className="memory-node memory-node-4">
+                <circle className="memory-node-ring" cx="452" cy="202" r="14" />
+                <circle className="memory-node-core" cx="452" cy="202" r="5" />
+              </g>
+              <g className="memory-node memory-node-5">
+                <circle className="memory-node-ring" cx="612" cy="192" r="18" />
+                <circle className="memory-node-core" cx="612" cy="192" r="6" />
+              </g>
+              <g className="memory-node memory-node-6">
+                <circle className="memory-node-ring" cx="760" cy="128" r="14" />
+                <circle className="memory-node-core" cx="760" cy="128" r="5" />
+              </g>
+              <g className="memory-node memory-node-7">
+                <circle className="memory-node-ring" cx="840" cy="104" r="16" />
+                <circle className="memory-node-core" cx="840" cy="104" r="6" />
+              </g>
+              <g className="memory-node memory-node-8">
+                <circle className="memory-node-ring" cx="920" cy="110" r="16" />
+                <circle className="memory-node-core" cx="920" cy="110" r="6" />
+              </g>
+            </svg>
+          </div>
+
+          <div className="relative max-w-6xl mx-auto">
+            <svg className="hidden md:block absolute top-[58px] left-0 w-full h-10 z-0 pointer-events-none" viewBox="0 0 1000 40" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="step-connector-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" stopColor="#ff7b72" stopOpacity="0" />
+                  <stop offset="20%" stopColor="#ff7b72" />
+                  <stop offset="50%" stopColor="#a78bfa" />
+                  <stop offset="100%" stopColor="#60a5fa" />
+                </linearGradient>
+              </defs>
+              <path d="M180 20C260 8 384 8 468 20" className="step-connector-backdrop" />
+              <path d="M180 20C260 8 384 8 468 20" className="step-connector-glow" />
+              <path d="M180 20C260 8 384 8 468 20" className="step-connector-flow" />
+              <path d="M532 20C616 8 740 8 820 20" className="step-connector-backdrop" />
+              <path d="M532 20C616 8 740 8 820 20" className="step-connector-glow" />
+              <path d="M532 20C616 8 740 8 820 20" className="step-connector-flow" />
             </svg>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">01</span>
+                <div className="step-mini step-mini-scan" aria-hidden="true">
+                  <span className="mini-dot mini-dot-1"></span>
+                  <span className="mini-dot mini-dot-2"></span>
+                  <span className="mini-dot mini-dot-3"></span>
+                  <span className="mini-dot mini-dot-4"></span>
+                  <span className="mini-dot mini-dot-5"></span>
+                  <span className="mini-dot mini-dot-6"></span>
+                  <span className="mini-scan-beam"></span>
+                </div>
                 <div className="step-icon-wrap">
                   <ScanSearch className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">First session</h3>
                 <p className="text-base opacity-70 leading-relaxed">reccli scans your codebase and builds a feature map to understand your project.</p>
+                <div className="step-chip-row">
+                  <span className="step-chip">scan</span>
+                  <span className="step-chip">cluster</span>
+                  <span className="step-chip">map</span>
+                </div>
               </div>
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">02</span>
+                <div className="step-mini step-mini-memory" aria-hidden="true">
+                  <span className="mini-track"></span>
+                  <span className="mini-memory-node mini-memory-node-1"></span>
+                  <span className="mini-memory-node mini-memory-node-2"></span>
+                  <span className="mini-memory-node mini-memory-node-3"></span>
+                  <span className="mini-memory-chip mini-memory-chip-1"></span>
+                  <span className="mini-memory-chip mini-memory-chip-2"></span>
+                </div>
                 <div className="step-icon-wrap">
                   <RefreshCw className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Every session after</h3>
                 <p className="text-base opacity-70 leading-relaxed">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
+                <div className="step-chip-row">
+                  <span className="step-chip">decisions</span>
+                  <span className="step-chip">structure</span>
+                  <span className="step-chip">last fixes</span>
+                </div>
               </div>
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">03</span>
+                <div className="step-mini step-mini-growth" aria-hidden="true">
+                  <span className="mini-root"></span>
+                  <span className="mini-branch mini-branch-1"></span>
+                  <span className="mini-branch mini-branch-2"></span>
+                  <span className="mini-growth-node mini-growth-node-1"></span>
+                  <span className="mini-growth-node mini-growth-node-2"></span>
+                  <span className="mini-growth-node mini-growth-node-3"></span>
+                </div>
                 <div className="step-icon-wrap">
                   <TrendingUp className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">It compounds</h3>
                 <p className="text-base opacity-70 leading-relaxed">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
+                <div className="step-chip-row">
+                  <span className="step-chip">faster starts</span>
+                  <span className="step-chip">less re-explaining</span>
+                  <span className="step-chip">compounding context</span>
+                </div>
               </div>
             </div>
           </div>
