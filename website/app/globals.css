@@ -57,7 +57,7 @@ body {
   inset: -1px;
   border-radius: 1.25rem;
   padding: 1px;
-  background: linear-gradient(160deg, rgba(74,222,128,0.2), rgba(74,222,128,0.0) 40%, rgba(56,189,248,0.0) 60%, rgba(56,189,248,0.15));
+  background: linear-gradient(160deg, rgba(248,113,113,0.2), rgba(248,113,113,0.0) 40%, rgba(239,68,68,0.0) 60%, rgba(239,68,68,0.15));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -71,13 +71,13 @@ body {
 .step-card:hover {
   transform: translateY(-4px);
   background: linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
-  box-shadow: 0 20px 60px -15px rgba(74,222,128,0.08), 0 0 30px -10px rgba(56,189,248,0.06);
+  box-shadow: 0 20px 60px -15px rgba(248,113,113,0.08), 0 0 30px -10px rgba(239,68,68,0.06);
 }
 
 .step-card:hover::before {
   animation: none;
   opacity: 1;
-  background: linear-gradient(160deg, rgba(74,222,128,0.4), rgba(74,222,128,0.0) 40%, rgba(56,189,248,0.0) 60%, rgba(56,189,248,0.3));
+  background: linear-gradient(160deg, rgba(248,113,113,0.4), rgba(248,113,113,0.0) 40%, rgba(239,68,68,0.0) 60%, rgba(239,68,68,0.3));
 }
 
 .step-icon-wrap {
@@ -95,7 +95,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(74,222,128,0.12), rgba(56,189,248,0.12));
+  background: linear-gradient(135deg, rgba(248,113,113,0.12), rgba(239,68,68,0.12));
 }
 
 .step-icon-wrap::after {
@@ -103,7 +103,7 @@ body {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 1px solid rgba(74,222,128,0.15);
+  border: 1px solid rgba(248,113,113,0.15);
   animation: pulseRing 3s ease-in-out infinite;
 }
 
@@ -123,10 +123,10 @@ body {
   position: absolute;
   top: 1rem;
   left: 1.25rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: rgba(74,222,128,0.4);
+  color: rgba(74,222,128,0.5);
   font-variant-numeric: tabular-nums;
 }
 

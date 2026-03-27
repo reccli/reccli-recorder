@@ -242,7 +242,7 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">01</span>
                 <div className="step-icon-wrap">
-                  <ScanSearch className="w-7 h-7 text-green-400/80" strokeWidth={1.5} />
+                  <ScanSearch className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">First session</h3>
                 <p className="text-base opacity-70 leading-relaxed">reccli scans your codebase and builds a feature map to understand your project.</p>
@@ -250,7 +250,7 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">02</span>
                 <div className="step-icon-wrap">
-                  <RefreshCw className="w-7 h-7 text-sky-400/80" strokeWidth={1.5} />
+                  <RefreshCw className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Every session after</h3>
                 <p className="text-base opacity-70 leading-relaxed">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
@@ -258,7 +258,7 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">03</span>
                 <div className="step-icon-wrap">
-                  <TrendingUp className="w-7 h-7 text-emerald-400/80" strokeWidth={1.5} />
+                  <TrendingUp className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-3">It compounds</h3>
                 <p className="text-base opacity-70 leading-relaxed">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
