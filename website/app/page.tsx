@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Brain, Search, FolderTree, Save, Zap, GitBranch, ScanSearch, RefreshCw, TrendingUp } from 'lucide-react'
+import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch, ScanSearch, RefreshCw, TrendingUp } from 'lucide-react'
 
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
@@ -262,14 +262,14 @@ export default function Home() {
                 <div className="how-stage-scene scan-scene">
                   <span className="scan-scene-lane"></span>
                   <span className="scan-scene-beam"></span>
-                  <span className="scan-scene-node scan-scene-node-1"></span>
-                  <span className="scan-scene-node scan-scene-node-2"></span>
-                  <span className="scan-scene-node scan-scene-node-3"></span>
-                  <span className="scan-scene-node scan-scene-node-4"></span>
-                  <span className="scan-scene-node scan-scene-node-5"></span>
-                  <span className="scan-scene-node scan-scene-node-6"></span>
+                  <span className="scan-scene-bubble scan-scene-bubble-1">auth</span>
+                  <span className="scan-scene-bubble scan-scene-bubble-2">stripe</span>
+                  <span className="scan-scene-bubble scan-scene-bubble-3">api</span>
+                  <span className="scan-scene-bubble scan-scene-bubble-4">hooks</span>
+                  <span className="scan-scene-bubble scan-scene-bubble-5">ui</span>
+                  <span className="scan-scene-bubble scan-scene-bubble-6">db</span>
                 </div>
-                <p className="how-stage-description">Light sweeps the repo, finds structure, then snaps it into a usable memory lane.</p>
+                <p className="how-stage-description">A laser sweep finds important fragments, then lifts them into one aligned memory rail.</p>
               </div>
 
               <div className="how-stage-panel how-stage-panel-recall">
@@ -278,40 +278,74 @@ export default function Home() {
                   <span className="how-stage-name">Recall threads</span>
                 </div>
                 <div className="how-stage-scene recall-scene">
-                  <span className="recall-scene-line"></span>
-                  <span className="recall-scene-node recall-scene-node-1"></span>
-                  <span className="recall-scene-node recall-scene-node-2"></span>
-                  <span className="recall-scene-node recall-scene-node-3"></span>
-                  <span className="recall-thread recall-thread-1"></span>
-                  <span className="recall-thread recall-thread-2"></span>
-                  <span className="recall-thread recall-thread-3"></span>
-                  <span className="recall-bubble recall-bubble-1">auth</span>
-                  <span className="recall-bubble recall-bubble-2">...</span>
-                  <span className="recall-bubble recall-bubble-3">retry</span>
+                  <span className="recall-scroll-line"></span>
+                  <span className="recall-scroll-track">
+                    <span className="recall-doc recall-doc-1">
+                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
+                      auth flow
+                    </span>
+                    <span className="recall-doc recall-doc-2">
+                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
+                      webhook retry
+                    </span>
+                    <span className="recall-doc recall-doc-3">
+                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
+                      file boundaries
+                    </span>
+                    <span className="recall-doc recall-doc-4">
+                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
+                      next step
+                    </span>
+                  </span>
+                  <span className="recall-deploy-line"></span>
+                  <span className="recall-deploy-card">
+                    <FileText className="recall-doc-icon" strokeWidth={1.7} />
+                    auth middleware stays edge-safe
+                  </span>
                 </div>
-                <p className="how-stage-description">Saved decisions drop back in as threads, snippets, and conversation context.</p>
+                <p className="how-stage-description">Saved notes scroll into place, then the one you need deploys downward with the exact decision.</p>
               </div>
 
               <div className="how-stage-panel how-stage-panel-model">
                 <div className="how-stage-panel-head">
                   <span className="how-stage-count">03</span>
-                  <span className="how-stage-name">Memory model</span>
+                  <span className="how-stage-name">Compounding memory</span>
                 </div>
-                <div className="how-stage-scene model-scene">
-                  <span className="model-core">project memory</span>
-                  <span className="model-node model-node-top">files</span>
-                  <span className="model-node model-node-left">decisions</span>
-                  <span className="model-node model-node-right">sessions</span>
-                  <span className="model-node model-node-bottom">next steps</span>
-                  <span className="model-link model-link-top"></span>
-                  <span className="model-link model-link-left"></span>
-                  <span className="model-link model-link-right"></span>
-                  <span className="model-link model-link-bottom"></span>
-                  <span className="model-pulse model-pulse-1"></span>
-                  <span className="model-pulse model-pulse-2"></span>
-                  <span className="model-pulse model-pulse-3"></span>
+                <div className="how-stage-scene brain-scene">
+                  <svg viewBox="0 0 240 180" className="brain-scene-svg" role="presentation">
+                    <defs>
+                      <linearGradient id="brain-fill-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stopColor="#ff7b72" />
+                        <stop offset="48%" stopColor="#a78bfa" />
+                        <stop offset="100%" stopColor="#60a5fa" />
+                      </linearGradient>
+                      <clipPath id="brain-fill-clip">
+                        <path d="M77 35C61 35 48 48 48 65C48 74 51 82 57 88C48 93 42 103 42 114C42 131 55 145 72 145H168C185 145 198 131 198 114C198 103 192 93 183 88C189 82 192 74 192 65C192 48 179 35 163 35C154 35 146 39 140 46C135 35 124 27 112 27C99 27 88 35 83 46C81 39 74 35 77 35Z" />
+                      </clipPath>
+                    </defs>
+                    <path
+                      className="brain-outline"
+                      d="M77 35C61 35 48 48 48 65C48 74 51 82 57 88C48 93 42 103 42 114C42 131 55 145 72 145H168C185 145 198 131 198 114C198 103 192 93 183 88C189 82 192 74 192 65C192 48 179 35 163 35C154 35 146 39 140 46C135 35 124 27 112 27C99 27 88 35 83 46C81 39 74 35 77 35Z"
+                    />
+                    <g clipPath="url(#brain-fill-clip)">
+                      <rect className="brain-fill" x="30" y="24" width="180" height="128" rx="24" />
+                      <rect className="brain-fill-glow" x="30" y="24" width="180" height="128" rx="24" />
+                    </g>
+                    <path className="brain-detail" d="M84 56C74 63 72 74 78 83" />
+                    <path className="brain-detail" d="M104 44C94 54 93 66 100 76" />
+                    <path className="brain-detail" d="M132 44C142 54 143 66 136 76" />
+                    <path className="brain-detail" d="M156 56C166 63 168 74 162 83" />
+                    <path className="brain-detail" d="M92 96C102 104 102 115 96 124" />
+                    <path className="brain-detail" d="M144 96C134 104 134 115 140 124" />
+                    <circle className="brain-memory brain-memory-1" cx="88" cy="118" r="5" />
+                    <circle className="brain-memory brain-memory-2" cx="120" cy="102" r="5" />
+                    <circle className="brain-memory brain-memory-3" cx="150" cy="116" r="5" />
+                  </svg>
+                  <span className="brain-chip brain-chip-1">remembers auth</span>
+                  <span className="brain-chip brain-chip-2">keeps fixes</span>
+                  <span className="brain-chip brain-chip-3">loads next step</span>
                 </div>
-                <p className="how-stage-description">The memory stops being a log and becomes a structured model the assistant can build on.</p>
+                <p className="how-stage-description">Session after session, the memory fills up until the assistant starts already loaded with your project brain.</p>
               </div>
             </div>
           </div>
@@ -361,15 +395,12 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">02</span>
                 <div className="step-mini step-mini-memory" aria-hidden="true">
-                  <span className="mini-memory-node mini-memory-node-1"></span>
-                  <span className="mini-memory-node mini-memory-node-2"></span>
-                  <span className="mini-memory-node mini-memory-node-3"></span>
-                  <span className="mini-recall-thread mini-recall-thread-1"></span>
-                  <span className="mini-recall-thread mini-recall-thread-2"></span>
-                  <span className="mini-recall-thread mini-recall-thread-3"></span>
-                  <span className="mini-recall-bubble mini-recall-bubble-1">...</span>
-                  <span className="mini-recall-bubble mini-recall-bubble-2">auth</span>
-                  <span className="mini-recall-bubble mini-recall-bubble-3">fix</span>
+                  <span className="mini-scroll-line"></span>
+                  <span className="mini-scroll-pill mini-scroll-pill-1"></span>
+                  <span className="mini-scroll-pill mini-scroll-pill-2"></span>
+                  <span className="mini-scroll-pill mini-scroll-pill-3"></span>
+                  <span className="mini-deploy-line"></span>
+                  <span className="mini-deploy-card"></span>
                 </div>
                 <div className="step-icon-wrap">
                   <RefreshCw className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
@@ -385,15 +416,11 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">03</span>
                 <div className="step-mini step-mini-growth" aria-hidden="true">
-                  <span className="mini-model-core"></span>
-                  <span className="mini-model-node mini-model-node-1"></span>
-                  <span className="mini-model-node mini-model-node-2"></span>
-                  <span className="mini-model-node mini-model-node-3"></span>
-                  <span className="mini-model-node mini-model-node-4"></span>
-                  <span className="mini-model-link mini-model-link-1"></span>
-                  <span className="mini-model-link mini-model-link-2"></span>
-                  <span className="mini-model-link mini-model-link-3"></span>
-                  <span className="mini-model-link mini-model-link-4"></span>
+                  <span className="mini-brain-shell"></span>
+                  <span className="mini-brain-fill"></span>
+                  <span className="mini-brain-dot mini-brain-dot-1"></span>
+                  <span className="mini-brain-dot mini-brain-dot-2"></span>
+                  <span className="mini-brain-dot mini-brain-dot-3"></span>
                 </div>
                 <div className="step-icon-wrap">
                   <TrendingUp className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />

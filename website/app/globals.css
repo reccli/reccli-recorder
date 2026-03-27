@@ -149,6 +149,29 @@ body {
   }
 }
 
+@keyframes docScrollIn {
+  0%, 18% {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  34% {
+    opacity: 1;
+  }
+  48%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes brainFillRise {
+  0%, 30% {
+    transform: translateY(110px);
+  }
+  56%, 100% {
+    transform: translateY(0);
+  }
+}
+
 .how-it-works-section {
   position: relative;
   isolation: isolate;
@@ -561,6 +584,217 @@ body {
   left: 18%;
   animation-delay: 1.4s;
 }
+
+.scan-scene {
+  background:
+    radial-gradient(circle at 18% 34%, rgba(255, 123, 114, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(15, 17, 35, 0.96), rgba(20, 23, 44, 0.78));
+}
+
+.scan-scene-lane {
+  top: calc(45% - 2px);
+}
+
+.scan-scene-beam {
+  inset: 1.2rem auto 1.2rem -16%;
+  width: 32%;
+  animation-duration: 6.4s;
+}
+
+.scan-scene-bubble {
+  position: absolute;
+  top: calc(45% - 1rem);
+  padding: 0.42rem 0.68rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(10, 12, 28, 0.9);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.74);
+  animation: assembleToLane 6.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.scan-scene-bubble-1 { left: 8%; --from-x: -14px; --from-y: 56px; }
+.scan-scene-bubble-2 { left: 22%; --from-x: -4px; --from-y: 78px; animation-delay: 0.08s; }
+.scan-scene-bubble-3 { left: 37%; --from-x: 12px; --from-y: 62px; animation-delay: 0.16s; }
+.scan-scene-bubble-4 { left: 52%; --from-x: -10px; --from-y: 74px; animation-delay: 0.24s; }
+.scan-scene-bubble-5 { left: 66%; --from-x: 10px; --from-y: 58px; animation-delay: 0.32s; }
+.scan-scene-bubble-6 { left: 80%; --from-x: 18px; --from-y: 72px; animation-delay: 0.4s; }
+
+.recall-scene {
+  background:
+    radial-gradient(circle at 52% 28%, rgba(167, 139, 250, 0.16), transparent 32%),
+    linear-gradient(180deg, rgba(15, 17, 35, 0.96), rgba(20, 23, 44, 0.78));
+}
+
+.recall-scroll-line {
+  position: absolute;
+  left: 1.35rem;
+  right: 1.35rem;
+  top: 41%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 123, 114, 0.62), rgba(167, 139, 250, 0.82), rgba(96, 165, 250, 0.72));
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.22);
+  transform-origin: left center;
+  animation: laneAppear 6.8s ease-in-out infinite;
+}
+
+.recall-scroll-track {
+  position: absolute;
+  inset: 1.1rem 1.1rem auto;
+  height: 5.3rem;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.recall-doc {
+  position: absolute;
+  top: 0.3rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 5.9rem;
+  padding: 0.55rem 0.75rem 0.65rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 12, 28, 0.9);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  animation: docScrollIn 6.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.recall-doc-1 { left: 8%; }
+.recall-doc-2 {
+  left: 34%;
+  border-color: rgba(167, 139, 250, 0.32);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.1), 0 14px 34px rgba(0, 0, 0, 0.24);
+  animation-delay: 0.12s;
+}
+.recall-doc-3 { left: 60%; animation-delay: 0.24s; }
+.recall-doc-4 { left: 84%; animation-delay: 0.36s; }
+
+.recall-doc-icon {
+  width: 1rem;
+  height: 1rem;
+  color: rgba(96, 165, 250, 0.84);
+}
+
+.recall-deploy-line {
+  position: absolute;
+  top: 5.2rem;
+  left: 46%;
+  width: 2px;
+  height: 4rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0.88), rgba(96, 165, 250, 0.12));
+  transform-origin: top center;
+  animation: threadDrop 6.8s ease-in-out infinite;
+}
+
+.recall-deploy-card {
+  position: absolute;
+  left: 27%;
+  right: 18%;
+  top: 9.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.72rem 0.9rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 13, 30, 0.92);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.8);
+  animation: bubbleDrop 6.8s ease-in-out infinite;
+}
+
+.brain-scene {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(96, 165, 250, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(15, 17, 35, 0.96), rgba(20, 23, 44, 0.78));
+}
+
+.brain-scene-svg {
+  position: absolute;
+  inset: 1rem 1rem 2.6rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 3.6rem);
+}
+
+.brain-outline,
+.brain-detail {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brain-outline {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 3;
+}
+
+.brain-detail {
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 2.2;
+}
+
+.brain-fill,
+.brain-fill-glow {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: brainFillRise 6.8s ease-in-out infinite;
+}
+
+.brain-fill {
+  fill: url(#brain-fill-gradient);
+  opacity: 0.86;
+}
+
+.brain-fill-glow {
+  fill: rgba(96, 165, 250, 0.18);
+  filter: blur(8px);
+}
+
+.brain-memory {
+  fill: #60a5fa;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.55));
+  animation: nodeSettle 6.8s ease-in-out infinite;
+}
+
+.brain-memory-2 { animation-delay: 0.12s; }
+.brain-memory-3 { animation-delay: 0.24s; }
+
+.brain-chip {
+  position: absolute;
+  padding: 0.42rem 0.68rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 12, 28, 0.9);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.76);
+  animation: bubbleDrop 6.8s ease-in-out infinite;
+}
+
+.brain-chip-1 { left: 8%; bottom: 1rem; }
+.brain-chip-2 { left: 35%; bottom: 0.65rem; animation-delay: 0.12s; }
+.brain-chip-3 { right: 8%; bottom: 1rem; animation-delay: 0.24s; }
 
 .how-stage-graph {
   position: absolute;
@@ -1108,6 +1342,157 @@ body {
   animation: graphFlow 3.6s linear infinite;
 }
 
+.step-mini-memory {
+  background:
+    radial-gradient(circle at 62% 28%, rgba(167, 139, 250, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(13, 15, 33, 0.9), rgba(20, 23, 44, 0.66));
+}
+
+.mini-scroll-line {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 2.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 123, 114, 0.62), rgba(167, 139, 250, 0.82), rgba(96, 165, 250, 0.7));
+  transform-origin: left center;
+  animation: laneAppear 5.8s ease-in-out infinite;
+}
+
+.mini-scroll-pill {
+  position: absolute;
+  top: 0.8rem;
+  width: 2.4rem;
+  height: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 12, 28, 0.9);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+  animation: docScrollIn 5.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.mini-scroll-pill::before {
+  content: '';
+  position: absolute;
+  top: 0.22rem;
+  left: calc(50% - 0.22rem);
+  width: 0.44rem;
+  height: 0.44rem;
+  border-radius: 2px;
+  background: rgba(96, 165, 250, 0.86);
+}
+
+.mini-scroll-pill::after {
+  content: '';
+  position: absolute;
+  left: 0.45rem;
+  right: 0.45rem;
+  bottom: 0.28rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.mini-scroll-pill-1 { left: 1rem; }
+.mini-scroll-pill-2 { left: 4.35rem; animation-delay: 0.12s; }
+.mini-scroll-pill-3 { left: 7.7rem; animation-delay: 0.24s; }
+
+.mini-deploy-line {
+  position: absolute;
+  left: 5.55rem;
+  top: 2.05rem;
+  width: 2px;
+  height: 1.95rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0.84), rgba(96, 165, 250, 0.12));
+  transform-origin: top center;
+  animation: threadDrop 5.8s ease-in-out infinite;
+}
+
+.mini-deploy-card {
+  position: absolute;
+  left: 3.5rem;
+  top: 4.15rem;
+  width: 4.2rem;
+  height: 1rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 13, 30, 0.92);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: bubbleDrop 5.8s ease-in-out infinite;
+}
+
+.mini-deploy-card::before,
+.mini-deploy-card::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.mini-deploy-card::before {
+  left: 0.55rem;
+  top: 0.34rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 2px;
+  background: rgba(96, 165, 250, 0.82);
+}
+
+.mini-deploy-card::after {
+  left: 1.2rem;
+  right: 0.6rem;
+  top: 0.45rem;
+  height: 2px;
+}
+
+.step-mini-growth {
+  background:
+    radial-gradient(circle at 48% 26%, rgba(96, 165, 250, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(13, 15, 33, 0.9), rgba(20, 23, 44, 0.66));
+}
+
+.mini-brain-shell {
+  position: absolute;
+  left: calc(50% - 2.9rem);
+  top: 1rem;
+  width: 5.8rem;
+  height: 3.8rem;
+  border-radius: 48% 48% 44% 44% / 42% 42% 58% 58%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 12, 28, 0.48);
+  overflow: hidden;
+}
+
+.mini-brain-fill {
+  position: absolute;
+  left: calc(50% - 2.55rem);
+  top: 1.2rem;
+  width: 5.1rem;
+  height: 3.3rem;
+  border-radius: 48% 48% 44% 44% / 42% 42% 58% 58%;
+  background: linear-gradient(180deg, rgba(96, 165, 250, 0.9), rgba(167, 139, 250, 0.82), rgba(255, 123, 114, 0.72));
+  transform: translateY(2.5rem);
+  animation: brainFillRise 5.8s ease-in-out infinite;
+  opacity: 0.82;
+}
+
+.mini-brain-dot {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #60a5fa;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  animation: nodeSettle 5.8s ease-in-out infinite;
+}
+
+.mini-brain-dot-1 { left: 4.15rem; top: 2.7rem; }
+.mini-brain-dot-2 { left: 6.15rem; top: 2rem; animation-delay: 0.12s; }
+.mini-brain-dot-3 { left: 8.25rem; top: 2.75rem; animation-delay: 0.24s; }
+
 @media (max-width: 1023px) {
   .how-stage-grid {
     grid-template-columns: 1fr;
@@ -1168,25 +1553,26 @@ body {
 
   .scan-scene-lane,
   .scan-scene-beam,
-  .scan-scene-node,
-  .recall-scene-node,
-  .recall-thread,
-  .recall-bubble,
-  .model-core,
-  .model-node,
-  .model-link,
-  .model-pulse,
+  .scan-scene-bubble,
+  .recall-scroll-line,
+  .recall-doc,
+  .recall-deploy-line,
+  .recall-deploy-card,
+  .brain-fill,
+  .brain-fill-glow,
+  .brain-memory,
+  .brain-chip,
   .step-icon-wrap::after,
   .step-icon-wrap svg,
   .mini-scan-lane,
   .mini-dot,
   .mini-scan-beam,
-  .mini-memory-node,
-  .mini-recall-thread,
-  .mini-recall-bubble,
-  .mini-model-core,
-  .mini-model-node,
-  .mini-model-link,
+  .mini-scroll-line,
+  .mini-scroll-pill,
+  .mini-deploy-line,
+  .mini-deploy-card,
+  .mini-brain-fill,
+  .mini-brain-dot,
   .step-connector-flow,
   .how-it-works-visual::after {
     animation: none !important;
