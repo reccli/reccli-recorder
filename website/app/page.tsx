@@ -168,7 +168,7 @@ export default function Home() {
       <section className="py-16">
         <div className="container mx-auto px-6 md:px-10 max-w-4xl">
           <h2 className="text-2xl font-bold mb-2 flex items-center gap-2"><span className="text-white/40">&#10095;</span> Quick Start</h2>
-          <p className="text-white/50 mb-8 text-sm">Copy and paste the following commands one by one into your terminal <span className="text-white/30">(&#8984; Space → Terminal)</span> to install.</p>
+          <p className="text-white/50 mb-8 text-sm">Copy and paste the following commands one by one into your terminal <span className="text-white/30">(&#8984; Space: Terminal)</span> to install.</p>
           <div className="bg-[#1a1a2e]/80 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
             {/* Terminal header */}
             <div className="bg-[#1a1a2e] px-4 py-3 flex items-center gap-2 border-b border-white/5">
