@@ -253,79 +253,67 @@ export default function Home() {
           <p className="text-xl text-center opacity-70 mb-10 max-w-2xl mx-auto">One scan. Every session gets smarter.</p>
 
           <div className="how-it-works-visual max-w-6xl mx-auto mb-10 lg:mb-14" aria-hidden="true">
-            <div className="how-stage-label how-stage-label-1"><span>01</span> scan codebase</div>
-            <div className="how-stage-label how-stage-label-2"><span>02</span> recall decisions</div>
-            <div className="how-stage-label how-stage-label-3"><span>03</span> compound context</div>
+            <div className="how-stage-grid">
+              <div className="how-stage-panel how-stage-panel-scan">
+                <div className="how-stage-panel-head">
+                  <span className="how-stage-count">01</span>
+                  <span className="how-stage-name">Project scan</span>
+                </div>
+                <div className="how-stage-scene scan-scene">
+                  <span className="scan-scene-lane"></span>
+                  <span className="scan-scene-beam"></span>
+                  <span className="scan-scene-node scan-scene-node-1"></span>
+                  <span className="scan-scene-node scan-scene-node-2"></span>
+                  <span className="scan-scene-node scan-scene-node-3"></span>
+                  <span className="scan-scene-node scan-scene-node-4"></span>
+                  <span className="scan-scene-node scan-scene-node-5"></span>
+                  <span className="scan-scene-node scan-scene-node-6"></span>
+                </div>
+                <p className="how-stage-description">Light sweeps the repo, finds structure, then snaps it into a usable memory lane.</p>
+              </div>
 
-            <div className="how-stage-chip how-stage-chip-1">feature map</div>
-            <div className="how-stage-chip how-stage-chip-2">auth decisions</div>
-            <div className="how-stage-chip how-stage-chip-3">webhook retry</div>
-            <div className="how-stage-chip how-stage-chip-4">next step</div>
+              <div className="how-stage-panel how-stage-panel-recall">
+                <div className="how-stage-panel-head">
+                  <span className="how-stage-count">02</span>
+                  <span className="how-stage-name">Recall threads</span>
+                </div>
+                <div className="how-stage-scene recall-scene">
+                  <span className="recall-scene-line"></span>
+                  <span className="recall-scene-node recall-scene-node-1"></span>
+                  <span className="recall-scene-node recall-scene-node-2"></span>
+                  <span className="recall-scene-node recall-scene-node-3"></span>
+                  <span className="recall-thread recall-thread-1"></span>
+                  <span className="recall-thread recall-thread-2"></span>
+                  <span className="recall-thread recall-thread-3"></span>
+                  <span className="recall-bubble recall-bubble-1">auth</span>
+                  <span className="recall-bubble recall-bubble-2">...</span>
+                  <span className="recall-bubble recall-bubble-3">retry</span>
+                </div>
+                <p className="how-stage-description">Saved decisions drop back in as threads, snippets, and conversation context.</p>
+              </div>
 
-            <div className="how-stage-scan"></div>
-
-            <svg viewBox="0 0 1000 320" preserveAspectRatio="none" className="how-stage-graph">
-              <defs>
-                <linearGradient id="memory-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%" stopColor="#ff7b72" />
-                  <stop offset="45%" stopColor="#a78bfa" />
-                  <stop offset="100%" stopColor="#60a5fa" />
-                </linearGradient>
-              </defs>
-
-              <path
-                className="memory-graph-backdrop"
-                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
-              />
-              <path
-                className="memory-graph-glow"
-                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
-              />
-              <path
-                className="memory-graph-flow"
-                d="M80 212C156 150 220 140 314 156C408 172 506 232 612 192C712 154 830 84 920 110"
-              />
-
-              <path className="memory-graph-branch memory-graph-branch-left" d="M120 212C148 184 178 164 216 160" />
-              <path className="memory-graph-branch memory-graph-branch-left" d="M198 168C228 136 258 126 296 130" />
-              <path className="memory-graph-branch memory-graph-branch-mid" d="M452 202C500 184 554 176 612 192" />
-              <path className="memory-graph-branch memory-graph-branch-mid" d="M510 226C548 214 584 214 622 222" />
-              <path className="memory-graph-branch memory-graph-branch-right" d="M694 152C756 126 814 104 872 108" />
-              <path className="memory-graph-branch memory-graph-branch-right" d="M762 176C814 156 860 152 906 154" />
-
-              <g className="memory-node memory-node-1">
-                <circle className="memory-node-ring" cx="120" cy="212" r="18" />
-                <circle className="memory-node-core" cx="120" cy="212" r="6" />
-              </g>
-              <g className="memory-node memory-node-2">
-                <circle className="memory-node-ring" cx="216" cy="160" r="14" />
-                <circle className="memory-node-core" cx="216" cy="160" r="5" />
-              </g>
-              <g className="memory-node memory-node-3">
-                <circle className="memory-node-ring" cx="314" cy="156" r="14" />
-                <circle className="memory-node-core" cx="314" cy="156" r="5" />
-              </g>
-              <g className="memory-node memory-node-4">
-                <circle className="memory-node-ring" cx="452" cy="202" r="14" />
-                <circle className="memory-node-core" cx="452" cy="202" r="5" />
-              </g>
-              <g className="memory-node memory-node-5">
-                <circle className="memory-node-ring" cx="612" cy="192" r="18" />
-                <circle className="memory-node-core" cx="612" cy="192" r="6" />
-              </g>
-              <g className="memory-node memory-node-6">
-                <circle className="memory-node-ring" cx="760" cy="128" r="14" />
-                <circle className="memory-node-core" cx="760" cy="128" r="5" />
-              </g>
-              <g className="memory-node memory-node-7">
-                <circle className="memory-node-ring" cx="840" cy="104" r="16" />
-                <circle className="memory-node-core" cx="840" cy="104" r="6" />
-              </g>
-              <g className="memory-node memory-node-8">
-                <circle className="memory-node-ring" cx="920" cy="110" r="16" />
-                <circle className="memory-node-core" cx="920" cy="110" r="6" />
-              </g>
-            </svg>
+              <div className="how-stage-panel how-stage-panel-model">
+                <div className="how-stage-panel-head">
+                  <span className="how-stage-count">03</span>
+                  <span className="how-stage-name">Memory model</span>
+                </div>
+                <div className="how-stage-scene model-scene">
+                  <span className="model-core">project memory</span>
+                  <span className="model-node model-node-top">files</span>
+                  <span className="model-node model-node-left">decisions</span>
+                  <span className="model-node model-node-right">sessions</span>
+                  <span className="model-node model-node-bottom">next steps</span>
+                  <span className="model-link model-link-top"></span>
+                  <span className="model-link model-link-left"></span>
+                  <span className="model-link model-link-right"></span>
+                  <span className="model-link model-link-bottom"></span>
+                  <span className="model-pulse model-pulse-1"></span>
+                  <span className="model-pulse model-pulse-2"></span>
+                  <span className="model-pulse model-pulse-3"></span>
+                </div>
+                <p className="how-stage-description">The memory stops being a log and becomes a structured model the assistant can build on.</p>
+              </div>
+            </div>
           </div>
 
           <div className="relative max-w-6xl mx-auto">
@@ -350,6 +338,7 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">01</span>
                 <div className="step-mini step-mini-scan" aria-hidden="true">
+                  <span className="mini-scan-lane"></span>
                   <span className="mini-dot mini-dot-1"></span>
                   <span className="mini-dot mini-dot-2"></span>
                   <span className="mini-dot mini-dot-3"></span>
@@ -372,12 +361,15 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">02</span>
                 <div className="step-mini step-mini-memory" aria-hidden="true">
-                  <span className="mini-track"></span>
                   <span className="mini-memory-node mini-memory-node-1"></span>
                   <span className="mini-memory-node mini-memory-node-2"></span>
                   <span className="mini-memory-node mini-memory-node-3"></span>
-                  <span className="mini-memory-chip mini-memory-chip-1"></span>
-                  <span className="mini-memory-chip mini-memory-chip-2"></span>
+                  <span className="mini-recall-thread mini-recall-thread-1"></span>
+                  <span className="mini-recall-thread mini-recall-thread-2"></span>
+                  <span className="mini-recall-thread mini-recall-thread-3"></span>
+                  <span className="mini-recall-bubble mini-recall-bubble-1">...</span>
+                  <span className="mini-recall-bubble mini-recall-bubble-2">auth</span>
+                  <span className="mini-recall-bubble mini-recall-bubble-3">fix</span>
                 </div>
                 <div className="step-icon-wrap">
                   <RefreshCw className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
@@ -393,12 +385,15 @@ export default function Home() {
               <div className="step-card p-8 pt-10 text-center">
                 <span className="step-number">03</span>
                 <div className="step-mini step-mini-growth" aria-hidden="true">
-                  <span className="mini-root"></span>
-                  <span className="mini-branch mini-branch-1"></span>
-                  <span className="mini-branch mini-branch-2"></span>
-                  <span className="mini-growth-node mini-growth-node-1"></span>
-                  <span className="mini-growth-node mini-growth-node-2"></span>
-                  <span className="mini-growth-node mini-growth-node-3"></span>
+                  <span className="mini-model-core"></span>
+                  <span className="mini-model-node mini-model-node-1"></span>
+                  <span className="mini-model-node mini-model-node-2"></span>
+                  <span className="mini-model-node mini-model-node-3"></span>
+                  <span className="mini-model-node mini-model-node-4"></span>
+                  <span className="mini-model-link mini-model-link-1"></span>
+                  <span className="mini-model-link mini-model-link-2"></span>
+                  <span className="mini-model-link mini-model-link-3"></span>
+                  <span className="mini-model-link mini-model-link-4"></span>
                 </div>
                 <div className="step-icon-wrap">
                   <TrendingUp className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
