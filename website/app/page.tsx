@@ -226,25 +226,43 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-7xl">
+      <section className="py-24 relative overflow-hidden">
+        <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">How it works</h2>
-          <p className="text-xl text-center opacity-70 mb-16 max-w-2xl mx-auto">Two commands. Then your AI remembers everything.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">1 <ScanSearch className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
-              <h3 className="text-xl font-bold mb-3">First session</h3>
-              <p className="text-lg opacity-90">reccli scans your codebase and builds a feature map to understand your project.</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">2 <RefreshCw className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
-              <h3 className="text-xl font-bold mb-3">Every session after</h3>
-              <p className="text-lg opacity-90">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
-              <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">3 <TrendingUp className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
-              <h3 className="text-xl font-bold mb-3">It compounds</h3>
-              <p className="text-lg opacity-90">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
+          <p className="text-xl text-center opacity-70 mb-20 max-w-2xl mx-auto">Two commands. Then your AI remembers everything.</p>
+
+          <div className="relative max-w-5xl mx-auto">
+            {/* Connector lines (desktop only) */}
+            <svg className="hidden md:block absolute top-[52px] left-0 w-full h-8 z-0 pointer-events-none" viewBox="0 0 1000 30" preserveAspectRatio="none">
+              <line x1="200" y1="15" x2="480" y2="15" className="step-connector" />
+              <line x1="520" y1="15" x2="800" y2="15" className="step-connector" />
+            </svg>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+              <div className="step-card p-8 pt-10 text-center">
+                <span className="step-number">01</span>
+                <div className="step-icon-wrap">
+                  <ScanSearch className="w-7 h-7 text-green-400/80" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">First session</h3>
+                <p className="text-base opacity-70 leading-relaxed">reccli scans your codebase and builds a feature map to understand your project.</p>
+              </div>
+              <div className="step-card p-8 pt-10 text-center">
+                <span className="step-number">02</span>
+                <div className="step-icon-wrap">
+                  <RefreshCw className="w-7 h-7 text-sky-400/80" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Every session after</h3>
+                <p className="text-base opacity-70 leading-relaxed">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
+              </div>
+              <div className="step-card p-8 pt-10 text-center">
+                <span className="step-number">03</span>
+                <div className="step-icon-wrap">
+                  <TrendingUp className="w-7 h-7 text-emerald-400/80" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">It compounds</h3>
+                <p className="text-base opacity-70 leading-relaxed">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
+              </div>
             </div>
           </div>
         </div>
