@@ -244,7 +244,7 @@ export default function Home() {
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
               <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">3 <TrendingUp className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">It compounds</h3>
-              <p className="text-lg opacity-90">Your AI gets better over time — not because the model improved. Because it remembered session 1.</p>
+              <p className="text-lg opacity-90">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
             </div>
           </div>
         </div>
