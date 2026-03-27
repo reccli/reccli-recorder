@@ -234,17 +234,17 @@ export default function Home() {
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
               <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">1 <ScanSearch className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">First session</h3>
-              <p className="text-lg opacity-90">reccli scans your codebase with Tree-sitter, clusters files into features, and creates a structured project map.</p>
+              <p className="text-lg opacity-90">reccli scans your codebase and builds a feature map to understand your project.</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
               <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">2 <RefreshCw className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">Every session after</h3>
-              <p className="text-lg opacity-90">Your AI loads the project map + last session's decisions, problems solved, and next steps. No re-explaining.</p>
+              <p className="text-lg opacity-90">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 text-center">
               <div className="text-4xl font-bold text-white/30 mb-4 flex items-center justify-center gap-3">3 <TrendingUp className="w-12 h-12 text-white/30" strokeWidth={1.5} /></div>
               <h3 className="text-xl font-bold mb-3">It compounds</h3>
-              <p className="text-lg opacity-90">Session #10 is dramatically better than #1. Your AI accumulates structured memory instead of starting cold.</p>
+              <p className="text-lg opacity-90">Your AI gets better over time — not because the model improved. Because it remembered session 1.</p>
             </div>
           </div>
         </div>
