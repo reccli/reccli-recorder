@@ -199,7 +199,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <div className="text-green-400 mb-2"># Add to Claude Code (or any MCP-compatible tool)</div>
+                <div className="text-green-400 mb-2"># Add to Claude Code</div>
                 <div
                   onClick={() => handleCopy(mcpCommand, 'mcp')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
