@@ -15,7 +15,7 @@ export default function Home() {
   const [confirmEmail, setConfirmEmail] = useState('')
 
   const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
-  const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python -m reccli.mcp_server'
+  const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python3 -m reccli.mcp_server'
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
     try {
