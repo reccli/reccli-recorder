@@ -185,8 +185,7 @@ export default function Home() {
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
                 >
                   <div>
-                    <span className="text-green-400">$</span>
-                    <span className="text-white ml-2 text-base break-all">{cloneCommand}</span>
+                    <span className="text-white text-base break-all">{cloneCommand}</span>
                   </div>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0 ml-2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -206,8 +205,7 @@ export default function Home() {
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
                 >
                   <div>
-                    <span className="text-green-400">$</span>
-                    <span className="text-white ml-2 text-base">{mcpCommand}</span>
+                    <span className="text-white text-base">{mcpCommand}</span>
                   </div>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600 group-hover:text-white transition-colors flex-shrink-0">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
