@@ -112,11 +112,17 @@ export default function Home() {
     const vLine = scene.querySelector('.scan-v-line') as HTMLElement
     if (!vLine || chips.length === 0) return
 
-    // Final resting Y % for each chip (from CSS), ordered top to bottom
     const chipFinalYPcts = [0.12, 0.25, 0.38, 0.51, 0.64, 0.77]
-    // Delays match CSS: chip 6 (bottom) fires first, chip 1 (top) fires last
-    // The vertical line grows from bottom up, so we show each beam
-    // only after the line has reached that chip's Y position
+    // Line grows bottom-up during 8-28% of 7s = 0.56s to 1.96s
+    // Each chip activates when the line reaches its Y (bottom first)
+    const animDur = 7 // seconds
+    const lineStart = 0.08 * animDur // 0.56s
+    const lineEnd = 0.28 * animDur   // 1.96s
+    const lineDur = lineEnd - lineStart
+    const chipActiveTimes = chipFinalYPcts.map(pct => {
+      const progress = 1 - (pct - 0.04) / 0.90 // 0=bottom, 1=top
+      return lineStart + progress * lineDur
+    })
 
     const lines: SVGLineElement[] = []
     chips.forEach(() => {
@@ -128,7 +134,6 @@ export default function Home() {
       lines.push(line)
     })
 
-    // Set SVG viewBox to match scene pixel dimensions
     const setViewBox = () => {
       const r = scene.getBoundingClientRect()
       svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`)
@@ -136,20 +141,14 @@ export default function Home() {
     setViewBox()
     window.addEventListener('resize', setViewBox)
 
+    const startTime = performance.now()
     let rafId: number
+
     const update = () => {
+      const elapsedSec = ((performance.now() - startTime) % (animDur * 1000)) / 1000
       const sceneRect = scene.getBoundingClientRect()
       const vLineRect = vLine.getBoundingClientRect()
       const lineX = vLineRect.left + vLineRect.width / 2 - sceneRect.left
-
-      // The vertical line's visible top edge (it grows from bottom up via scaleY)
-      // vLineRect.top relative to scene = how far the line has grown
-      const lineVisibleTop = vLineRect.top - sceneRect.top
-      const lineVisibleBottom = vLineRect.bottom - sceneRect.top
-
-      // Vertical line grows bottom-up: track its visible top edge
-      const lineTop = vLineRect.top - sceneRect.top
-      const lineBottom = vLineRect.bottom - sceneRect.top
 
       chips.forEach((chip, i) => {
         const chipRect = chip.getBoundingClientRect()
@@ -157,11 +156,9 @@ export default function Home() {
         const chipCenterY = chipRect.top + chipRect.height / 2 - sceneRect.top
         const finalY = chipFinalYPcts[i] * sceneRect.height + chipRect.height / 2
         const dist = chipLeftX - lineX
+        const activated = elapsedSec >= chipActiveTimes[i]
 
-        // Only show beam once the vertical line has grown past this chip's final Y
-        const lineReached = finalY >= lineTop - 10 && finalY <= lineBottom + 10
-
-        if (lineReached && dist > 5) {
+        if (activated && dist > 5) {
           lines[i].setAttribute('x1', String(lineX))
           lines[i].setAttribute('y1', String(finalY))
           lines[i].setAttribute('x2', String(chipLeftX))
