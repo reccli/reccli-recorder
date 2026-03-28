@@ -112,10 +112,9 @@ body {
 }
 
 @keyframes graphLinkDraw {
-  0%, 2% { stroke-dashoffset: var(--dash, 80); opacity: 0; }
-  4% { opacity: 0.8; }
-  18%, 92% { stroke-dashoffset: 0; opacity: 0.8; }
-  100% { stroke-dashoffset: var(--dash, 80); opacity: 0; }
+  0% { stroke-dashoffset: var(--dash, 80); opacity: 0; }
+  3% { opacity: 0.8; }
+  18%, 100% { stroke-dashoffset: 0; opacity: 0.8; }
 }
 
 @keyframes graphLinkR1 {
@@ -690,10 +689,10 @@ body {
 .graph-link-r3 { stroke-dasharray: 50; stroke-dashoffset: 50; stroke: rgba(96, 165, 250, 0.35); stroke-width: 1; }
 .graph-link-cross { stroke-dasharray: 60; stroke-dashoffset: 60; stroke: rgba(255, 255, 255, 0.22); stroke-width: 0.8; }
 
-.how-stage-row.is-active .graph-link-r1 { animation: graphLinkDraw 8s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.how-stage-row.is-active .graph-link-r2 { animation: graphLinkDraw 8s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.how-stage-row.is-active .graph-link-r3 { animation: graphLinkDraw 8s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.how-stage-row.is-active .graph-link-cross { animation: graphLinkDraw 8s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.how-stage-row.is-active .graph-link-r1 { animation: graphLinkDraw 8s ease-in-out forwards; animation-delay: var(--d, 0s); }
+.how-stage-row.is-active .graph-link-r2 { animation: graphLinkDraw 8s ease-in-out forwards; animation-delay: var(--d, 0s); }
+.how-stage-row.is-active .graph-link-r3 { animation: graphLinkDraw 8s ease-in-out forwards; animation-delay: var(--d, 0s); }
+.how-stage-row.is-active .graph-link-cross { animation: graphLinkDraw 8s ease-in-out forwards; animation-delay: var(--d, 0s); }
 
 /* Nodes — all visible from start, no entrance animation */
 .graph-node {
