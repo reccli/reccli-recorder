@@ -128,6 +128,14 @@ export default function Home() {
       lines.push(line)
     })
 
+    // Set SVG viewBox to match scene pixel dimensions
+    const setViewBox = () => {
+      const r = scene.getBoundingClientRect()
+      svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`)
+    }
+    setViewBox()
+    window.addEventListener('resize', setViewBox)
+
     let rafId: number
     const update = () => {
       const sceneRect = scene.getBoundingClientRect()
@@ -163,6 +171,7 @@ export default function Home() {
     rafId = requestAnimationFrame(update)
     return () => {
       cancelAnimationFrame(rafId)
+      window.removeEventListener('resize', setViewBox)
       lines.forEach(l => l.remove())
     }
   }, [stage1Active])
