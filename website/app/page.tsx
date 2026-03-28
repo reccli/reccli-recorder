@@ -510,69 +510,71 @@ export default function Home() {
                       <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
                     </radialGradient>
                   </defs>
-                  {/* Core glow */}
-                  <circle className="graph-core-glow" cx="180" cy="135" r="55" fill="url(#graph-core-glow)" />
+                  {/* Core glow + ripple */}
+                  <circle className="graph-core-glow" cx="180" cy="135" r="35" fill="url(#graph-core-glow)" />
+                  <circle className="graph-ripple" cx="180" cy="135" r="20" />
+                  <circle className="graph-ripple graph-ripple-2" cx="180" cy="135" r="20" />
 
-                  {/* === Links: core → ring 1 === */}
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="180" y2="75" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="232" y2="88" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="240" y2="140" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="220" y2="185" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="140" y2="185" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="120" y2="140" />
-                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="128" y2="88" />
+                  {/* === Links: core → ring 1 (0-1s stagger) === */}
+                  <line className="graph-link graph-link-r1" style={{'--d':'0s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="180" y2="75" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.18s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="232" y2="88" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.08s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="240" y2="140" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.28s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="220" y2="185" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.12s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="140" y2="185" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.35s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="120" y2="140" />
+                  <line className="graph-link graph-link-r1" style={{'--d':'0.22s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="128" y2="88" />
 
-                  {/* === Links: ring 1 → ring 2 === */}
-                  <line className="graph-link graph-link-r2" x1="180" y1="75" x2="155" y2="38" />
-                  <line className="graph-link graph-link-r2" x1="180" y1="75" x2="210" y2="42" />
-                  <line className="graph-link graph-link-r2" x1="232" y1="88" x2="272" y2="58" />
-                  <line className="graph-link graph-link-r2" x1="232" y1="88" x2="278" y2="105" />
-                  <line className="graph-link graph-link-r2" x1="240" y1="140" x2="290" y2="130" />
-                  <line className="graph-link graph-link-r2" x1="240" y1="140" x2="282" y2="170" />
-                  <line className="graph-link graph-link-r2" x1="220" y1="185" x2="255" y2="215" />
-                  <line className="graph-link graph-link-r2" x1="220" y1="185" x2="195" y2="225" />
-                  <line className="graph-link graph-link-r2" x1="140" y1="185" x2="165" y2="225" />
-                  <line className="graph-link graph-link-r2" x1="140" y1="185" x2="100" y2="215" />
-                  <line className="graph-link graph-link-r2" x1="120" y1="140" x2="70" y2="165" />
-                  <line className="graph-link graph-link-r2" x1="120" y1="140" x2="68" y2="125" />
-                  <line className="graph-link graph-link-r2" x1="128" y1="88" x2="82" y2="60" />
-                  <line className="graph-link graph-link-r2" x1="128" y1="88" x2="85" y2="95" />
+                  {/* === Links: ring 1 → ring 2 (1-2.8s stagger) === */}
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.0s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="155" y2="38" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.15s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="210" y2="42" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.3s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="272" y2="58" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.08s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="278" y2="105" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.55s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="290" y2="130" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.4s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="282" y2="170" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.7s','--dash':'60'} as React.CSSProperties} x1="220" y1="185" x2="255" y2="215" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.25s','--dash':'60'} as React.CSSProperties} x1="220" y1="185" x2="195" y2="225" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.85s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="165" y2="225" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.5s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="100" y2="215" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'2.0s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="70" y2="165" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.65s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="68" y2="125" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'2.15s','--dash':'60'} as React.CSSProperties} x1="128" y1="88" x2="82" y2="60" />
+                  <line className="graph-link graph-link-r2" style={{'--d':'1.9s','--dash':'60'} as React.CSSProperties} x1="128" y1="88" x2="85" y2="95" />
 
-                  {/* === Links: ring 2 → ring 3 === */}
-                  <line className="graph-link graph-link-r3" x1="155" y1="38" x2="135" y2="15" />
-                  <line className="graph-link graph-link-r3" x1="210" y1="42" x2="230" y2="18" />
-                  <line className="graph-link graph-link-r3" x1="272" y1="58" x2="305" y2="38" />
-                  <line className="graph-link graph-link-r3" x1="278" y1="105" x2="320" y2="98" />
-                  <line className="graph-link graph-link-r3" x1="290" y1="130" x2="330" y2="140" />
-                  <line className="graph-link graph-link-r3" x1="282" y1="170" x2="318" y2="192" />
-                  <line className="graph-link graph-link-r3" x1="255" y1="215" x2="275" y2="245" />
-                  <line className="graph-link graph-link-r3" x1="195" y1="225" x2="200" y2="255" />
-                  <line className="graph-link graph-link-r3" x1="165" y1="225" x2="158" y2="255" />
-                  <line className="graph-link graph-link-r3" x1="100" y1="215" x2="78" y2="242" />
-                  <line className="graph-link graph-link-r3" x1="70" y1="165" x2="38" y2="185" />
-                  <line className="graph-link graph-link-r3" x1="68" y1="125" x2="30" y2="118" />
-                  <line className="graph-link graph-link-r3" x1="82" y1="60" x2="55" y2="35" />
-                  <line className="graph-link graph-link-r3" x1="85" y1="95" x2="42" y2="82" />
+                  {/* === Links: ring 2 → ring 3 (2.8-4.5s stagger) === */}
+                  <line className="graph-link graph-link-r3" style={{'--d':'2.8s','--dash':'50'} as React.CSSProperties} x1="155" y1="38" x2="135" y2="15" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.0s','--dash':'50'} as React.CSSProperties} x1="210" y1="42" x2="230" y2="18" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'2.9s','--dash':'50'} as React.CSSProperties} x1="272" y1="58" x2="305" y2="38" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.2s','--dash':'50'} as React.CSSProperties} x1="278" y1="105" x2="320" y2="98" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.1s','--dash':'50'} as React.CSSProperties} x1="290" y1="130" x2="330" y2="140" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.4s','--dash':'50'} as React.CSSProperties} x1="282" y1="170" x2="318" y2="192" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.55s','--dash':'50'} as React.CSSProperties} x1="255" y1="215" x2="275" y2="245" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.3s','--dash':'50'} as React.CSSProperties} x1="195" y1="225" x2="200" y2="255" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.7s','--dash':'50'} as React.CSSProperties} x1="165" y1="225" x2="158" y2="255" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.5s','--dash':'50'} as React.CSSProperties} x1="100" y1="215" x2="78" y2="242" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'3.85s','--dash':'50'} as React.CSSProperties} x1="70" y1="165" x2="38" y2="185" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'4.0s','--dash':'50'} as React.CSSProperties} x1="68" y1="125" x2="30" y2="118" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'4.15s','--dash':'50'} as React.CSSProperties} x1="82" y1="60" x2="55" y2="35" />
+                  <line className="graph-link graph-link-r3" style={{'--d':'4.3s','--dash':'50'} as React.CSSProperties} x1="85" y1="95" x2="42" y2="82" />
 
-                  {/* === Cross-links (intra-ring) === */}
-                  <line className="graph-link graph-link-cross" x1="180" y1="75" x2="232" y2="88" />
-                  <line className="graph-link graph-link-cross" x1="232" y1="88" x2="240" y2="140" />
-                  <line className="graph-link graph-link-cross" x1="120" y1="140" x2="128" y2="88" />
-                  <line className="graph-link graph-link-cross" x1="140" y1="185" x2="220" y2="185" />
-                  <line className="graph-link graph-link-cross" x1="155" y1="38" x2="210" y2="42" />
-                  <line className="graph-link graph-link-cross" x1="272" y1="58" x2="278" y2="105" />
-                  <line className="graph-link graph-link-cross" x1="70" y1="165" x2="100" y2="215" />
-                  <line className="graph-link graph-link-cross" x1="282" y1="170" x2="255" y2="215" />
-                  <line className="graph-link graph-link-cross" x1="240" y1="140" x2="220" y2="185" />
-                  <line className="graph-link graph-link-cross" x1="120" y1="140" x2="140" y2="185" />
-                  <line className="graph-link graph-link-cross" x1="180" y1="75" x2="128" y2="88" />
-                  <line className="graph-link graph-link-cross" x1="195" y1="225" x2="165" y2="225" />
-                  <line className="graph-link graph-link-cross" x1="290" y1="130" x2="282" y2="170" />
-                  <line className="graph-link graph-link-cross" x1="68" y1="125" x2="82" y2="60" />
+                  {/* === Cross-links (4.5-6s stagger) === */}
+                  <line className="graph-link graph-link-cross" style={{'--d':'4.5s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="232" y2="88" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'4.7s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="240" y2="140" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'4.85s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="128" y2="88" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.0s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="220" y2="185" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'4.6s','--dash':'60'} as React.CSSProperties} x1="155" y1="38" x2="210" y2="42" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.15s','--dash':'60'} as React.CSSProperties} x1="272" y1="58" x2="278" y2="105" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.3s','--dash':'60'} as React.CSSProperties} x1="70" y1="165" x2="100" y2="215" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'4.95s','--dash':'60'} as React.CSSProperties} x1="282" y1="170" x2="255" y2="215" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.45s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="220" y2="185" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.6s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="140" y2="185" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.1s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="128" y2="88" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.75s','--dash':'60'} as React.CSSProperties} x1="195" y1="225" x2="165" y2="225" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.5s','--dash':'60'} as React.CSSProperties} x1="290" y1="130" x2="282" y2="170" />
+                  <line className="graph-link graph-link-cross" style={{'--d':'5.9s','--dash':'60'} as React.CSSProperties} x1="68" y1="125" x2="82" y2="60" />
 
                   {/* === Core node === */}
-                  <circle className="graph-node graph-node-core" cx="180" cy="135" r="8" />
-                  <circle className="graph-node graph-node-core-ring" cx="180" cy="135" r="13" />
+                  <circle className="graph-node graph-node-core" cx="180" cy="135" r="5" />
+                  <circle className="graph-node graph-node-core-ring" cx="180" cy="135" r="9" />
 
                   {/* === Ring 1 nodes (features) === */}
                   <circle className="graph-node graph-node-r1" cx="180" cy="75" r="5" />
