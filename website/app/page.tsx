@@ -112,11 +112,12 @@ export default function Home() {
     const vLine = scene.querySelector('.scan-v-line') as HTMLElement
     if (!vLine || chips.length === 0) return
 
-    // Measure each chip's final resting Y (from CSS top %)
-    const sceneH = scene.offsetHeight
-    const chipFinalYs = [0.12, 0.25, 0.38, 0.51, 0.64, 0.77] // top % values from CSS
+    // Final resting Y % for each chip (from CSS), ordered top to bottom
+    const chipFinalYPcts = [0.12, 0.25, 0.38, 0.51, 0.64, 0.77]
+    // Delays match CSS: chip 6 (bottom) fires first, chip 1 (top) fires last
+    // The vertical line grows from bottom up, so we show each beam
+    // only after the line has reached that chip's Y position
 
-    // Create SVG lines for each chip
     const lines: SVGLineElement[] = []
     chips.forEach(() => {
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
@@ -133,23 +134,32 @@ export default function Home() {
       const vLineRect = vLine.getBoundingClientRect()
       const lineX = vLineRect.left + vLineRect.width / 2 - sceneRect.left
 
+      // The vertical line's visible top edge (it grows from bottom up via scaleY)
+      // vLineRect.top relative to scene = how far the line has grown
+      const lineVisibleTop = vLineRect.top - sceneRect.top
+      const lineVisibleBottom = vLineRect.bottom - sceneRect.top
+
       chips.forEach((chip, i) => {
         const chipRect = chip.getBoundingClientRect()
         const chipLeftX = chipRect.left - sceneRect.left
         const chipCenterY = chipRect.top + chipRect.height / 2 - sceneRect.top
+        const finalY = chipFinalYPcts[i] * sceneRect.height + chipRect.height / 2
 
-        // Left endpoint: fixed at the chip's FINAL Y on the vertical line
-        const finalY = chipFinalYs[i] * sceneRect.height + chipRect.height / 2
-
+        // Only show beam if the vertical line has grown past this chip's final Y
+        const lineReachedChip = finalY >= lineVisibleTop && finalY <= lineVisibleBottom
         const dist = chipLeftX - lineX
 
-        if (dist > 3) {
+        if (lineReachedChip && dist > 5) {
           lines[i].setAttribute('x1', String(lineX))
           lines[i].setAttribute('y1', String(finalY))
           lines[i].setAttribute('x2', String(chipLeftX))
           lines[i].setAttribute('y2', String(chipCenterY))
-          lines[i].setAttribute('stroke-opacity', String(Math.min(0.5, dist / 100)))
+          lines[i].setAttribute('stroke-opacity', String(Math.min(0.5, dist / 80)))
+        } else if (dist <= 5) {
+          // Chip landed — hide
+          lines[i].setAttribute('stroke-opacity', '0')
         } else {
+          // Line hasn't reached this chip yet — hide
           lines[i].setAttribute('stroke-opacity', '0')
         }
       })
