@@ -87,8 +87,28 @@ body {
 }
 
 @keyframes graphR2Appear {
-  0%, 42% { opacity: 0; transform: scale(0); }
-  60%, 100% { opacity: 1; transform: scale(1); }
+  0%, 36% { opacity: 0; transform: scale(0); }
+  52%, 100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes graphR3Appear {
+  0%, 52% { opacity: 0; transform: scale(0); }
+  68%, 100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes graphLinkR3 {
+  0%, 48% { opacity: 0; stroke-dashoffset: 50; }
+  66%, 100% { opacity: 0.4; stroke-dashoffset: 0; }
+}
+
+@keyframes graphCrossLink {
+  0%, 56% { opacity: 0; stroke-dashoffset: 60; }
+  72%, 100% { opacity: 0.3; stroke-dashoffset: 0; }
+}
+
+@keyframes graphLabelAppear {
+  0%, 30% { opacity: 0; }
+  45%, 100% { opacity: 1; }
 }
 
 @keyframes graphLinkR1 {
@@ -478,7 +498,7 @@ body {
 .recall-slot-icon-outer {
   width: 0.85rem;
   height: 0.85rem;
-  color: rgba(96, 165, 250, 0.5);
+  color: rgba(167, 139, 250, 0.8);
   flex-shrink: 0;
 }
 
@@ -578,9 +598,9 @@ body {
 }
 
 .recall-deploy-icon-outer {
-  width: 0.9rem;
-  height: 0.9rem;
-  color: rgba(96, 165, 250, 0.6);
+  width: 1rem;
+  height: 1rem;
+  color: rgba(255, 255, 255, 0.7);
   flex-shrink: 0;
   margin-top: 0.7rem;
 }
@@ -592,7 +612,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(11, 13, 30, 0.92);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
-  font-size: 0.68rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.82);
@@ -611,15 +631,15 @@ body {
 
 .graph-scene {
   background:
-    radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.1), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.08), transparent 50%),
     linear-gradient(180deg, rgba(15, 17, 35, 0.96), rgba(20, 23, 44, 0.78));
 }
 
 .graph-svg {
   position: absolute;
-  inset: 5%;
-  width: 90%;
-  height: 90%;
+  inset: 2%;
+  width: 96%;
+  height: 96%;
 }
 
 .graph-core-glow {
@@ -627,53 +647,28 @@ body {
 }
 
 .how-stage-row.is-active .graph-core-glow {
-  animation: graphGlowPulse 4s ease-in-out infinite;
-  animation-delay: 0.4s;
+  animation: graphGlowPulse 4s ease-in-out infinite 0.4s;
 }
 
-/* Links */
+/* Links — all rings */
 .graph-link {
-  stroke: url(#graph-link-grad);
-  stroke-width: 1.5;
+  stroke: rgba(167, 139, 250, 0.35);
+  stroke-width: 1;
   stroke-linecap: round;
-  stroke-dasharray: 80;
-  stroke-dashoffset: 80;
   opacity: 0;
 }
 
-.how-stage-row.is-active .graph-link-r1-1,
-.how-stage-row.is-active .graph-link-r1-2,
-.how-stage-row.is-active .graph-link-r1-3,
-.how-stage-row.is-active .graph-link-r1-4,
-.how-stage-row.is-active .graph-link-r1-5,
-.how-stage-row.is-active .graph-link-r1-6 {
-  animation: graphLinkR1 7s ease-in-out infinite;
-}
+.graph-link-r1 { stroke-dasharray: 80; stroke-dashoffset: 80; stroke: rgba(255, 123, 114, 0.55); stroke-width: 1.5; }
+.graph-link-r2 { stroke-dasharray: 60; stroke-dashoffset: 60; stroke: rgba(167, 139, 250, 0.45); stroke-width: 1.2; }
+.graph-link-r3 { stroke-dasharray: 50; stroke-dashoffset: 50; stroke: rgba(96, 165, 250, 0.35); stroke-width: 1; }
+.graph-link-cross { stroke-dasharray: 60; stroke-dashoffset: 60; stroke: rgba(255, 255, 255, 0.22); stroke-width: 0.8; }
 
-.how-stage-row.is-active .graph-link-r1-2 { animation-delay: 0.08s; }
-.how-stage-row.is-active .graph-link-r1-3 { animation-delay: 0.16s; }
-.how-stage-row.is-active .graph-link-r1-4 { animation-delay: 0.24s; }
-.how-stage-row.is-active .graph-link-r1-5 { animation-delay: 0.32s; }
-.how-stage-row.is-active .graph-link-r1-6 { animation-delay: 0.40s; }
+.how-stage-row.is-active .graph-link-r1 { animation: graphLinkR1 8s ease-in-out infinite; }
+.how-stage-row.is-active .graph-link-r2 { animation: graphLinkR2 8s ease-in-out infinite; }
+.how-stage-row.is-active .graph-link-r3 { animation: graphLinkR3 8s ease-in-out infinite; }
+.how-stage-row.is-active .graph-link-cross { animation: graphCrossLink 8s ease-in-out infinite; }
 
-.how-stage-row.is-active .graph-link-r2-1,
-.how-stage-row.is-active .graph-link-r2-2,
-.how-stage-row.is-active .graph-link-r2-3,
-.how-stage-row.is-active .graph-link-r2-4,
-.how-stage-row.is-active .graph-link-r2-5,
-.how-stage-row.is-active .graph-link-r2-6 {
-  stroke-dasharray: 60;
-  stroke-dashoffset: 60;
-  animation: graphLinkR2 7s ease-in-out infinite;
-}
-
-.how-stage-row.is-active .graph-link-r2-2 { animation-delay: 0.1s; }
-.how-stage-row.is-active .graph-link-r2-3 { animation-delay: 0.2s; }
-.how-stage-row.is-active .graph-link-r2-4 { animation-delay: 0.3s; }
-.how-stage-row.is-active .graph-link-r2-5 { animation-delay: 0.4s; }
-.how-stage-row.is-active .graph-link-r2-6 { animation-delay: 0.5s; }
-
-/* Nodes */
+/* Nodes — all rings */
 .graph-node {
   transform-box: fill-box;
   transform-origin: center;
@@ -682,65 +677,80 @@ body {
 
 .graph-node-core {
   fill: #a78bfa;
-  filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.6));
+  filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.6));
+}
+
+.graph-node-core-ring {
+  fill: none;
+  stroke: rgba(167, 139, 250, 0.35);
+  stroke-width: 1.8;
+  opacity: 0;
 }
 
 .how-stage-row.is-active .graph-node-core {
-  animation: graphCoreAppear 7s ease-in-out infinite, graphPulse 3s ease-in-out infinite 1.5s;
+  animation: graphCoreAppear 8s ease-in-out infinite, graphPulse 3s ease-in-out infinite 1.5s;
+}
+
+.how-stage-row.is-active .graph-node-core-ring {
+  animation: graphCoreAppear 8s ease-in-out infinite;
 }
 
 .graph-node-r1 {
   fill: #ff7b72;
-  filter: drop-shadow(0 0 8px rgba(255, 123, 114, 0.5));
+  filter: drop-shadow(0 0 6px rgba(255, 123, 114, 0.45));
 }
 
 .how-stage-row.is-active .graph-node-r1 {
-  animation: graphR1Appear 7s ease-in-out infinite;
+  animation: graphR1Appear 8s ease-in-out infinite;
 }
 
-.how-stage-row.is-active .graph-node-r1-2 { animation-delay: 0.08s; }
-.how-stage-row.is-active .graph-node-r1-3 { animation-delay: 0.16s; }
-.how-stage-row.is-active .graph-node-r1-4 { animation-delay: 0.24s; }
-.how-stage-row.is-active .graph-node-r1-5 { animation-delay: 0.32s; }
-.how-stage-row.is-active .graph-node-r1-6 { animation-delay: 0.40s; }
-
 .graph-node-r2 {
-  fill: #60a5fa;
-  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
+  fill: #a78bfa;
+  filter: drop-shadow(0 0 5px rgba(167, 139, 250, 0.4));
 }
 
 .how-stage-row.is-active .graph-node-r2 {
-  animation: graphR2Appear 7s ease-in-out infinite;
+  animation: graphR2Appear 8s ease-in-out infinite;
 }
 
-.how-stage-row.is-active .graph-node-r2-2 { animation-delay: 0.1s; }
-.how-stage-row.is-active .graph-node-r2-3 { animation-delay: 0.2s; }
-.how-stage-row.is-active .graph-node-r2-4 { animation-delay: 0.3s; }
-.how-stage-row.is-active .graph-node-r2-5 { animation-delay: 0.4s; }
-.how-stage-row.is-active .graph-node-r2-6 { animation-delay: 0.5s; }
+.graph-node-r3 {
+  fill: #60a5fa;
+  filter: drop-shadow(0 0 4px rgba(96, 165, 250, 0.35));
+}
 
-/* Labels floating near graph */
-.graph-label {
-  position: absolute;
-  padding: 0.35rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 12, 28, 0.9);
-  font-size: 0.62rem;
+.how-stage-row.is-active .graph-node-r3 {
+  animation: graphR3Appear 8s ease-in-out infinite;
+}
+
+/* Node labels (inline SVG text) */
+.graph-node-label {
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.04em;
+  fill: rgba(255, 255, 255, 0.78);
   opacity: 0;
 }
 
-.how-stage-row.is-active .graph-label {
-  animation: graphLabelFloat 7s ease-in-out infinite;
+.graph-node-label-core {
+  font-size: 0;
 }
 
-.graph-label-1 { bottom: 6%; left: 8%; }
-.graph-label-2 { bottom: 6%; left: 38%; animation-delay: 0.15s; }
-.graph-label-3 { bottom: 6%; right: 8%; animation-delay: 0.3s; }
+.graph-node-label-r2 {
+  font-size: 8px;
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+.how-stage-row.is-active .graph-node-label-r2 {
+  animation: graphLabelAppear 8s ease-in-out infinite;
+}
+
+.how-stage-row.is-active .graph-node-label-core {
+  animation: graphCoreAppear 8s ease-in-out infinite;
+}
+
+.how-stage-row.is-active .graph-node-label-r1 {
+  animation: graphLabelAppear 8s ease-in-out infinite;
+}
 
 /* ===== Shared — step chips ===== */
 
@@ -790,9 +800,8 @@ body {
     padding: 0.5rem 0.65rem;
   }
 
-  .graph-label {
-    font-size: 0.52rem;
-    padding: 0.28rem 0.45rem;
+  .graph-node-label {
+    font-size: 6px;
   }
 
   .scan-v-label {

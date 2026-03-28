@@ -170,8 +170,8 @@ export default function Home() {
         if (searching) {
           anims.push(searching.animate([
             { transform: 'translateY(0)', opacity: 1, offset: 0 },
-            { transform: 'translateY(0)', opacity: 1, offset: 0.36 },
-            { transform: 'translateY(-120%)', opacity: 0, offset: 0.42 },
+            { transform: 'translateY(0)', opacity: 1, offset: 0.27 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 0.33 },
             { transform: 'translateY(-120%)', opacity: 0, offset: 0.999 },
             { transform: 'translateY(0)', opacity: 1, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
@@ -179,8 +179,8 @@ export default function Home() {
         if (found) {
           anims.push(found.animate([
             { transform: 'translateY(120%)', opacity: 0, offset: 0 },
-            { transform: 'translateY(120%)', opacity: 0, offset: 0.36 },
-            { transform: 'translateY(0)', opacity: 1, offset: 0.42 },
+            { transform: 'translateY(120%)', opacity: 0, offset: 0.27 },
+            { transform: 'translateY(0)', opacity: 1, offset: 0.33 },
             { transform: 'translateY(0)', opacity: 1, offset: 0.999 },
             { transform: 'translateY(120%)', opacity: 0, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
@@ -481,7 +481,7 @@ export default function Home() {
                 <span className="recall-deploy-wrap" ref={el => { deployCardRef.current = el }}>
                   <FileText className="recall-deploy-icon-outer" strokeWidth={1.7} />
                   <span className="recall-deploy-card">
-                    decided to keep auth middleware edge-safe — verified session tokens validate before route handlers
+                    decided to keep auth middleware edge-safe, verified session tokens validate before route handlers
                   </span>
                 </span>
               </div>
@@ -503,53 +503,122 @@ export default function Home() {
               className={`how-stage-row ${stage3Active ? 'is-active' : ''}`}
             >
               <div className="how-stage-scene graph-scene" aria-hidden="true">
-                <svg viewBox="0 0 320 240" className="graph-svg" role="presentation">
+                <svg viewBox="0 0 360 270" className="graph-svg" role="presentation">
                   <defs>
                     <radialGradient id="graph-core-glow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.35" />
                       <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
                     </radialGradient>
-                    <linearGradient id="graph-link-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#ff7b72" stopOpacity="0.6" />
-                      <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.6" />
-                    </linearGradient>
                   </defs>
                   {/* Core glow */}
-                  <circle className="graph-core-glow" cx="160" cy="120" r="48" fill="url(#graph-core-glow)" />
-                  {/* Ring 1 links */}
-                  <line className="graph-link graph-link-r1-1" x1="160" y1="120" x2="160" y2="62" />
-                  <line className="graph-link graph-link-r1-2" x1="160" y1="120" x2="214" y2="91" />
-                  <line className="graph-link graph-link-r1-3" x1="160" y1="120" x2="214" y2="149" />
-                  <line className="graph-link graph-link-r1-4" x1="160" y1="120" x2="160" y2="178" />
-                  <line className="graph-link graph-link-r1-5" x1="160" y1="120" x2="106" y2="149" />
-                  <line className="graph-link graph-link-r1-6" x1="160" y1="120" x2="106" y2="91" />
-                  {/* Ring 2 links */}
-                  <line className="graph-link graph-link-r2-1" x1="160" y1="62" x2="160" y2="28" />
-                  <line className="graph-link graph-link-r2-2" x1="214" y1="91" x2="258" y2="62" />
-                  <line className="graph-link graph-link-r2-3" x1="214" y1="149" x2="258" y2="178" />
-                  <line className="graph-link graph-link-r2-4" x1="160" y1="178" x2="160" y2="212" />
-                  <line className="graph-link graph-link-r2-5" x1="106" y1="149" x2="62" y2="178" />
-                  <line className="graph-link graph-link-r2-6" x1="106" y1="91" x2="62" y2="62" />
-                  {/* Core node */}
-                  <circle className="graph-node graph-node-core" cx="160" cy="120" r="8" />
-                  {/* Ring 1 nodes */}
-                  <circle className="graph-node graph-node-r1 graph-node-r1-1" cx="160" cy="62" r="5.5" />
-                  <circle className="graph-node graph-node-r1 graph-node-r1-2" cx="214" cy="91" r="5.5" />
-                  <circle className="graph-node graph-node-r1 graph-node-r1-3" cx="214" cy="149" r="5.5" />
-                  <circle className="graph-node graph-node-r1 graph-node-r1-4" cx="160" cy="178" r="5.5" />
-                  <circle className="graph-node graph-node-r1 graph-node-r1-5" cx="106" cy="149" r="5.5" />
-                  <circle className="graph-node graph-node-r1 graph-node-r1-6" cx="106" cy="91" r="5.5" />
-                  {/* Ring 2 nodes */}
-                  <circle className="graph-node graph-node-r2 graph-node-r2-1" cx="160" cy="28" r="4" />
-                  <circle className="graph-node graph-node-r2 graph-node-r2-2" cx="258" cy="62" r="4" />
-                  <circle className="graph-node graph-node-r2 graph-node-r2-3" cx="258" cy="178" r="4" />
-                  <circle className="graph-node graph-node-r2 graph-node-r2-4" cx="160" cy="212" r="4" />
-                  <circle className="graph-node graph-node-r2 graph-node-r2-5" cx="62" cy="178" r="4" />
-                  <circle className="graph-node graph-node-r2 graph-node-r2-6" cx="62" cy="62" r="4" />
+                  <circle className="graph-core-glow" cx="180" cy="135" r="55" fill="url(#graph-core-glow)" />
+
+                  {/* === Links: core → ring 1 === */}
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="180" y2="75" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="232" y2="88" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="240" y2="140" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="220" y2="185" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="140" y2="185" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="120" y2="140" />
+                  <line className="graph-link graph-link-r1" x1="180" y1="135" x2="128" y2="88" />
+
+                  {/* === Links: ring 1 → ring 2 === */}
+                  <line className="graph-link graph-link-r2" x1="180" y1="75" x2="155" y2="38" />
+                  <line className="graph-link graph-link-r2" x1="180" y1="75" x2="210" y2="42" />
+                  <line className="graph-link graph-link-r2" x1="232" y1="88" x2="272" y2="58" />
+                  <line className="graph-link graph-link-r2" x1="232" y1="88" x2="278" y2="105" />
+                  <line className="graph-link graph-link-r2" x1="240" y1="140" x2="290" y2="130" />
+                  <line className="graph-link graph-link-r2" x1="240" y1="140" x2="282" y2="170" />
+                  <line className="graph-link graph-link-r2" x1="220" y1="185" x2="255" y2="215" />
+                  <line className="graph-link graph-link-r2" x1="220" y1="185" x2="195" y2="225" />
+                  <line className="graph-link graph-link-r2" x1="140" y1="185" x2="165" y2="225" />
+                  <line className="graph-link graph-link-r2" x1="140" y1="185" x2="100" y2="215" />
+                  <line className="graph-link graph-link-r2" x1="120" y1="140" x2="70" y2="165" />
+                  <line className="graph-link graph-link-r2" x1="120" y1="140" x2="68" y2="125" />
+                  <line className="graph-link graph-link-r2" x1="128" y1="88" x2="82" y2="60" />
+                  <line className="graph-link graph-link-r2" x1="128" y1="88" x2="85" y2="95" />
+
+                  {/* === Links: ring 2 → ring 3 === */}
+                  <line className="graph-link graph-link-r3" x1="155" y1="38" x2="135" y2="15" />
+                  <line className="graph-link graph-link-r3" x1="210" y1="42" x2="230" y2="18" />
+                  <line className="graph-link graph-link-r3" x1="272" y1="58" x2="305" y2="38" />
+                  <line className="graph-link graph-link-r3" x1="278" y1="105" x2="320" y2="98" />
+                  <line className="graph-link graph-link-r3" x1="290" y1="130" x2="330" y2="140" />
+                  <line className="graph-link graph-link-r3" x1="282" y1="170" x2="318" y2="192" />
+                  <line className="graph-link graph-link-r3" x1="255" y1="215" x2="275" y2="245" />
+                  <line className="graph-link graph-link-r3" x1="195" y1="225" x2="200" y2="255" />
+                  <line className="graph-link graph-link-r3" x1="165" y1="225" x2="158" y2="255" />
+                  <line className="graph-link graph-link-r3" x1="100" y1="215" x2="78" y2="242" />
+                  <line className="graph-link graph-link-r3" x1="70" y1="165" x2="38" y2="185" />
+                  <line className="graph-link graph-link-r3" x1="68" y1="125" x2="30" y2="118" />
+                  <line className="graph-link graph-link-r3" x1="82" y1="60" x2="55" y2="35" />
+                  <line className="graph-link graph-link-r3" x1="85" y1="95" x2="42" y2="82" />
+
+                  {/* === Cross-links (intra-ring) === */}
+                  <line className="graph-link graph-link-cross" x1="180" y1="75" x2="232" y2="88" />
+                  <line className="graph-link graph-link-cross" x1="232" y1="88" x2="240" y2="140" />
+                  <line className="graph-link graph-link-cross" x1="120" y1="140" x2="128" y2="88" />
+                  <line className="graph-link graph-link-cross" x1="140" y1="185" x2="220" y2="185" />
+                  <line className="graph-link graph-link-cross" x1="155" y1="38" x2="210" y2="42" />
+                  <line className="graph-link graph-link-cross" x1="272" y1="58" x2="278" y2="105" />
+                  <line className="graph-link graph-link-cross" x1="70" y1="165" x2="100" y2="215" />
+                  <line className="graph-link graph-link-cross" x1="282" y1="170" x2="255" y2="215" />
+
+                  {/* === Core node === */}
+                  <circle className="graph-node graph-node-core" cx="180" cy="135" r="8" />
+                  <circle className="graph-node graph-node-core-ring" cx="180" cy="135" r="13" />
+
+                  {/* === Ring 1 nodes (features) === */}
+                  <circle className="graph-node graph-node-r1" cx="180" cy="75" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="180" y="65" textAnchor="middle">auth</text>
+                  <circle className="graph-node graph-node-r1" cx="232" cy="88" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="246" y="83" textAnchor="start">api</text>
+                  <circle className="graph-node graph-node-r1" cx="240" cy="140" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="254" y="144" textAnchor="start">db</text>
+                  <circle className="graph-node graph-node-r1" cx="220" cy="185" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="234" y="192" textAnchor="start">routes</text>
+                  <circle className="graph-node graph-node-r1" cx="140" cy="185" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="125" y="196" textAnchor="end">hooks</text>
+                  <circle className="graph-node graph-node-r1" cx="120" cy="140" r="5" />
+                  <text className="graph-node-label graph-node-label-r1" x="106" y="144" textAnchor="end">ui</text>
+                  <circle className="graph-node graph-node-r1" cx="128" cy="88" r="5" />
+
+                  {/* === Ring 2 nodes (sessions/decisions) === */}
+                  <circle className="graph-node graph-node-r2" cx="155" cy="38" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="140" y="30" textAnchor="end">session 3</text>
+                  <circle className="graph-node graph-node-r2" cx="210" cy="42" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="224" y="36" textAnchor="start">session 7</text>
+                  <circle className="graph-node graph-node-r2" cx="272" cy="58" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="278" cy="105" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="290" cy="130" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="304" y="134" textAnchor="start">session 12</text>
+                  <circle className="graph-node graph-node-r2" cx="282" cy="170" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="255" cy="215" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="195" cy="225" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="165" cy="225" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="100" cy="215" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="70" cy="165" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="56" y="172" textAnchor="end">session 1</text>
+                  <circle className="graph-node graph-node-r2" cx="68" cy="125" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="82" cy="60" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="85" cy="95" r="3.5" />
+
+                  {/* === Ring 3 nodes (context details) === */}
+                  <circle className="graph-node graph-node-r3" cx="135" cy="15" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="230" cy="18" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="305" cy="38" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="320" cy="98" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="330" cy="140" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="318" cy="192" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="275" cy="245" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="200" cy="255" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="158" cy="255" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="78" cy="242" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="38" cy="185" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="30" cy="118" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="55" cy="35" r="3.2" />
+                  <circle className="graph-node graph-node-r3" cx="42" cy="82" r="3.2" />
                 </svg>
-                <span className="graph-label graph-label-1">.devproject</span>
-                <span className="graph-label graph-label-2">sessions</span>
-                <span className="graph-label graph-label-3">decisions</span>
               </div>
               <div className="how-stage-text">
                 <span className="how-stage-count">03</span>
