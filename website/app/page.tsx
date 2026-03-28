@@ -16,6 +16,11 @@ export default function Home() {
   const stage1Ref = useRef<HTMLDivElement | null>(null)
   const stage2Ref = useRef<HTMLDivElement | null>(null)
   const stage3Ref = useRef<HTMLDivElement | null>(null)
+  const slotReelRef = useRef<HTMLDivElement | null>(null)
+  const tStemRef = useRef<HTMLSpanElement | null>(null)
+  const tBarRef = useRef<HTMLSpanElement | null>(null)
+  const deployCardRef = useRef<HTMLSpanElement | null>(null)
+  const searchLabelRef = useRef<HTMLSpanElement | null>(null)
   const [stage1Active, setStage1Active] = useState(false)
   const [stage2Active, setStage2Active] = useState(false)
   const [stage3Active, setStage3Active] = useState(false)
@@ -23,13 +28,40 @@ export default function Home() {
   const sessionList = useMemo(() => {
     const today = new Date()
     const sessions: { name: string; selected: boolean }[] = []
-    // Today first, oldest last — selected item ~42 days back
-    for (let i = 0; i <= 49; i++) {
+    const summaries = [
+      'fixed auth redirect loop',
+      'added rate limiting',
+      'refactored db queries',
+      'updated stripe webhooks',
+      'migrated user schema',
+      'patched CORS config',
+      'added search indexing',
+      'fixed session timeout',
+      'updated API versioning',
+      'added error boundaries',
+      'refactored middleware',
+      'fixed race condition',
+      'updated dependencies',
+      'added logging pipeline',
+      'fixed memory leak',
+      'refactored auth flow',
+      'added caching layer',
+      'fixed pagination bug',
+      'updated test suite',
+      'added health checks',
+    ]
+    // Oldest first (left), today last (right)
+    for (let i = 24; i >= 0; i--) {
       const d = new Date(today)
       d.setDate(d.getDate() - i)
       const mm = String(d.getMonth() + 1).padStart(2, '0')
       const dd = String(d.getDate()).padStart(2, '0')
-      sessions.push({ name: `session-${mm}-${dd}.md`, selected: i === 0 || i === 33 })
+      sessions.push({
+        name: `${mm}-${dd}.devsession`,
+        summary: summaries[i % summaries.length],
+        selected: i === 0,
+        landed: i === 20,
+      })
     }
     return sessions
   }, [])
@@ -66,6 +98,114 @@ export default function Home() {
 
     return () => observers.forEach(o => o.disconnect())
   }, [])
+
+  // Drive slot reel animation from JS so landing position is viewport-aware
+  useEffect(() => {
+    if (!stage2Active) return
+    const reel = slotReelRef.current
+    if (!reel) return
+    const track = reel.parentElement
+    if (!track) return
+
+    let currentAnim: Animation | null = null
+
+    const anims: Animation[] = []
+
+    const runAnimation = () => {
+      anims.forEach(a => a.cancel())
+      anims.length = 0
+
+      const reelWidth = reel.scrollWidth
+      const trackWidth = track.clientWidth
+      const startX = -(reelWidth - trackWidth)
+      const selected = reel.querySelector('.recall-slot-item-landed') as HTMLElement
+      if (!selected) return
+      const selectedCenter = selected.offsetLeft + selected.offsetWidth / 2
+      const endX = -(selectedCenter - trackWidth / 2)
+      const dur = 6000
+
+      // Reel scroll
+      const reelAnim = reel.animate([
+        { transform: `translateX(${startX}px)`, offset: 0 },
+        // Smooth x² ease-in / ease-out curve (20 steps)
+        ...Array.from({ length: 21 }, (_, i) => {
+          const t = i / 20
+          const progress = t < 0.5
+            ? 2 * t * t
+            : 1 - 2 * (1 - t) * (1 - t)
+          const x = startX + (endX - startX) * progress
+          return { transform: `translateX(${x}px)`, offset: 0.02 + t * 0.21 }
+        }),
+        { transform: `translateX(${endX}px)`, offset: 0.999 },
+        { transform: `translateX(${startX}px)`, offset: 1 },
+      ], { duration: dur, easing: 'linear', iterations: Infinity })
+      anims.push(reelAnim)
+
+      // T-stem: appears right after reel lands (0.40)
+      if (tStemRef.current) {
+        anims.push(tStemRef.current.animate([
+          { opacity: 0, transform: 'scaleY(0)', offset: 0 },
+          { opacity: 0, transform: 'scaleY(0)', offset: 0.22 },
+          { opacity: 1, transform: 'scaleY(1)', offset: 0.30 },
+          { opacity: 1, transform: 'scaleY(1)', offset: 0.999 },
+          { opacity: 0, transform: 'scaleY(0)', offset: 1 },
+        ], { duration: dur, easing: 'linear', iterations: Infinity }))
+      }
+
+      // T-bar: right after stem (0.46)
+      if (tBarRef.current) {
+        anims.push(tBarRef.current.animate([
+          { opacity: 0, transform: 'scaleX(0)', offset: 0 },
+          { opacity: 0, transform: 'scaleX(0)', offset: 0.27 },
+          { opacity: 1, transform: 'scaleX(1)', offset: 0.35 },
+          { opacity: 1, transform: 'scaleX(1)', offset: 0.999 },
+          { opacity: 0, transform: 'scaleX(0)', offset: 1 },
+        ], { duration: dur, easing: 'linear', iterations: Infinity }))
+      }
+
+      // Search label text swap with scroll animation
+      if (searchLabelRef.current) {
+        const searching = searchLabelRef.current.querySelector('.recall-label-searching') as HTMLElement
+        const found = searchLabelRef.current.querySelector('.recall-label-found') as HTMLElement
+        if (searching) {
+          anims.push(searching.animate([
+            { transform: 'translateY(0)', opacity: 1, offset: 0 },
+            { transform: 'translateY(0)', opacity: 1, offset: 0.36 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 0.42 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 0.999 },
+            { transform: 'translateY(0)', opacity: 1, offset: 1 },
+          ], { duration: dur, easing: 'linear', iterations: Infinity }))
+        }
+        if (found) {
+          anims.push(found.animate([
+            { transform: 'translateY(120%)', opacity: 0, offset: 0 },
+            { transform: 'translateY(120%)', opacity: 0, offset: 0.36 },
+            { transform: 'translateY(0)', opacity: 1, offset: 0.42 },
+            { transform: 'translateY(0)', opacity: 1, offset: 0.999 },
+            { transform: 'translateY(120%)', opacity: 0, offset: 1 },
+          ], { duration: dur, easing: 'linear', iterations: Infinity }))
+        }
+      }
+
+      // Deploy card: right after bar
+      if (deployCardRef.current) {
+        anims.push(deployCardRef.current.animate([
+          { opacity: 0, transform: 'translateY(12px) scale(0.92)', offset: 0 },
+          { opacity: 0, transform: 'translateY(12px) scale(0.92)', offset: 0.32 },
+          { opacity: 1, transform: 'translateY(0) scale(1)', offset: 0.40 },
+          { opacity: 1, transform: 'translateY(0) scale(1)', offset: 0.999 },
+          { opacity: 0, transform: 'translateY(12px) scale(0.92)', offset: 1 },
+        ], { duration: dur, easing: 'linear', iterations: Infinity }))
+      }
+    }
+
+    runAnimation()
+    window.addEventListener('resize', runAnimation)
+    return () => {
+      anims.forEach(a => a.cancel())
+      window.removeEventListener('resize', runAnimation)
+    }
+  }, [stage2Active, sessionList])
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
     try {
@@ -318,20 +458,31 @@ export default function Home() {
               <div className="how-stage-scene recall-scene" aria-hidden="true">
                 <div className="recall-search-zone">
                   <Search className="recall-search-icon" strokeWidth={1.5} />
-                  <span className="recall-search-label"><Search className="recall-label-icon" strokeWidth={1.5} />exact context</span>
+                  <span className="recall-search-label" ref={el => { searchLabelRef.current = el }}>
+                    <Search className="recall-label-icon" strokeWidth={1.5} />
+                    <span className="recall-label-text-wrap">
+                      <span className="recall-label-searching">searching...</span>
+                      <span className="recall-label-found">exact context</span>
+                    </span>
+                  </span>
                 </div>
                 <div className="recall-slot-track">
-                  <div className="recall-slot-reel">
+                  <div className="recall-slot-reel" ref={slotReelRef}>
                     {sessionList.map((s, i) => (
-                      <span key={i} className={`recall-slot-item${s.selected ? ' recall-slot-item-selected' : ''}`}>{s.name}</span>
+                      <div key={i} className="recall-slot-col">
+                        <span className={`recall-slot-item${s.selected ? ' recall-slot-item-selected' : ''}${s.landed ? ' recall-slot-item-landed' : ''}`}><FileText className="recall-slot-icon-outer" strokeWidth={1.7} /><span className="recall-slot-pill">{s.name}</span></span>
+                        <span className="recall-slot-summary">{s.summary}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
-                <span className="recall-t-stem"></span>
-                <span className="recall-t-bar"></span>
-                <span className="recall-deploy-card">
-                  <FileText className="recall-deploy-icon" strokeWidth={1.7} />
-                  auth middleware stays edge-safe
+                <span className="recall-t-stem" ref={el => { tStemRef.current = el }}></span>
+                <span className="recall-t-bar" ref={el => { tBarRef.current = el }}></span>
+                <span className="recall-deploy-wrap" ref={el => { deployCardRef.current = el }}>
+                  <FileText className="recall-deploy-icon-outer" strokeWidth={1.7} />
+                  <span className="recall-deploy-card">
+                    decided to keep auth middleware edge-safe — verified session tokens validate before route handlers
+                  </span>
                 </span>
               </div>
               <div className="how-stage-text">

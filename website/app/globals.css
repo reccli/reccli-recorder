@@ -53,12 +53,12 @@ body {
 }
 
 @keyframes slotSpin {
-  0%, 5% { transform: translateY(4rem); }
-  20% { transform: translateY(-45rem); }
-  30% { transform: translateY(-62rem); }
-  36% { transform: translateY(-66rem); }
-  40%, 99.9% { transform: translateY(-68rem); }
-  100% { transform: translateY(4rem); }
+  0%, 12% { transform: translateX(0); }
+  28% { transform: translateX(74%); }
+  34% { transform: translateX(92%); }
+  38% { transform: translateX(96%); }
+  42%, 99.9% { transform: translateX(96%); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes tStemGrow {
@@ -290,31 +290,29 @@ body {
 .scan-status {
   position: absolute;
   top: 50%;
-  left: calc(50% + 20px);
-  transform: translate(-50%, -50%);
+  right: 6%;
+  transform: translateY(-50%);
   padding: 0.5rem 1rem;
   border-radius: 0.65rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   backdrop-filter: blur(12px);
-  font-size: clamp(1.05rem, 3vw, 1.6rem);
+  font-size: clamp(0.8rem, 2.5vw, 1.4rem);
   font-weight: 900;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.74);
   white-space: nowrap;
   z-index: 3;
-  transform: translate(420px, -50%);
+  transform: translate(120%, -50%);
 }
 
 .how-stage-row.is-active .scan-status {
-  animation: attractToLine 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: statusSlideIn 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   animation-delay: -0.2s;
-  --from-x: 420px;
-  --from-y: 0px;
 }
 
 @keyframes statusSlideIn {
-  0%, 30% { opacity: 1; transform: translate(420px, -50%); }
-  55%, 100% { opacity: 1; transform: translate(-50%, -50%); }
+  0%, 30% { transform: translate(120%, -50%); }
+  55%, 100% { transform: translateY(-50%); }
 }
 
 .scan-beam-v {
@@ -402,7 +400,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: clamp(1.05rem, 3vw, 1.6rem);
+  font-size: clamp(0.85rem, 2.4vw, 1.25rem);
   font-weight: 800;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.74);
@@ -412,6 +410,19 @@ body {
   backdrop-filter: blur(12px);
   white-space: nowrap;
   z-index: 1;
+}
+
+.recall-label-text-wrap {
+  position: relative;
+  overflow: hidden;
+  display: inline-grid;
+  height: 1.4em;
+}
+
+.recall-label-searching,
+.recall-label-found {
+  grid-area: 1 / 1;
+  white-space: nowrap;
 }
 
 .recall-label-icon {
@@ -436,55 +447,103 @@ body {
 
 .recall-slot-track {
   position: absolute;
-  top: 27.5%;
-  left: 10%;
-  right: 10%;
-  height: 31%;
+  top: 29%;
+  left: 0;
+  right: 0;
+  height: 4.8rem;
   overflow: hidden;
   display: flex;
-  align-items: flex-start;
-  mask-image: linear-gradient(180deg, transparent, black 25%, black 92%, transparent);
+  align-items: center;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
 
 .recall-slot-reel {
   display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  width: 100%;
+  flex-direction: row;
+  gap: 0.35rem;
+  white-space: nowrap;
+  transform: translateX(-100%);
 }
 
-.how-stage-row.is-active .recall-slot-reel {
-  animation: slotSpin 7.5s linear infinite;
-}
+/* Slot reel animation driven by JS for viewport-aware centering */
 
 .recall-slot-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.recall-slot-icon-outer {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: rgba(96, 165, 250, 0.5);
+  flex-shrink: 0;
+}
+
+.recall-slot-pill {
   padding: 0.45rem 0.75rem;
   border-radius: 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(10, 12, 28, 0.8);
+  border: 1.5px solid rgba(167, 139, 250, 0.6);
+  background: rgba(167, 139, 250, 0.1);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.1), 0 4px 16px rgba(0, 0, 0, 0.2);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.6);
   font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
-  text-align: center;
+}
+
+.recall-slot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.recall-slot-summary {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-.recall-slot-item-selected {
-  border-color: rgba(167, 139, 250, 0.4);
-  background: rgba(167, 139, 250, 0.08);
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.12), 0 8px 24px rgba(0, 0, 0, 0.2);
+.recall-slot-item-selected .recall-slot-pill {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.recall-slot-item-selected .recall-slot-icon-outer {
+  color: rgba(167, 139, 250, 0.8);
+}
+
+.recall-slot-item-landed .recall-slot-pill {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.recall-slot-item-landed .recall-slot-icon-outer {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* T-shape connector */
 .recall-t-stem {
   position: absolute;
   left: 50%;
-  top: 59%;
+  top: 52%;
   width: 2px;
-  height: 12%;
+  height: 10%;
   margin-left: -1px;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(167, 139, 250, 0.85), rgba(96, 165, 250, 0.4));
@@ -492,15 +551,13 @@ body {
   opacity: 0;
 }
 
-.how-stage-row.is-active .recall-t-stem {
-  animation: tStemGrow 7.5s ease-in-out infinite;
-}
+/* T animations driven by JS */
 
 .recall-t-bar {
   position: absolute;
   left: 20%;
   right: 20%;
-  top: 71%;
+  top: 58%;
   height: 2px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.8), rgba(96, 165, 250, 0.3));
@@ -508,18 +565,28 @@ body {
   opacity: 0;
 }
 
-.how-stage-row.is-active .recall-t-bar {
-  animation: tBarGrow 7.5s ease-in-out infinite;
+/* T-bar driven by JS */
+
+.recall-deploy-wrap {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 62%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.recall-deploy-icon-outer {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: rgba(96, 165, 250, 0.6);
+  flex-shrink: 0;
+  margin-top: 0.7rem;
 }
 
 .recall-deploy-card {
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  top: 74%;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
+  flex: 1;
   padding: 0.65rem 0.85rem;
   border-radius: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -529,12 +596,9 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.82);
-  opacity: 0;
 }
 
-.how-stage-row.is-active .recall-deploy-card {
-  animation: deployRise 7.5s ease-in-out infinite;
-}
+/* Deploy card driven by JS */
 
 .recall-deploy-icon {
   width: 0.9rem;
@@ -716,9 +780,12 @@ body {
     padding: 0.35rem 0.55rem;
   }
 
+  .recall-deploy-wrap {
+    left: 5%;
+    right: 5%;
+  }
+
   .recall-deploy-card {
-    left: 10%;
-    right: 10%;
     font-size: 0.6rem;
     padding: 0.5rem 0.65rem;
   }
@@ -747,9 +814,12 @@ body {
   .scan-chip-5 { --from-x: 130px; --from-y: -50px; }
   .scan-chip-6 { --from-x: 100px; --from-y: -70px; }
 
+  .recall-deploy-wrap {
+    left: 3%;
+    right: 3%;
+  }
+
   .recall-deploy-card {
-    left: 6%;
-    right: 6%;
     font-size: 0.54rem;
   }
 }
@@ -769,7 +839,7 @@ body {
   .recall-slot-reel,
   .recall-t-stem,
   .recall-t-bar,
-  .recall-deploy-card,
+  .recall-deploy-wrap,
   .graph-core-glow,
   .graph-link,
   .graph-node,
