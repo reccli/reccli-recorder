@@ -556,21 +556,6 @@ export default function Home() {
                   <line className="graph-link graph-link-r3" style={{'--d':'4.15s','--dash':'50'} as React.CSSProperties} x1="82" y1="60" x2="55" y2="35" />
                   <line className="graph-link graph-link-r3" style={{'--d':'4.3s','--dash':'50'} as React.CSSProperties} x1="85" y1="95" x2="42" y2="82" />
 
-                  {/* === Cross-links (4.5-6s stagger) === */}
-                  <line className="graph-link graph-link-cross" style={{'--d':'4.5s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="232" y2="88" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'4.7s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="240" y2="140" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'4.85s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="128" y2="88" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.0s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="220" y2="185" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'4.6s','--dash':'60'} as React.CSSProperties} x1="155" y1="38" x2="210" y2="42" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.15s','--dash':'60'} as React.CSSProperties} x1="272" y1="58" x2="278" y2="105" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.3s','--dash':'60'} as React.CSSProperties} x1="70" y1="165" x2="100" y2="215" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'4.95s','--dash':'60'} as React.CSSProperties} x1="282" y1="170" x2="255" y2="215" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.45s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="220" y2="185" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.6s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="140" y2="185" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.1s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="128" y2="88" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.75s','--dash':'60'} as React.CSSProperties} x1="195" y1="225" x2="165" y2="225" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.5s','--dash':'60'} as React.CSSProperties} x1="290" y1="130" x2="282" y2="170" />
-                  <line className="graph-link graph-link-cross" style={{'--d':'5.9s','--dash':'60'} as React.CSSProperties} x1="68" y1="125" x2="82" y2="60" />
 
                   {/* === Core node === */}
                   <circle className="graph-node graph-node-core" cx="180" cy="135" r="5" />
