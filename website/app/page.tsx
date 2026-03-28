@@ -563,6 +563,12 @@ export default function Home() {
                   <line className="graph-link graph-link-cross" x1="272" y1="58" x2="278" y2="105" />
                   <line className="graph-link graph-link-cross" x1="70" y1="165" x2="100" y2="215" />
                   <line className="graph-link graph-link-cross" x1="282" y1="170" x2="255" y2="215" />
+                  <line className="graph-link graph-link-cross" x1="240" y1="140" x2="220" y2="185" />
+                  <line className="graph-link graph-link-cross" x1="120" y1="140" x2="140" y2="185" />
+                  <line className="graph-link graph-link-cross" x1="180" y1="75" x2="128" y2="88" />
+                  <line className="graph-link graph-link-cross" x1="195" y1="225" x2="165" y2="225" />
+                  <line className="graph-link graph-link-cross" x1="290" y1="130" x2="282" y2="170" />
+                  <line className="graph-link graph-link-cross" x1="68" y1="125" x2="82" y2="60" />
 
                   {/* === Core node === */}
                   <circle className="graph-node graph-node-core" cx="180" cy="135" r="8" />
