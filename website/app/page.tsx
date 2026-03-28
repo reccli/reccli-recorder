@@ -147,6 +147,10 @@ export default function Home() {
       const lineVisibleTop = vLineRect.top - sceneRect.top
       const lineVisibleBottom = vLineRect.bottom - sceneRect.top
 
+      // Vertical line grows bottom-up: track its visible top edge
+      const lineTop = vLineRect.top - sceneRect.top
+      const lineBottom = vLineRect.bottom - sceneRect.top
+
       chips.forEach((chip, i) => {
         const chipRect = chip.getBoundingClientRect()
         const chipLeftX = chipRect.left - sceneRect.left
@@ -154,12 +158,15 @@ export default function Home() {
         const finalY = chipFinalYPcts[i] * sceneRect.height + chipRect.height / 2
         const dist = chipLeftX - lineX
 
-        if (dist > 5) {
+        // Only show beam once the vertical line has grown past this chip's final Y
+        const lineReached = finalY >= lineTop - 10 && finalY <= lineBottom + 10
+
+        if (lineReached && dist > 5) {
           lines[i].setAttribute('x1', String(lineX))
           lines[i].setAttribute('y1', String(finalY))
           lines[i].setAttribute('x2', String(chipLeftX))
           lines[i].setAttribute('y2', String(chipCenterY))
-          lines[i].setAttribute('stroke-opacity', String(Math.min(0.5, dist / 80)))
+          lines[i].setAttribute('stroke-opacity', String(Math.min(0.55, dist / 60)))
         } else {
           lines[i].setAttribute('stroke-opacity', '0')
         }
