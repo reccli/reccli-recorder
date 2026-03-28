@@ -510,107 +510,102 @@ export default function Home() {
                       <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
                     </radialGradient>
                   </defs>
-                  {/* Core glow + ripple */}
                   <circle className="graph-core-glow" cx="180" cy="135" r="35" fill="url(#graph-core-glow)" />
                   <circle className="graph-ripple" cx="180" cy="135" r="20" />
                   <circle className="graph-ripple graph-ripple-2" cx="180" cy="135" r="20" />
 
-                  {/* === Links: core → ring 1 (0-1s stagger) === */}
-                  <line className="graph-link graph-link-r1" style={{'--d':'0s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="180" y2="75" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.18s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="232" y2="88" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.08s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="240" y2="140" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.28s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="220" y2="185" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.12s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="140" y2="185" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.35s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="120" y2="140" />
-                  <line className="graph-link graph-link-r1" style={{'--d':'0.22s','--dash':'80'} as React.CSSProperties} x1="180" y1="135" x2="128" y2="88" />
+                  {/* All lines from center outward — staggered sequentially */}
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0s'} as React.CSSProperties} x1="180" y1="135" x2="192" y2="68" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.15s'} as React.CSSProperties} x1="180" y1="135" x2="238" y2="82" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.08s'} as React.CSSProperties} x1="180" y1="135" x2="248" y2="148" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.25s'} as React.CSSProperties} x1="180" y1="135" x2="225" y2="192" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.12s'} as React.CSSProperties} x1="180" y1="135" x2="132" y2="188" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.32s'} as React.CSSProperties} x1="180" y1="135" x2="112" y2="142" />
+                  <line className="graph-link graph-link-r1" pathLength="1" style={{'--d':'0.2s'} as React.CSSProperties} x1="180" y1="135" x2="122" y2="82" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'0.9s'} as React.CSSProperties} x1="180" y1="135" x2="148" y2="32" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.05s'} as React.CSSProperties} x1="180" y1="135" x2="218" y2="38" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.2s'} as React.CSSProperties} x1="180" y1="135" x2="278" y2="52" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'0.95s'} as React.CSSProperties} x1="180" y1="135" x2="285" y2="108" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.4s'} as React.CSSProperties} x1="180" y1="135" x2="295" y2="138" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.25s'} as React.CSSProperties} x1="180" y1="135" x2="275" y2="178" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.55s'} as React.CSSProperties} x1="180" y1="135" x2="258" y2="218" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.1s'} as React.CSSProperties} x1="180" y1="135" x2="198" y2="228" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.7s'} as React.CSSProperties} x1="180" y1="135" x2="158" y2="232" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.35s'} as React.CSSProperties} x1="180" y1="135" x2="95" y2="218" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.85s'} as React.CSSProperties} x1="180" y1="135" x2="65" y2="168" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.5s'} as React.CSSProperties} x1="180" y1="135" x2="62" y2="118" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'2.0s'} as React.CSSProperties} x1="180" y1="135" x2="78" y2="55" />
+                  <line className="graph-link graph-link-r2" pathLength="1" style={{'--d':'1.75s'} as React.CSSProperties} x1="180" y1="135" x2="88" y2="92" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'2.6s'} as React.CSSProperties} x1="180" y1="135" x2="128" y2="12" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'2.8s'} as React.CSSProperties} x1="180" y1="135" x2="242" y2="15" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'2.7s'} as React.CSSProperties} x1="180" y1="135" x2="312" y2="35" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'2.95s'} as React.CSSProperties} x1="180" y1="135" x2="328" y2="95" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'2.85s'} as React.CSSProperties} x1="180" y1="135" x2="338" y2="148" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.1s'} as React.CSSProperties} x1="180" y1="135" x2="322" y2="198" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.3s'} as React.CSSProperties} x1="180" y1="135" x2="282" y2="248" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.05s'} as React.CSSProperties} x1="180" y1="135" x2="205" y2="258" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.45s'} as React.CSSProperties} x1="180" y1="135" x2="152" y2="258" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.2s'} as React.CSSProperties} x1="180" y1="135" x2="72" y2="245" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.55s'} as React.CSSProperties} x1="180" y1="135" x2="32" y2="188" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.7s'} as React.CSSProperties} x1="180" y1="135" x2="25" y2="112" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'3.85s'} as React.CSSProperties} x1="180" y1="135" x2="48" y2="30" />
+                  <line className="graph-link graph-link-r3" pathLength="1" style={{'--d':'4.0s'} as React.CSSProperties} x1="180" y1="135" x2="38" y2="78" />
 
-                  {/* === Links: ring 1 → ring 2 (1-2.8s stagger) === */}
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.0s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="155" y2="38" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.15s','--dash':'60'} as React.CSSProperties} x1="180" y1="75" x2="210" y2="42" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.3s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="272" y2="58" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.08s','--dash':'60'} as React.CSSProperties} x1="232" y1="88" x2="278" y2="105" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.55s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="290" y2="130" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.4s','--dash':'60'} as React.CSSProperties} x1="240" y1="140" x2="282" y2="170" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.7s','--dash':'60'} as React.CSSProperties} x1="220" y1="185" x2="255" y2="215" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.25s','--dash':'60'} as React.CSSProperties} x1="220" y1="185" x2="195" y2="225" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.85s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="165" y2="225" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.5s','--dash':'60'} as React.CSSProperties} x1="140" y1="185" x2="100" y2="215" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'2.0s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="70" y2="165" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.65s','--dash':'60'} as React.CSSProperties} x1="120" y1="140" x2="68" y2="125" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'2.15s','--dash':'60'} as React.CSSProperties} x1="128" y1="88" x2="82" y2="60" />
-                  <line className="graph-link graph-link-r2" style={{'--d':'1.9s','--dash':'60'} as React.CSSProperties} x1="128" y1="88" x2="85" y2="95" />
-
-                  {/* === Links: ring 2 → ring 3 (2.8-4.5s stagger) === */}
-                  <line className="graph-link graph-link-r3" style={{'--d':'2.8s','--dash':'50'} as React.CSSProperties} x1="155" y1="38" x2="135" y2="15" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.0s','--dash':'50'} as React.CSSProperties} x1="210" y1="42" x2="230" y2="18" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'2.9s','--dash':'50'} as React.CSSProperties} x1="272" y1="58" x2="305" y2="38" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.2s','--dash':'50'} as React.CSSProperties} x1="278" y1="105" x2="320" y2="98" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.1s','--dash':'50'} as React.CSSProperties} x1="290" y1="130" x2="330" y2="140" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.4s','--dash':'50'} as React.CSSProperties} x1="282" y1="170" x2="318" y2="192" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.55s','--dash':'50'} as React.CSSProperties} x1="255" y1="215" x2="275" y2="245" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.3s','--dash':'50'} as React.CSSProperties} x1="195" y1="225" x2="200" y2="255" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.7s','--dash':'50'} as React.CSSProperties} x1="165" y1="225" x2="158" y2="255" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.5s','--dash':'50'} as React.CSSProperties} x1="100" y1="215" x2="78" y2="242" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'3.85s','--dash':'50'} as React.CSSProperties} x1="70" y1="165" x2="38" y2="185" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'4.0s','--dash':'50'} as React.CSSProperties} x1="68" y1="125" x2="30" y2="118" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'4.15s','--dash':'50'} as React.CSSProperties} x1="82" y1="60" x2="55" y2="35" />
-                  <line className="graph-link graph-link-r3" style={{'--d':'4.3s','--dash':'50'} as React.CSSProperties} x1="85" y1="95" x2="42" y2="82" />
-
-
-                  {/* === Core node === */}
+                  {/* Core */}
                   <circle className="graph-node graph-node-core" cx="180" cy="135" r="5" />
                   <circle className="graph-node graph-node-core-ring" cx="180" cy="135" r="9" />
 
-                  {/* === Ring 1 nodes (features) === */}
-                  <circle className="graph-node graph-node-r1" cx="180" cy="75" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="180" y="65" textAnchor="middle">auth</text>
-                  <circle className="graph-node graph-node-r1" cx="232" cy="88" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="246" y="83" textAnchor="start">api</text>
-                  <circle className="graph-node graph-node-r1" cx="240" cy="140" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="254" y="144" textAnchor="start">db</text>
-                  <circle className="graph-node graph-node-r1" cx="220" cy="185" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="234" y="192" textAnchor="start">routes</text>
-                  <circle className="graph-node graph-node-r1" cx="140" cy="185" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="125" y="196" textAnchor="end">hooks</text>
-                  <circle className="graph-node graph-node-r1" cx="120" cy="140" r="5" />
-                  <text className="graph-node-label graph-node-label-r1" x="106" y="144" textAnchor="end">ui</text>
-                  <circle className="graph-node graph-node-r1" cx="128" cy="88" r="5" />
+                  {/* Scattered dots — randomized positions, no ring symmetry */}
+                  {/* Near nodes (larger, labeled) */}
+                  <circle className="graph-node graph-node-r1" cx="192" cy="68" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="192" y="58" textAnchor="middle">auth</text>
+                  <circle className="graph-node graph-node-r1" cx="238" cy="82" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="252" y="78" textAnchor="start">api</text>
+                  <circle className="graph-node graph-node-r1" cx="248" cy="148" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="262" y="152" textAnchor="start">db</text>
+                  <circle className="graph-node graph-node-r1" cx="225" cy="192" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="239" y="198" textAnchor="start">routes</text>
+                  <circle className="graph-node graph-node-r1" cx="132" cy="188" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="118" y="198" textAnchor="end">hooks</text>
+                  <circle className="graph-node graph-node-r1" cx="112" cy="142" r="4.5" />
+                  <text className="graph-node-label graph-node-label-r1" x="98" y="146" textAnchor="end">ui</text>
+                  <circle className="graph-node graph-node-r1" cx="122" cy="82" r="4.5" />
 
-                  {/* === Ring 2 nodes (sessions/decisions) === */}
-                  <circle className="graph-node graph-node-r2" cx="155" cy="38" r="3.5" />
-                  <text className="graph-node-label graph-node-label-r2" x="140" y="30" textAnchor="end">session 3</text>
-                  <circle className="graph-node graph-node-r2" cx="210" cy="42" r="3.5" />
-                  <text className="graph-node-label graph-node-label-r2" x="224" y="36" textAnchor="start">session 7</text>
-                  <circle className="graph-node graph-node-r2" cx="272" cy="58" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="278" cy="105" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="290" cy="130" r="3.5" />
-                  <text className="graph-node-label graph-node-label-r2" x="304" y="134" textAnchor="start">session 12</text>
-                  <circle className="graph-node graph-node-r2" cx="282" cy="170" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="255" cy="215" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="195" cy="225" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="165" cy="225" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="100" cy="215" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="70" cy="165" r="3.5" />
-                  <text className="graph-node-label graph-node-label-r2" x="56" y="172" textAnchor="end">session 1</text>
-                  <circle className="graph-node graph-node-r2" cx="68" cy="125" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="82" cy="60" r="3.5" />
-                  <circle className="graph-node graph-node-r2" cx="85" cy="95" r="3.5" />
+                  {/* Mid-range dots (medium, some labeled) */}
+                  <circle className="graph-node graph-node-r2" cx="148" cy="32" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="133" y="25" textAnchor="end">session 3</text>
+                  <circle className="graph-node graph-node-r2" cx="218" cy="38" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="232" y="32" textAnchor="start">session 7</text>
+                  <circle className="graph-node graph-node-r2" cx="278" cy="52" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="285" cy="108" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="295" cy="138" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="309" y="142" textAnchor="start">session 12</text>
+                  <circle className="graph-node graph-node-r2" cx="275" cy="178" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="258" cy="218" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="198" cy="228" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="158" cy="232" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="95" cy="218" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="65" cy="168" r="3.5" />
+                  <text className="graph-node-label graph-node-label-r2" x="51" y="175" textAnchor="end">session 1</text>
+                  <circle className="graph-node graph-node-r2" cx="62" cy="118" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="78" cy="55" r="3.5" />
+                  <circle className="graph-node graph-node-r2" cx="88" cy="92" r="3.5" />
 
-                  {/* === Ring 3 nodes (context details) === */}
-                  <circle className="graph-node graph-node-r3" cx="135" cy="15" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="230" cy="18" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="305" cy="38" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="320" cy="98" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="330" cy="140" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="318" cy="192" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="275" cy="245" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="200" cy="255" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="158" cy="255" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="78" cy="242" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="38" cy="185" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="30" cy="118" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="55" cy="35" r="3.2" />
-                  <circle className="graph-node graph-node-r3" cx="42" cy="82" r="3.2" />
+                  {/* Outer dots (small) */}
+                  <circle className="graph-node graph-node-r3" cx="128" cy="12" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="242" cy="15" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="312" cy="35" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="328" cy="95" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="338" cy="148" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="322" cy="198" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="282" cy="248" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="205" cy="258" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="152" cy="258" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="72" cy="245" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="32" cy="188" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="25" cy="112" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="48" cy="30" r="2.8" />
+                  <circle className="graph-node graph-node-r3" cx="38" cy="78" r="2.8" />
                 </svg>
               </div>
               <div className="how-stage-text">
