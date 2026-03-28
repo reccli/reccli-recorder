@@ -21,6 +21,8 @@ export default function Home() {
   const tBarRef = useRef<HTMLSpanElement | null>(null)
   const deployCardRef = useRef<HTMLSpanElement | null>(null)
   const searchLabelRef = useRef<HTMLSpanElement | null>(null)
+  const scanSceneRef = useRef<HTMLDivElement | null>(null)
+  const scanBranchesSvgRef = useRef<SVGSVGElement | null>(null)
   const [stage1Active, setStage1Active] = useState(false)
   const [stage2Active, setStage2Active] = useState(false)
   const [stage3Active, setStage3Active] = useState(false)
@@ -99,6 +101,69 @@ export default function Home() {
     return () => observers.forEach(o => o.disconnect())
   }, [])
 
+  // Draw tractor beam lines from vertical line to each chip's current position
+  useEffect(() => {
+    if (!stage1Active) return
+    const scene = scanSceneRef.current
+    const svg = scanBranchesSvgRef.current
+    if (!scene || !svg) return
+
+    const chips = scene.querySelectorAll('.scan-chip')
+    const vLine = scene.querySelector('.scan-v-line') as HTMLElement
+    if (!vLine || chips.length === 0) return
+
+    // Measure each chip's final resting Y (from CSS top %)
+    const sceneH = scene.offsetHeight
+    const chipFinalYs = [0.12, 0.25, 0.38, 0.51, 0.64, 0.77] // top % values from CSS
+
+    // Create SVG lines for each chip
+    const lines: SVGLineElement[] = []
+    chips.forEach(() => {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+      line.setAttribute('stroke', 'rgba(167, 139, 250, 0.45)')
+      line.setAttribute('stroke-width', '1.5')
+      line.setAttribute('stroke-linecap', 'round')
+      svg.appendChild(line)
+      lines.push(line)
+    })
+
+    let rafId: number
+    const update = () => {
+      const sceneRect = scene.getBoundingClientRect()
+      const vLineRect = vLine.getBoundingClientRect()
+      const lineX = vLineRect.left + vLineRect.width / 2 - sceneRect.left
+
+      chips.forEach((chip, i) => {
+        const chipRect = chip.getBoundingClientRect()
+        const chipLeftX = chipRect.left - sceneRect.left
+        const chipCenterY = chipRect.top + chipRect.height / 2 - sceneRect.top
+
+        // Left endpoint: fixed at the chip's FINAL Y on the vertical line
+        const finalY = chipFinalYs[i] * sceneRect.height + chipRect.height / 2
+
+        const dist = chipLeftX - lineX
+
+        if (dist > 3) {
+          lines[i].setAttribute('x1', String(lineX))
+          lines[i].setAttribute('y1', String(finalY))
+          lines[i].setAttribute('x2', String(chipLeftX))
+          lines[i].setAttribute('y2', String(chipCenterY))
+          lines[i].setAttribute('stroke-opacity', String(Math.min(0.5, dist / 100)))
+        } else {
+          lines[i].setAttribute('stroke-opacity', '0')
+        }
+      })
+
+      rafId = requestAnimationFrame(update)
+    }
+
+    rafId = requestAnimationFrame(update)
+    return () => {
+      cancelAnimationFrame(rafId)
+      lines.forEach(l => l.remove())
+    }
+  }, [stage1Active])
+
   // Drive slot reel animation from JS so landing position is viewport-aware
   useEffect(() => {
     if (!stage2Active) return
@@ -171,18 +236,18 @@ export default function Home() {
           anims.push(searching.animate([
             { transform: 'translateY(0)', opacity: 1, offset: 0 },
             { transform: 'translateY(0)', opacity: 1, offset: 0.27 },
-            { transform: 'translateY(-120%)', opacity: 0, offset: 0.33 },
-            { transform: 'translateY(-120%)', opacity: 0, offset: 0.999 },
+            { transform: 'translateY(120%)', opacity: 0, offset: 0.33 },
+            { transform: 'translateY(120%)', opacity: 0, offset: 0.999 },
             { transform: 'translateY(0)', opacity: 1, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
         }
         if (found) {
           anims.push(found.animate([
-            { transform: 'translateY(120%)', opacity: 0, offset: 0 },
-            { transform: 'translateY(120%)', opacity: 0, offset: 0.27 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 0 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 0.27 },
             { transform: 'translateY(0)', opacity: 1, offset: 0.33 },
             { transform: 'translateY(0)', opacity: 1, offset: 0.999 },
-            { transform: 'translateY(120%)', opacity: 0, offset: 1 },
+            { transform: 'translateY(-120%)', opacity: 0, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
         }
       }
@@ -426,7 +491,7 @@ export default function Home() {
               ref={stage1Ref}
               className={`how-stage-row ${stage1Active ? 'is-active' : ''}`}
             >
-              <div className="how-stage-scene scan-scene" aria-hidden="true">
+              <div className="how-stage-scene scan-scene" ref={el => { scanSceneRef.current = el }} aria-hidden="true">
                 <span className="scan-v-line"></span>
                 <span className="scan-v-label">.devproject</span>
                 <span className="scan-status">features found</span>
@@ -437,6 +502,7 @@ export default function Home() {
                 <span className="scan-chip scan-chip-4">hooks</span>
                 <span className="scan-chip scan-chip-5">chat window</span>
                 <span className="scan-chip scan-chip-6">db</span>
+                <svg className="scan-branches-svg" ref={el => { scanBranchesSvgRef.current = el }}></svg>
               </div>
               <div className="how-stage-text">
                 <span className="how-stage-count">01</span>
