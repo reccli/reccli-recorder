@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch, ScanSearch, RefreshCw, TrendingUp } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch } from 'lucide-react'
 
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
@@ -13,28 +13,58 @@ export default function Home() {
   const [waitlistError, setWaitlistError] = useState('')
   const [waitlistLoading, setWaitlistLoading] = useState(false)
   const [confirmEmail, setConfirmEmail] = useState('')
-  const howItWorksRef = useRef<HTMLElement | null>(null)
-  const [howItWorksActive, setHowItWorksActive] = useState(false)
+  const stage1Ref = useRef<HTMLDivElement | null>(null)
+  const stage2Ref = useRef<HTMLDivElement | null>(null)
+  const stage3Ref = useRef<HTMLDivElement | null>(null)
+  const [stage1Active, setStage1Active] = useState(false)
+  const [stage2Active, setStage2Active] = useState(false)
+  const [stage3Active, setStage3Active] = useState(false)
+
+  const sessionList = useMemo(() => {
+    const today = new Date()
+    const sessions: { name: string; selected: boolean }[] = []
+    // Today first, oldest last — selected item ~42 days back
+    for (let i = 0; i <= 49; i++) {
+      const d = new Date(today)
+      d.setDate(d.getDate() - i)
+      const mm = String(d.getMonth() + 1).padStart(2, '0')
+      const dd = String(d.getDate()).padStart(2, '0')
+      sessions.push({ name: `session-${mm}-${dd}.md`, selected: i === 0 || i === 33 })
+    }
+    return sessions
+  }, [])
 
   const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
   const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python3 -m reccli.mcp_server'
 
   useEffect(() => {
-    const node = howItWorksRef.current
-    if (!node) return
+    const stages: [React.RefObject<HTMLDivElement | null>, (v: boolean) => void][] = [
+      [stage1Ref, setStage1Active],
+      [stage2Ref, setStage2Active],
+      [stage3Ref, setStage3Active],
+    ]
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHowItWorksActive(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
-    )
+    const observers: IntersectionObserver[] = []
 
-    observer.observe(node)
-    return () => observer.disconnect()
+    stages.forEach(([ref, setActive]) => {
+      const node = ref.current
+      if (!node) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActive(true)
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.25, rootMargin: '0px 0px -8% 0px' }
+      )
+
+      observer.observe(node)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach(o => o.disconnect())
   }, [])
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
@@ -243,197 +273,145 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section
-        ref={howItWorksRef}
-        className={`py-24 relative overflow-hidden how-it-works-section ${howItWorksActive ? 'is-active' : ''}`}
-      >
+      <section className="py-24 relative overflow-hidden how-it-works-section">
         <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
-          <p className="how-it-works-eyebrow text-center mb-4">Memory flow</p>
-          <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">How it works</h2>
-          <p className="text-xl text-center opacity-70 mb-10 max-w-2xl mx-auto">One scan. Every session gets smarter.</p>
+          <p className="how-it-works-eyebrow text-center mb-4">How it works</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">Memory that compounds</h2>
+          <p className="text-xl text-center opacity-70 mb-14 max-w-2xl mx-auto">Three layers. One command. Every session starts informed.</p>
 
-          <div className="how-it-works-visual max-w-6xl mx-auto mb-10 lg:mb-14" aria-hidden="true">
-            <div className="how-stage-grid">
-              <div className="how-stage-panel how-stage-panel-scan">
-                <div className="how-stage-panel-head">
-                  <span className="how-stage-count">01</span>
-                  <span className="how-stage-name">Project scan</span>
-                </div>
-                <div className="how-stage-scene scan-scene">
-                  <span className="scan-scene-lane"></span>
-                  <span className="scan-scene-beam"></span>
-                  <span className="scan-scene-bubble scan-scene-bubble-1">auth</span>
-                  <span className="scan-scene-bubble scan-scene-bubble-2">stripe</span>
-                  <span className="scan-scene-bubble scan-scene-bubble-3">api</span>
-                  <span className="scan-scene-bubble scan-scene-bubble-4">hooks</span>
-                  <span className="scan-scene-bubble scan-scene-bubble-5">ui</span>
-                  <span className="scan-scene-bubble scan-scene-bubble-6">db</span>
-                </div>
-                <p className="how-stage-description">A laser sweep finds important fragments, then lifts them into one aligned memory rail.</p>
+          <div className="flex flex-col gap-10 lg:gap-14 max-w-6xl mx-auto">
+
+            {/* Stage 1 — Project Scan */}
+            <div
+              ref={stage1Ref}
+              className={`how-stage-row ${stage1Active ? 'is-active' : ''}`}
+            >
+              <div className="how-stage-scene scan-scene" aria-hidden="true">
+                <span className="scan-v-line"></span>
+                <span className="scan-v-label">.devproject</span>
+                <span className="scan-status">features found</span>
+                <span className="scan-beam-v"></span>
+                <span className="scan-chip scan-chip-1">auth</span>
+                <span className="scan-chip scan-chip-2">payments</span>
+                <span className="scan-chip scan-chip-3">api</span>
+                <span className="scan-chip scan-chip-4">hooks</span>
+                <span className="scan-chip scan-chip-5">chat window</span>
+                <span className="scan-chip scan-chip-6">db</span>
               </div>
-
-              <div className="how-stage-panel how-stage-panel-recall">
-                <div className="how-stage-panel-head">
-                  <span className="how-stage-count">02</span>
-                  <span className="how-stage-name">Recall threads</span>
+              <div className="how-stage-text">
+                <span className="how-stage-count">01</span>
+                <h3 className="text-2xl lg:text-3xl font-bold mb-3">Scan the codebase into structure</h3>
+                <p className="text-base lg:text-lg opacity-70 leading-relaxed mb-5">reccli reads your project and builds a <code className="how-code">.devproject</code> feature map — components, dependencies, architecture. Your agent starts with a mental model instead of a blank slate.</p>
+                <div className="step-chip-row justify-start">
+                  <span className="step-chip">.devproject</span>
+                  <span className="step-chip">feature map</span>
+                  <span className="step-chip">project structure</span>
                 </div>
-                <div className="how-stage-scene recall-scene">
-                  <span className="recall-scroll-line"></span>
-                  <span className="recall-scroll-track">
-                    <span className="recall-doc recall-doc-1">
-                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
-                      auth flow
-                    </span>
-                    <span className="recall-doc recall-doc-2">
-                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
-                      webhook retry
-                    </span>
-                    <span className="recall-doc recall-doc-3">
-                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
-                      file boundaries
-                    </span>
-                    <span className="recall-doc recall-doc-4">
-                      <FileText className="recall-doc-icon" strokeWidth={1.7} />
-                      next step
-                    </span>
-                  </span>
-                  <span className="recall-deploy-line"></span>
-                  <span className="recall-deploy-card">
-                    <FileText className="recall-doc-icon" strokeWidth={1.7} />
-                    auth middleware stays edge-safe
-                  </span>
-                </div>
-                <p className="how-stage-description">Saved notes scroll into place, then the one you need deploys downward with the exact decision.</p>
-              </div>
-
-              <div className="how-stage-panel how-stage-panel-model">
-                <div className="how-stage-panel-head">
-                  <span className="how-stage-count">03</span>
-                  <span className="how-stage-name">Compounding memory</span>
-                </div>
-                <div className="how-stage-scene brain-scene">
-                  <svg viewBox="0 0 240 180" className="brain-scene-svg" role="presentation">
-                    <defs>
-                      <linearGradient id="brain-fill-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#ff7b72" />
-                        <stop offset="48%" stopColor="#a78bfa" />
-                        <stop offset="100%" stopColor="#60a5fa" />
-                      </linearGradient>
-                      <clipPath id="brain-fill-clip">
-                        <path d="M77 35C61 35 48 48 48 65C48 74 51 82 57 88C48 93 42 103 42 114C42 131 55 145 72 145H168C185 145 198 131 198 114C198 103 192 93 183 88C189 82 192 74 192 65C192 48 179 35 163 35C154 35 146 39 140 46C135 35 124 27 112 27C99 27 88 35 83 46C81 39 74 35 77 35Z" />
-                      </clipPath>
-                    </defs>
-                    <path
-                      className="brain-outline"
-                      d="M77 35C61 35 48 48 48 65C48 74 51 82 57 88C48 93 42 103 42 114C42 131 55 145 72 145H168C185 145 198 131 198 114C198 103 192 93 183 88C189 82 192 74 192 65C192 48 179 35 163 35C154 35 146 39 140 46C135 35 124 27 112 27C99 27 88 35 83 46C81 39 74 35 77 35Z"
-                    />
-                    <g clipPath="url(#brain-fill-clip)">
-                      <rect className="brain-fill" x="30" y="24" width="180" height="128" rx="24" />
-                      <rect className="brain-fill-glow" x="30" y="24" width="180" height="128" rx="24" />
-                    </g>
-                    <path className="brain-detail" d="M84 56C74 63 72 74 78 83" />
-                    <path className="brain-detail" d="M104 44C94 54 93 66 100 76" />
-                    <path className="brain-detail" d="M132 44C142 54 143 66 136 76" />
-                    <path className="brain-detail" d="M156 56C166 63 168 74 162 83" />
-                    <path className="brain-detail" d="M92 96C102 104 102 115 96 124" />
-                    <path className="brain-detail" d="M144 96C134 104 134 115 140 124" />
-                    <circle className="brain-memory brain-memory-1" cx="88" cy="118" r="5" />
-                    <circle className="brain-memory brain-memory-2" cx="120" cy="102" r="5" />
-                    <circle className="brain-memory brain-memory-3" cx="150" cy="116" r="5" />
-                  </svg>
-                  <span className="brain-chip brain-chip-1">remembers auth</span>
-                  <span className="brain-chip brain-chip-2">keeps fixes</span>
-                  <span className="brain-chip brain-chip-3">loads next step</span>
-                </div>
-                <p className="how-stage-description">Session after session, the memory fills up until the assistant starts already loaded with your project brain.</p>
               </div>
             </div>
-          </div>
 
-          <div className="relative max-w-6xl mx-auto">
-            <svg className="hidden md:block absolute top-[58px] left-0 w-full h-10 z-0 pointer-events-none" viewBox="0 0 1000 40" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="step-connector-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%" stopColor="#ff7b72" stopOpacity="0" />
-                  <stop offset="20%" stopColor="#ff7b72" />
-                  <stop offset="50%" stopColor="#a78bfa" />
-                  <stop offset="100%" stopColor="#60a5fa" />
-                </linearGradient>
-              </defs>
-              <path d="M180 20C260 8 384 8 468 20" className="step-connector-backdrop" />
-              <path d="M180 20C260 8 384 8 468 20" className="step-connector-glow" />
-              <path d="M180 20C260 8 384 8 468 20" className="step-connector-flow" />
-              <path d="M532 20C616 8 740 8 820 20" className="step-connector-backdrop" />
-              <path d="M532 20C616 8 740 8 820 20" className="step-connector-glow" />
-              <path d="M532 20C616 8 740 8 820 20" className="step-connector-flow" />
-            </svg>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-              <div className="step-card p-8 pt-10 text-center">
-                <span className="step-number">01</span>
-                <div className="step-mini step-mini-scan" aria-hidden="true">
-                  <span className="mini-scan-lane"></span>
-                  <span className="mini-dot mini-dot-1"></span>
-                  <span className="mini-dot mini-dot-2"></span>
-                  <span className="mini-dot mini-dot-3"></span>
-                  <span className="mini-dot mini-dot-4"></span>
-                  <span className="mini-dot mini-dot-5"></span>
-                  <span className="mini-dot mini-dot-6"></span>
-                  <span className="mini-scan-beam"></span>
+            {/* Stage 2 — Session Recall */}
+            <div
+              ref={stage2Ref}
+              className={`how-stage-row how-stage-row-reverse ${stage2Active ? 'is-active' : ''}`}
+            >
+              <div className="how-stage-scene recall-scene" aria-hidden="true">
+                <div className="recall-search-zone">
+                  <Search className="recall-search-icon" strokeWidth={1.5} />
+                  <span className="recall-search-label"><Search className="recall-label-icon" strokeWidth={1.5} />exact context</span>
                 </div>
-                <div className="step-icon-wrap">
-                  <ScanSearch className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
+                <div className="recall-slot-track">
+                  <div className="recall-slot-reel">
+                    {sessionList.map((s, i) => (
+                      <span key={i} className={`recall-slot-item${s.selected ? ' recall-slot-item-selected' : ''}`}>{s.name}</span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">First session</h3>
-                <p className="text-base opacity-70 leading-relaxed">reccli scans your codebase and builds a feature map to understand your project.</p>
-                <div className="step-chip-row">
-                  <span className="step-chip">scan</span>
-                  <span className="step-chip">cluster</span>
-                  <span className="step-chip">map</span>
-                </div>
+                <span className="recall-t-stem"></span>
+                <span className="recall-t-bar"></span>
+                <span className="recall-deploy-card">
+                  <FileText className="recall-deploy-icon" strokeWidth={1.7} />
+                  auth middleware stays edge-safe
+                </span>
               </div>
-              <div className="step-card p-8 pt-10 text-center">
-                <span className="step-number">02</span>
-                <div className="step-mini step-mini-memory" aria-hidden="true">
-                  <span className="mini-scroll-line"></span>
-                  <span className="mini-scroll-pill mini-scroll-pill-1"></span>
-                  <span className="mini-scroll-pill mini-scroll-pill-2"></span>
-                  <span className="mini-scroll-pill mini-scroll-pill-3"></span>
-                  <span className="mini-deploy-line"></span>
-                  <span className="mini-deploy-card"></span>
-                </div>
-                <div className="step-icon-wrap">
-                  <RefreshCw className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-xl font-bold mb-3">Every session after</h3>
-                <p className="text-base opacity-70 leading-relaxed">Context loads automatically. Decisions carry forward. Your AI remembers what you decided and why.</p>
-                <div className="step-chip-row">
+              <div className="how-stage-text">
+                <span className="how-stage-count">02</span>
+                <h3 className="text-2xl lg:text-3xl font-bold mb-3">Reload decisions, not just files</h3>
+                <p className="text-base lg:text-lg opacity-70 leading-relaxed mb-5">Prior <code className="how-code">.devsession</code> summaries, open decisions, and working context load automatically. The agent picks up where the last session left off.</p>
+                <div className="step-chip-row justify-start">
+                  <span className="step-chip">session summaries</span>
                   <span className="step-chip">decisions</span>
-                  <span className="step-chip">structure</span>
-                  <span className="step-chip">last fixes</span>
-                </div>
-              </div>
-              <div className="step-card p-8 pt-10 text-center">
-                <span className="step-number">03</span>
-                <div className="step-mini step-mini-growth" aria-hidden="true">
-                  <span className="mini-brain-shell"></span>
-                  <span className="mini-brain-fill"></span>
-                  <span className="mini-brain-dot mini-brain-dot-1"></span>
-                  <span className="mini-brain-dot mini-brain-dot-2"></span>
-                  <span className="mini-brain-dot mini-brain-dot-3"></span>
-                </div>
-                <div className="step-icon-wrap">
-                  <TrendingUp className="w-7 h-7 text-red-400/80" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-xl font-bold mb-3">It compounds</h3>
-                <p className="text-base opacity-70 leading-relaxed">Your AI gets better over time — not because the model improved. Because it remembers session 1.</p>
-                <div className="step-chip-row">
-                  <span className="step-chip">faster starts</span>
-                  <span className="step-chip">less re-explaining</span>
-                  <span className="step-chip">compounding context</span>
+                  <span className="step-chip">active context</span>
                 </div>
               </div>
             </div>
+
+            {/* Stage 3 — Compounding Knowledge Graph */}
+            <div
+              ref={stage3Ref}
+              className={`how-stage-row ${stage3Active ? 'is-active' : ''}`}
+            >
+              <div className="how-stage-scene graph-scene" aria-hidden="true">
+                <svg viewBox="0 0 320 240" className="graph-svg" role="presentation">
+                  <defs>
+                    <radialGradient id="graph-core-glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+                    </radialGradient>
+                    <linearGradient id="graph-link-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#ff7b72" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.6" />
+                    </linearGradient>
+                  </defs>
+                  {/* Core glow */}
+                  <circle className="graph-core-glow" cx="160" cy="120" r="48" fill="url(#graph-core-glow)" />
+                  {/* Ring 1 links */}
+                  <line className="graph-link graph-link-r1-1" x1="160" y1="120" x2="160" y2="62" />
+                  <line className="graph-link graph-link-r1-2" x1="160" y1="120" x2="214" y2="91" />
+                  <line className="graph-link graph-link-r1-3" x1="160" y1="120" x2="214" y2="149" />
+                  <line className="graph-link graph-link-r1-4" x1="160" y1="120" x2="160" y2="178" />
+                  <line className="graph-link graph-link-r1-5" x1="160" y1="120" x2="106" y2="149" />
+                  <line className="graph-link graph-link-r1-6" x1="160" y1="120" x2="106" y2="91" />
+                  {/* Ring 2 links */}
+                  <line className="graph-link graph-link-r2-1" x1="160" y1="62" x2="160" y2="28" />
+                  <line className="graph-link graph-link-r2-2" x1="214" y1="91" x2="258" y2="62" />
+                  <line className="graph-link graph-link-r2-3" x1="214" y1="149" x2="258" y2="178" />
+                  <line className="graph-link graph-link-r2-4" x1="160" y1="178" x2="160" y2="212" />
+                  <line className="graph-link graph-link-r2-5" x1="106" y1="149" x2="62" y2="178" />
+                  <line className="graph-link graph-link-r2-6" x1="106" y1="91" x2="62" y2="62" />
+                  {/* Core node */}
+                  <circle className="graph-node graph-node-core" cx="160" cy="120" r="8" />
+                  {/* Ring 1 nodes */}
+                  <circle className="graph-node graph-node-r1 graph-node-r1-1" cx="160" cy="62" r="5.5" />
+                  <circle className="graph-node graph-node-r1 graph-node-r1-2" cx="214" cy="91" r="5.5" />
+                  <circle className="graph-node graph-node-r1 graph-node-r1-3" cx="214" cy="149" r="5.5" />
+                  <circle className="graph-node graph-node-r1 graph-node-r1-4" cx="160" cy="178" r="5.5" />
+                  <circle className="graph-node graph-node-r1 graph-node-r1-5" cx="106" cy="149" r="5.5" />
+                  <circle className="graph-node graph-node-r1 graph-node-r1-6" cx="106" cy="91" r="5.5" />
+                  {/* Ring 2 nodes */}
+                  <circle className="graph-node graph-node-r2 graph-node-r2-1" cx="160" cy="28" r="4" />
+                  <circle className="graph-node graph-node-r2 graph-node-r2-2" cx="258" cy="62" r="4" />
+                  <circle className="graph-node graph-node-r2 graph-node-r2-3" cx="258" cy="178" r="4" />
+                  <circle className="graph-node graph-node-r2 graph-node-r2-4" cx="160" cy="212" r="4" />
+                  <circle className="graph-node graph-node-r2 graph-node-r2-5" cx="62" cy="178" r="4" />
+                  <circle className="graph-node graph-node-r2 graph-node-r2-6" cx="62" cy="62" r="4" />
+                </svg>
+                <span className="graph-label graph-label-1">.devproject</span>
+                <span className="graph-label graph-label-2">sessions</span>
+                <span className="graph-label graph-label-3">decisions</span>
+              </div>
+              <div className="how-stage-text">
+                <span className="how-stage-count">03</span>
+                <h3 className="text-2xl lg:text-3xl font-bold mb-3">Memory gets richer over time</h3>
+                <p className="text-base lg:text-lg opacity-70 leading-relaxed mb-5">Each session adds to the project&apos;s memory. Structure, decisions, and context accumulate — your agent doesn&apos;t just remember the last session. It learns the project.</p>
+                <div className="step-chip-row justify-start">
+                  <span className="step-chip">session 1 → session n</span>
+                  <span className="step-chip">deeper understanding</span>
+                  <span className="step-chip">less re-explaining</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
