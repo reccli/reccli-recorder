@@ -121,8 +121,8 @@ export default function Home() {
     const lines: SVGLineElement[] = []
     chips.forEach(() => {
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-      line.setAttribute('stroke', 'rgba(167, 139, 250, 0.45)')
-      line.setAttribute('stroke-width', '1.5')
+      line.setAttribute('stroke', 'rgba(167, 139, 250, 0.5)')
+      line.setAttribute('stroke-width', '2.5')
       line.setAttribute('stroke-linecap', 'round')
       svg.appendChild(line)
       lines.push(line)
@@ -144,22 +144,15 @@ export default function Home() {
         const chipLeftX = chipRect.left - sceneRect.left
         const chipCenterY = chipRect.top + chipRect.height / 2 - sceneRect.top
         const finalY = chipFinalYPcts[i] * sceneRect.height + chipRect.height / 2
-
-        // Only show beam if the vertical line has grown past this chip's final Y
-        const lineReachedChip = finalY >= lineVisibleTop && finalY <= lineVisibleBottom
         const dist = chipLeftX - lineX
 
-        if (lineReachedChip && dist > 5) {
+        if (dist > 5) {
           lines[i].setAttribute('x1', String(lineX))
           lines[i].setAttribute('y1', String(finalY))
           lines[i].setAttribute('x2', String(chipLeftX))
           lines[i].setAttribute('y2', String(chipCenterY))
           lines[i].setAttribute('stroke-opacity', String(Math.min(0.5, dist / 80)))
-        } else if (dist <= 5) {
-          // Chip landed — hide
-          lines[i].setAttribute('stroke-opacity', '0')
         } else {
-          // Line hasn't reached this chip yet — hide
           lines[i].setAttribute('stroke-opacity', '0')
         }
       })
