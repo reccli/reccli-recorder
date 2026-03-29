@@ -29,7 +29,7 @@ export default function Home() {
 
   const sessionList = useMemo(() => {
     const today = new Date()
-    const sessions: { name: string; selected: boolean }[] = []
+    const sessions: { name: string; summary: string; selected: boolean; landed: boolean }[] = []
     const summaries = [
       'fixed auth redirect loop',
       'added rate limiting',
@@ -250,20 +250,20 @@ export default function Home() {
         const found = searchLabelRef.current.querySelector('.recall-label-found') as HTMLElement
         if (searching) {
           anims.push(searching.animate([
-            { transform: 'translateY(0)', opacity: 1, offset: 0 },
-            { transform: 'translateY(0)', opacity: 1, offset: 0.27 },
-            { transform: 'translateY(120%)', opacity: 0, offset: 0.33 },
-            { transform: 'translateY(120%)', opacity: 0, offset: 0.999 },
-            { transform: 'translateY(0)', opacity: 1, offset: 1 },
+            { opacity: 1, offset: 0 },
+            { opacity: 1, offset: 0.29 },
+            { opacity: 0, offset: 0.30 },
+            { opacity: 0, offset: 0.999 },
+            { opacity: 1, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
         }
         if (found) {
           anims.push(found.animate([
-            { transform: 'translateY(-120%)', opacity: 0, offset: 0 },
-            { transform: 'translateY(-120%)', opacity: 0, offset: 0.27 },
-            { transform: 'translateY(0)', opacity: 1, offset: 0.33 },
-            { transform: 'translateY(0)', opacity: 1, offset: 0.999 },
-            { transform: 'translateY(-120%)', opacity: 0, offset: 1 },
+            { opacity: 0, offset: 0 },
+            { opacity: 0, offset: 0.29 },
+            { opacity: 1, offset: 0.30 },
+            { opacity: 1, offset: 0.999 },
+            { opacity: 0, offset: 1 },
           ], { duration: dur, easing: 'linear', iterations: Infinity }))
         }
       }
@@ -510,7 +510,7 @@ export default function Home() {
               <div className="how-stage-scene scan-scene" ref={el => { scanSceneRef.current = el }} aria-hidden="true">
                 <span className="scan-v-line"></span>
                 <span className="scan-v-label">.devproject</span>
-                <span className="scan-status">features found</span>
+                <span className="scan-status">Project features<br />found</span>
                 <span className="scan-beam-v"></span>
                 <span className="scan-chip scan-chip-1">auth</span>
                 <span className="scan-chip scan-chip-2">payments</span>
@@ -544,7 +544,7 @@ export default function Home() {
                     <Search className="recall-label-icon" strokeWidth={1.5} />
                     <span className="recall-label-text-wrap">
                       <span className="recall-label-searching">searching...</span>
-                      <span className="recall-label-found">exact context</span>
+                      <span className="recall-label-found">exact context retrieval<span className="recall-status-dot"></span></span>
                     </span>
                   </span>
                 </div>

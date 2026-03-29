@@ -306,7 +306,7 @@ body {
   border-radius: 999px;
   border: 1px solid rgba(167, 139, 250, 0.25);
   background: rgba(10, 12, 28, 0.9);
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: rgba(167, 139, 250, 0.9);
@@ -316,8 +316,8 @@ body {
 
 .scan-status {
   position: absolute;
-  top: 50%;
-  right: 6%;
+  top: 54%;
+  right: 16%;
   transform: translateY(-50%);
   padding: 0.5rem 1rem;
   border-radius: 0.65rem;
@@ -328,6 +328,7 @@ body {
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.74);
   white-space: nowrap;
+  text-align: center;
   z-index: 3;
   transform: translate(120%, -50%);
 }
@@ -473,15 +474,34 @@ body {
 
 .recall-label-text-wrap {
   position: relative;
-  overflow: hidden;
   display: inline-grid;
-  height: 1.4em;
 }
 
 .recall-label-searching,
 .recall-label-found {
   grid-area: 1 / 1;
   white-space: nowrap;
+}
+
+.recall-label-found {
+  opacity: 0;
+}
+
+.recall-status-dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.9);
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  animation: dotFlash 1.2s ease-in-out infinite;
+}
+
+@keyframes dotFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 .recall-label-icon {
@@ -496,7 +516,8 @@ body {
   height: 3rem;
   color: rgba(167, 139, 250, 0.9);
   position: relative;
-  z-index: 1;
+  z-index: 0;
+  margin-top: 2.5rem;
   opacity: 0;
 }
 
