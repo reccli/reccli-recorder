@@ -114,8 +114,9 @@ body {
 @keyframes graphLinkDraw {
   0% { stroke-dashoffset: 1; opacity: 0; }
   3% { opacity: 0.8; }
-  18%, 99.9% { stroke-dashoffset: 0; opacity: 0.8; }
-  100% { stroke-dashoffset: 1; opacity: 0; }
+  18%, 62% { stroke-dashoffset: 0; opacity: 0.8; }
+  72% { stroke-dashoffset: 0; opacity: 0; }
+  72.1%, 100% { stroke-dashoffset: 1; opacity: 0; }
 }
 
 @keyframes graphLinkR1 {
@@ -744,9 +745,7 @@ body {
 .graph-link-r2 { stroke: rgba(167, 139, 250, 0.45); stroke-width: 1.2; }
 .graph-link-r3 { stroke: rgba(96, 165, 250, 0.35); stroke-width: 1; }
 
-.how-stage-row.is-active .graph-link-r1 { animation: graphLinkDraw 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.how-stage-row.is-active .graph-link-r2 { animation: graphLinkDraw 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.how-stage-row.is-active .graph-link-r3 { animation: graphLinkDraw 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
+/* Graph link animations driven by JS */
 
 /* Nodes — all visible from start, no entrance animation */
 .graph-node {

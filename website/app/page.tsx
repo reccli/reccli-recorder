@@ -23,6 +23,7 @@ export default function Home() {
   const searchLabelRef = useRef<HTMLSpanElement | null>(null)
   const scanSceneRef = useRef<HTMLDivElement | null>(null)
   const scanBranchesSvgRef = useRef<SVGSVGElement | null>(null)
+  const graphSceneRef = useRef<HTMLDivElement | null>(null)
   const [stage1Active, setStage1Active] = useState(false)
   const [stage2Active, setStage2Active] = useState(false)
   const [stage3Active, setStage3Active] = useState(false)
@@ -287,6 +288,71 @@ export default function Home() {
       window.removeEventListener('resize', runAnimation)
     }
   }, [stage2Active, sessionList])
+
+  // Stage 3: JS-driven graph line draw with proper fade and reset gap
+  useEffect(() => {
+    if (!stage3Active) return
+    const scene = graphSceneRef.current
+    if (!scene) return
+
+    const links = scene.querySelectorAll('.graph-link') as NodeListOf<SVGLineElement>
+    if (links.length === 0) return
+
+    // Parse each link's --d delay
+    const delays = Array.from(links).map(l => {
+      const d = getComputedStyle(l).getPropertyValue('--d')
+      return parseFloat(d) || 0
+    })
+    const maxDelay = Math.max(...delays)
+
+    // Timeline: draw (0-2s per link + delays), hold 3s, fade 1s, gap 2s
+    const drawDuration = 1.2 // seconds for each line to draw
+    const holdAfterAllDrawn = 3
+    const fadeDuration = 1
+    const gapDuration = 2
+
+    const allDrawnAt = maxDelay + drawDuration
+    const fadeStartAt = allDrawnAt + holdAfterAllDrawn
+    const fadeEndAt = fadeStartAt + fadeDuration
+    const totalCycle = fadeEndAt + gapDuration
+
+    let rafId: number
+    const startTime = performance.now()
+
+    const update = () => {
+      const elapsed = ((performance.now() - startTime) % (totalCycle * 1000)) / 1000
+
+      links.forEach((link, i) => {
+        const delay = delays[i]
+        const linkElapsed = elapsed - delay
+
+        if (linkElapsed < 0 || elapsed >= fadeEndAt) {
+          // Not started yet or in gap — invisible
+          link.style.strokeDashoffset = '1'
+          link.style.opacity = '0'
+        } else if (linkElapsed < drawDuration) {
+          // Drawing
+          const progress = linkElapsed / drawDuration
+          link.style.strokeDashoffset = String(1 - progress)
+          link.style.opacity = String(0.8 * progress)
+        } else if (elapsed < fadeStartAt) {
+          // Holding — fully drawn
+          link.style.strokeDashoffset = '0'
+          link.style.opacity = '0.8'
+        } else if (elapsed < fadeEndAt) {
+          // Fading out
+          const fadeProgress = (elapsed - fadeStartAt) / fadeDuration
+          link.style.strokeDashoffset = '0'
+          link.style.opacity = String(0.8 * (1 - fadeProgress))
+        }
+      })
+
+      rafId = requestAnimationFrame(update)
+    }
+
+    rafId = requestAnimationFrame(update)
+    return () => cancelAnimationFrame(rafId)
+  }, [stage3Active])
 
   const handleCopy = async (text: string, type: 'install' | 'mcp') => {
     try {
@@ -584,7 +650,7 @@ export default function Home() {
               ref={stage3Ref}
               className={`how-stage-row ${stage3Active ? 'is-active' : ''}`}
             >
-              <div className="how-stage-scene graph-scene" aria-hidden="true">
+              <div className="how-stage-scene graph-scene" ref={el => { graphSceneRef.current = el }} aria-hidden="true">
                 <svg viewBox="0 0 360 270" className="graph-svg" role="presentation">
                   <defs>
                     <radialGradient id="graph-core-glow" cx="50%" cy="50%" r="50%">
