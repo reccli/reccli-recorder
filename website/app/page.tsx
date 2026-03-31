@@ -70,7 +70,7 @@ export default function Home() {
   }, [])
 
   const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
-  const mcpCommand = 'claude mcp add reccli -- env PYTHONPATH=packages python3 -m reccli.mcp_server'
+  const mcpCommand = 'python3 -m reccli.runtime.cli setup'
 
   useEffect(() => {
     const stages: [React.RefObject<HTMLDivElement | null>, (v: boolean) => void][] = [
@@ -478,9 +478,9 @@ export default function Home() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3 text-[11px] sm:text-xs font-semibold tracking-[0.16em] uppercase text-white/58">
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Project Map</span>
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Session Summaries</span>
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Next Steps</span>
+                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Context retrieval</span>
+                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Project understanding</span>
+                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Session continuity</span>
                 </div>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -545,7 +545,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <div className="text-green-400 mb-2"># Add to Claude Code</div>
+                <div className="text-green-400 mb-2"># Set up MCP server + hooks</div>
                 <div
                   onClick={() => handleCopy(mcpCommand, 'mcp')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
@@ -769,7 +769,7 @@ export default function Home() {
               </div>
               <div className="how-stage-text">
                 <span className="how-stage-count">03</span>
-                <h3 className="text-2xl lg:text-3xl font-bold mb-3">Memory gets richer over time</h3>
+                <h3 className="text-2xl lg:text-3xl font-bold mb-3">Memory carries over time</h3>
                 <p className="text-base lg:text-lg opacity-70 leading-relaxed mb-5">Each session adds to the project&apos;s memory. Structure, decisions, and context accumulate — your agent doesn&apos;t just remember the last session. It learns the project.</p>
                 <div className="step-chip-row justify-start">
                   <span className="step-chip">session 1 → session n</span>
@@ -960,7 +960,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <div className="mb-4 text-gray-300"># 2. Add to Claude Code (or any MCP-compatible tool)</div>
+              <div className="mb-4 text-gray-300"># 2. Set up MCP server + hooks</div>
               <div onClick={() => handleCopy(mcpCommand, 'mcp')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
                 <code className="text-base font-mono text-white break-all pr-12">{mcpCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
