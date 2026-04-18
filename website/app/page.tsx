@@ -6,6 +6,7 @@ import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch } from 'lucid
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedMcp, setCopiedMcp] = useState(false)
+  const [agentTab, setAgentTab] = useState<'claude' | 'codex'>('claude')
   const [terminalRecordingStarted, setTerminalRecordingStarted] = useState(false)
   const [showWaitlistForm, setShowWaitlistForm] = useState(false)
   const [waitlistEmail, setWaitlistEmail] = useState('')
@@ -70,7 +71,11 @@ export default function Home() {
   }, [])
 
   const cloneCommand = 'git clone https://github.com/reccli/reccli.git && cd reccli && pip install -r requirements.txt'
-  const mcpCommand = 'python3 -m reccli.runtime.cli setup'
+  const mcpCommands = {
+    claude: 'python3 -m reccli.runtime.cli setup',
+    codex: 'python3 -m reccli.runtime.cli setup --codex',
+  }
+  const mcpCommand = mcpCommands[agentTab]
 
   useEffect(() => {
     const stages: [React.RefObject<HTMLDivElement | null>, (v: boolean) => void][] = [
@@ -515,6 +520,21 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-10 max-w-4xl">
           <h2 className="text-2xl font-bold mb-2 flex items-center gap-2"><span className="text-white/40">&#10095;</span> Quick Start</h2>
           <p className="text-white/50 mb-8 text-base">Copy and paste the following commands one by one into your terminal <span className="text-white/30">(&#8984; Space: Terminal)</span> to install.</p>
+          {/* Agent tabs */}
+          <div className="flex gap-2 mb-4">
+            <button
+              onClick={() => setAgentTab('claude')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${agentTab === 'claude' ? 'bg-white/15 text-white' : 'bg-white/5 text-white/50 hover:text-white/70'}`}
+            >
+              For Claude Code
+            </button>
+            <button
+              onClick={() => setAgentTab('codex')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${agentTab === 'codex' ? 'bg-white/15 text-white' : 'bg-white/5 text-white/50 hover:text-white/70'}`}
+            >
+              For OpenAI Codex
+            </button>
+          </div>
           <div className="bg-[#1a1a2e]/80 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
             {/* Terminal header */}
             <div className="bg-[#1a1a2e] px-4 py-3 flex items-center gap-2 border-b border-white/5">
@@ -545,7 +565,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <div className="text-green-400 mb-2"># Set up MCP server + hooks</div>
+                <div className="text-green-400 mb-2"># Set up MCP server{agentTab === 'claude' ? ' + hooks' : ''}</div>
                 <div
                   onClick={() => handleCopy(mcpCommand, 'mcp')}
                   className="flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg px-3 py-2 -mx-3 transition-all group relative"
@@ -949,6 +969,21 @@ export default function Home() {
       <section className="py-20" id="get-started">
         <div className="container mx-auto px-6 md:px-10 max-w-4xl text-center">
           <h2 className="text-5xl font-bold mb-12">Get started in 30 seconds</h2>
+          {/* Agent tabs */}
+          <div className="flex gap-2 mb-6 justify-center">
+            <button
+              onClick={() => setAgentTab('claude')}
+              className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${agentTab === 'claude' ? 'bg-white/15 text-white' : 'bg-white/5 text-white/50 hover:text-white/70'}`}
+            >
+              For Claude Code
+            </button>
+            <button
+              onClick={() => setAgentTab('codex')}
+              className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${agentTab === 'codex' ? 'bg-white/15 text-white' : 'bg-white/5 text-white/50 hover:text-white/70'}`}
+            >
+              For OpenAI Codex
+            </button>
+          </div>
           <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10 text-left space-y-8">
             <div>
               <div className="mb-4 text-gray-300"># 1. Clone and install</div>
@@ -960,7 +995,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <div className="mb-4 text-gray-300"># 2. Set up MCP server + hooks</div>
+              <div className="mb-4 text-gray-300"># 2. Set up MCP server{agentTab === 'claude' ? ' + hooks' : ''}</div>
               <div onClick={() => handleCopy(mcpCommand, 'mcp')} className="bg-black/20 p-4 rounded-lg cursor-pointer hover:bg-black/30 transition-all relative group flex items-center justify-between">
                 <code className="text-base font-mono text-white break-all pr-12">{mcpCommand}</code>
                 <button className="flex-shrink-0 p-2 hover:bg-white/10 rounded-lg transition-all">
