@@ -21,40 +21,35 @@ export default function Privacy() {
             <section>
               <h2 className="text-3xl font-bold mb-4">Overview</h2>
               <p className="opacity-90">
-                RecCli is committed to protecting your privacy. This policy explains how we handle your data when you use our terminal recording tool.
+                RecCli is a tri-layer memory system for AI coding agents. This policy explains how we handle data when you use the RecCli website and memory engine.
               </p>
             </section>
 
             <section>
               <h2 className="text-3xl font-bold mb-4">Data We Collect</h2>
-              <h3 className="text-2xl font-semibold mb-2 mt-4">RecCli Base (Free Tier)</h3>
+              <h3 className="text-2xl font-semibold mb-2 mt-4">Open-source memory engine</h3>
               <p className="opacity-90 mb-4">
-                RecCli Base stores all recordings <strong>locally on your machine</strong>. We do not collect, transmit, or store any of your terminal session data on our servers. Your recordings stay on your device.
+                RecCli stores its three memory layers—your <code>.devproject</code> map, compact <code>.devsession</code> summaries, and full <code>.devsession</code> conversations—<strong>locally in your project</strong>. RecCli does not upload those files to RecCli-operated servers.
+              </p>
+              <p className="opacity-90 mb-4">
+                If you configure a third-party model or embedding provider, RecCli may send the content required for that feature directly to the provider you selected. That processing is governed by the provider&apos;s terms and privacy policy.
               </p>
 
               <h3 className="text-2xl font-semibold mb-2 mt-4">Waitlist</h3>
               <p className="opacity-90 mb-4">
-                When you sign up for the RecCli Pro waitlist, we collect:
+                When you sign up for the RecCli Team waitlist, we collect:
               </p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
                 <li>Your email address</li>
                 <li>Timestamp of signup</li>
               </ul>
               <p className="opacity-90 mt-4">
-                We use this information solely to notify you when RecCli Pro launches. We will never sell, share, or spam your email.
+                We use this information solely to notify you about the Team product. We do not sell your email address.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-2 mt-4">RecCli Pro (Future)</h3>
+              <h3 className="text-2xl font-semibold mb-2 mt-4">Website analytics</h3>
               <p className="opacity-90">
-                When RecCli Pro launches, we will collect:
-              </p>
-              <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
-                <li>Account information (email, password hash)</li>
-                <li>Terminal session metadata for AI features (titles, timestamps, session length)</li>
-                <li>Usage analytics to improve the product</li>
-              </ul>
-              <p className="opacity-90 mt-4">
-                <strong>We will never access or store the actual content of your terminal sessions</strong> unless you explicitly choose to sync them for AI features.
+                The website uses privacy-conscious analytics to understand aggregate traffic and improve the site. Website analytics are separate from your local RecCli project memory.
               </p>
             </section>
 
@@ -64,20 +59,17 @@ export default function Privacy() {
                 We take security seriously:
               </p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
-                <li>All data transmission uses HTTPS encryption</li>
-                <li>Passwords are hashed using industry-standard algorithms</li>
-                <li>We use Row-Level Security (RLS) policies to ensure strict data isolation</li>
-                <li>Your data is never shared with third parties</li>
+                <li>The RecCli website is served over HTTPS</li>
+                <li>Project memory remains in local, human-readable files by default</li>
+                <li>You control which third-party model or embedding providers you configure</li>
+                <li>Secrets are redacted before supported summarization workflows</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-3xl font-bold mb-4">Data Retention</h2>
               <p className="opacity-90">
-                <strong>Waitlist emails:</strong> Stored until RecCli Pro launches, then deleted within 30 days after launch notification is sent.
-              </p>
-              <p className="opacity-90 mt-4">
-                <strong>RecCli Pro accounts:</strong> Your data is retained as long as your account is active. You can request account deletion at any time by emailing <a href="mailto:support@reccli.com" className="underline hover:text-purple-200">support@reccli.com</a>.
+                <strong>Waitlist emails:</strong> Stored while the Team waitlist is active or until you ask us to delete your address. You can request deletion at any time by emailing <a href="mailto:support@reccli.com" className="underline hover:text-purple-200">support@reccli.com</a>.
               </p>
             </section>
 
@@ -99,7 +91,7 @@ export default function Privacy() {
             <section>
               <h2 className="text-3xl font-bold mb-4">Open Source</h2>
               <p className="opacity-90">
-                RecCli Base is open source (MIT License). You can review our code, security practices, and data handling at <a href="https://github.com/willluecke/reccli" className="underline hover:text-purple-200">github.com/willluecke/reccli</a>.
+                The RecCli memory engine is open source under the MIT License. You can review its code, security practices, and data handling at <a href="https://github.com/reccli/reccli" className="underline hover:text-purple-200">github.com/reccli/reccli</a>.
               </p>
             </section>
 
