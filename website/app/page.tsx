@@ -4,14 +4,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch } from 'lucide-react'
 
 const heroProjects = [
-  { name: 'Atlas API', meta: '12 sessions', active: true },
-  { name: 'EstimateFast', meta: '8 sessions' },
-  { name: 'RegWatch', meta: '21 sessions' },
-  { name: 'MathViz', meta: '5 sessions' },
-  { name: 'Signal Room', meta: '14 sessions' },
-  { name: 'Workshop', meta: '3 sessions' },
-  { name: 'Hermes Chat', meta: '17 sessions' },
-  { name: 'Northstar', meta: '9 sessions' },
+  { name: 'Moonbase API', meta: '12 sessions', active: true },
+  { name: 'Acorn Ledger', meta: '8 sessions' },
+  { name: 'Paper Kite', meta: '21 sessions' },
+  { name: 'Lantern CRM', meta: '5 sessions' },
+  { name: 'Tiny Compiler', meta: '14 sessions' },
+  { name: 'Bluejay Mobile', meta: '3 sessions' },
+  { name: 'Mosaic Studio', meta: '17 sessions' },
+  { name: 'Relay Chat', meta: '9 sessions' },
 ]
 
 export default function Home() {
@@ -518,7 +518,7 @@ export default function Home() {
                 <div className="terminal-selection">
                   <span className="terminal-path">Select</span>
                   <span className="terminal-prompt">❯</span>
-                  <span className="terminal-selected-name">Atlas API</span>
+                  <span className="terminal-selected-name">Moonbase API</span>
                   <span className="terminal-cursor" aria-hidden="true"></span>
                 </div>
                 <div className="terminal-context-status">
