@@ -14,8 +14,6 @@ const heroProjects = [
   { name: 'Relay Chat', meta: '9 sessions' },
 ]
 
-const HERO_REVEAL_LEAD = 64
-
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedMcp, setCopiedMcp] = useState(false)
@@ -130,26 +128,24 @@ export default function Home() {
       const hero = heroRef.current
       if (!hero) return
 
-      const response = hero.querySelector('.terminal-response-reveal') as HTMLElement | null
-      const responseHeight = Math.ceil(response?.scrollHeight ?? 205)
-      const expansionLimit = HERO_REVEAL_LEAD + responseHeight
+      const memory = hero.querySelector('.terminal-memory-view') as HTMLElement | null
+      const memoryHeight = Math.ceil(memory?.scrollHeight ?? 260)
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       if (reducedMotion) {
-        hero.style.setProperty('--terminal-growth', `${expansionLimit}px`)
-        hero.style.setProperty('--response-reveal', `${responseHeight}px`)
+        hero.style.setProperty('--terminal-growth', `${memoryHeight}px`)
+        hero.style.setProperty('--memory-reveal', `${memoryHeight}px`)
         setHeroMemoryLoaded(true)
         return
       }
 
       const scrollAmount = Math.max(window.scrollY, 0)
-      const terminalGrowth = Math.min(scrollAmount, expansionLimit)
-      const responseReveal = Math.min(Math.max(scrollAmount - HERO_REVEAL_LEAD, 0), responseHeight)
+      const terminalGrowth = Math.min(scrollAmount, memoryHeight)
 
       hero.style.setProperty('--terminal-growth', `${Math.round(terminalGrowth)}px`)
-      hero.style.setProperty('--response-reveal', `${Math.round(responseReveal)}px`)
+      hero.style.setProperty('--memory-reveal', `${Math.round(terminalGrowth)}px`)
 
-      const shouldLoadMemory = scrollAmount >= 48
+      const shouldLoadMemory = terminalGrowth >= memoryHeight - 1
       setHeroMemoryLoaded(current => current === shouldLoadMemory ? current : shouldLoadMemory)
     }
 
@@ -506,8 +502,8 @@ export default function Home() {
 
     event.preventDefault()
 
-    const response = hero.querySelector('.terminal-response-reveal') as HTMLElement | null
-    const expansionLimit = HERO_REVEAL_LEAD + Math.ceil(response?.scrollHeight ?? 205)
+    const memory = hero.querySelector('.terminal-memory-view') as HTMLElement | null
+    const expansionLimit = Math.ceil(memory?.scrollHeight ?? 260)
     const currentGrowth = Number.parseFloat(getComputedStyle(hero).getPropertyValue('--terminal-growth')) || 0
     const remainingExpansion = Math.max(expansionLimit - currentGrowth, 0)
     const targetTop = window.scrollY + target.getBoundingClientRect().top + remainingExpansion
@@ -611,7 +607,7 @@ export default function Home() {
                 </div>
 
                 <div className="terminal-story-stage">
-                  <div className="terminal-picker-view" aria-hidden={heroMemoryLoaded}>
+                  <div className="terminal-picker-view">
                     <div className="terminal-greeting">Hey! Which project would you like to work on today?</div>
                     <div className="terminal-projects">
                       {heroProjects.map((project, index) => (
@@ -637,36 +633,28 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="terminal-memory-view" aria-hidden={!heroMemoryLoaded}>
-                    <div className="terminal-selection terminal-selection-confirmed">
-                      <span className="terminal-path">Select</span>
-                      <span className="terminal-prompt">❯</span>
-                      <span className="terminal-selected-name">Moonbase API</span>
-                    </div>
-
+                  <div className="terminal-memory-view">
                     <div className="terminal-loading-line">
                       <span className="terminal-loading-spark" aria-hidden="true"></span>
                       Loading project memory…
                     </div>
 
-                    <div className="terminal-response-reveal">
-                      <div className="terminal-tool-call">
-                        <span className="terminal-tool-check">✓</span>
-                        <span>Called</span>
-                        <strong>reccli</strong>
-                      </div>
+                    <div className="terminal-tool-call">
+                      <span className="terminal-tool-check">✓</span>
+                      <span>Called</span>
+                      <strong>reccli</strong>
+                    </div>
 
-                      <div className="terminal-resume">
-                        <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
-                        <div className="terminal-open-items-label">Open items from last session:</div>
-                        <ol className="terminal-open-items">
-                          <li><span>1.</span><span>Finish the auth middleware migration</span></li>
-                          <li><span>2.</span><span>Add refresh-token rotation tests</span></li>
-                          <li><span>3.</span><span>Verify rate-limit headers in staging</span></li>
-                        </ol>
-                        <div className="terminal-resume-meta">
-                          8 features mapped <span>•</span> 12 sessions linked
-                        </div>
+                    <div className="terminal-resume">
+                      <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
+                      <div className="terminal-open-items-label">Open items from last session:</div>
+                      <ol className="terminal-open-items">
+                        <li><span>1.</span><span>Finish the auth middleware migration</span></li>
+                        <li><span>2.</span><span>Add refresh-token rotation tests</span></li>
+                        <li><span>3.</span><span>Verify rate-limit headers in staging</span></li>
+                      </ol>
+                      <div className="terminal-resume-meta">
+                        8 features mapped <span>•</span> 12 sessions linked
                       </div>
                     </div>
                   </div>
