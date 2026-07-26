@@ -55,11 +55,14 @@ body {
 }
 
 .memory-hero {
+  --hero-lift: 0px;
+  --terminal-growth: 0px;
+  --response-reveal: 0px;
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: flex-start;
-  min-height: 155svh;
+  min-height: 180svh;
   overflow: clip;
   background:
     radial-gradient(circle at 78% 42%, rgba(99, 102, 241, 0.12), transparent 34%),
@@ -118,6 +121,8 @@ body {
 .memory-hero-copy {
   position: relative;
   z-index: 2;
+  transform: translateY(calc(-1 * var(--hero-lift)));
+  will-change: transform;
 }
 
 .memory-eyebrow {
@@ -245,6 +250,8 @@ body {
   position: relative;
   width: 100%;
   perspective: 1200px;
+  transform: translateY(calc(-1 * var(--hero-lift)));
+  will-change: transform;
 }
 
 .terminal-shadow {
@@ -329,7 +336,7 @@ body {
 }
 
 .mac-terminal-body {
-  min-height: 27rem;
+  min-height: calc(27rem + var(--terminal-growth));
   padding: 1.45rem 1.55rem 1.25rem;
   color: rgba(239, 241, 247, 0.86);
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
@@ -342,7 +349,7 @@ body {
 
 .terminal-story-stage {
   position: relative;
-  min-height: 22rem;
+  min-height: calc(22rem + var(--terminal-growth));
   margin-top: 1.25rem;
 }
 
@@ -519,6 +526,12 @@ body {
   border-radius: 999px;
   background: #b59aff;
   box-shadow: 0 0 14px rgba(181, 154, 255, 0.8);
+}
+
+.terminal-response-reveal {
+  max-height: var(--response-reveal);
+  overflow: clip;
+  will-change: max-height;
 }
 
 .terminal-tool-call {
@@ -793,7 +806,7 @@ body {
   }
 
   .terminal-story-stage {
-    min-height: 18.5rem;
+    min-height: calc(18.5rem + var(--terminal-growth));
   }
 
   .terminal-projects {

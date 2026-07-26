@@ -131,25 +131,37 @@ export default function Home() {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       if (reducedMotion) {
+        hero.style.setProperty('--hero-lift', '0px')
+        hero.style.setProperty('--terminal-growth', '160px')
+        hero.style.setProperty('--response-reveal', '260px')
         setHeroMemoryLoaded(true)
         return
       }
 
       const compactLayout = window.matchMedia('(max-width: 767px)').matches
-      let shouldLoadMemory = false
+      let progress = 0
 
       if (compactLayout) {
         const terminal = hero.querySelector('.mac-terminal-wrap')
         const terminalTop = terminal?.getBoundingClientRect().top ?? window.innerHeight
-        const triggerLine = Math.min(180, window.innerHeight * 0.25)
-        shouldLoadMemory = terminalTop <= triggerLine
+        const startLine = window.innerHeight * 0.62
+        const endLine = window.innerHeight * 0.35
+        progress = Math.min(Math.max((startLine - terminalTop) / (startLine - endLine), 0), 1)
       } else {
         const rect = hero.getBoundingClientRect()
         const scrollDistance = Math.max(hero.offsetHeight - window.innerHeight, 1)
-        const progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
-        shouldLoadMemory = progress >= 0.34
+        progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
       }
 
+      const liftDistance = compactLayout ? 0 : Math.min(140, window.innerHeight * 0.17)
+      const growthDistance = compactLayout ? 120 : Math.min(190, window.innerHeight * 0.24)
+      const responseProgress = Math.min(Math.max((progress - 0.34) / 0.66, 0), 1)
+
+      hero.style.setProperty('--hero-lift', `${Math.round(progress * liftDistance)}px`)
+      hero.style.setProperty('--terminal-growth', `${Math.round(progress * growthDistance)}px`)
+      hero.style.setProperty('--response-reveal', `${Math.round(responseProgress * 260)}px`)
+
+      const shouldLoadMemory = progress >= 0.26
       setHeroMemoryLoaded(current => current === shouldLoadMemory ? current : shouldLoadMemory)
     }
 
@@ -596,22 +608,24 @@ export default function Home() {
                       Loading project memory…
                     </div>
 
-                    <div className="terminal-tool-call">
-                      <span className="terminal-tool-check">✓</span>
-                      <span>Called</span>
-                      <strong>reccli</strong>
-                    </div>
+                    <div className="terminal-response-reveal">
+                      <div className="terminal-tool-call">
+                        <span className="terminal-tool-check">✓</span>
+                        <span>Called</span>
+                        <strong>reccli</strong>
+                      </div>
 
-                    <div className="terminal-resume">
-                      <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
-                      <div className="terminal-open-items-label">Open items from last session:</div>
-                      <ol className="terminal-open-items">
-                        <li><span>1.</span><span>Finish the auth middleware migration</span></li>
-                        <li><span>2.</span><span>Add refresh-token rotation tests</span></li>
-                        <li><span>3.</span><span>Verify rate-limit headers in staging</span></li>
-                      </ol>
-                      <div className="terminal-resume-meta">
-                        8 features mapped <span>•</span> 12 sessions linked
+                      <div className="terminal-resume">
+                        <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
+                        <div className="terminal-open-items-label">Open items from last session:</div>
+                        <ol className="terminal-open-items">
+                          <li><span>1.</span><span>Finish the auth middleware migration</span></li>
+                          <li><span>2.</span><span>Add refresh-token rotation tests</span></li>
+                          <li><span>3.</span><span>Verify rate-limit headers in staging</span></li>
+                        </ol>
+                        <div className="terminal-resume-meta">
+                          8 features mapped <span>•</span> 12 sessions linked
+                        </div>
                       </div>
                     </div>
                   </div>
