@@ -1,34 +1,36 @@
 #!/bin/bash
 
-# RecCli Installation Script
-# This script installs RecCli via Homebrew
+# RecCli installation helper
+# Installs the current tri-layer memory engine from its source repository.
 
 set -e
 
-echo "🔴 Installing RecCli..."
+echo "Installing RecCli — tri-layer memory for AI coding agents"
 echo ""
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null; then
-    echo "❌ Error: Homebrew is not installed."
-    echo ""
-    echo "Please install Homebrew first:"
-    echo "  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
-    echo ""
+# Check required tools.
+if ! command -v git >/dev/null 2>&1; then
+    echo "Error: git is required."
     exit 1
 fi
 
-echo "✓ Homebrew found"
-echo ""
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Error: Python 3 is required."
+    exit 1
+fi
 
-# Install RecCli via Homebrew
-echo "Installing RecCli via Homebrew..."
-brew install willluecke/reccli/reccli
-
+echo "Run these commands to install RecCli:"
 echo ""
-echo "✅ RecCli installed successfully!"
+echo "  git clone https://github.com/reccli/reccli.git"
+echo "  cd reccli"
+echo "  python3 -m pip install -r requirements.txt"
 echo ""
-echo "To get started, open a new terminal window."
-echo "The RecCli floating button will appear automatically."
+echo "Then configure your coding agent:"
 echo ""
-echo "For help, visit: https://github.com/willluecke/reccli"
+echo "  # Claude Code"
+echo "  python3 -m reccli.runtime.cli setup"
+echo ""
+echo "  # OpenAI Codex"
+echo "  python3 -m reccli.runtime.cli setup --codex"
+echo ""
+echo "Documentation: https://github.com/reccli/reccli"

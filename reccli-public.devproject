@@ -1,0 +1,651 @@
+{
+  "format": "devproject",
+  "version": "2.1.0",
+  "project_root": "/Users/will/coding-projects/reccli-public",
+  "updated_at": "2026-07-26T06:42:34Z",
+  "last_updated_session": null,
+  "project": {
+    "name": "reccli-public",
+    "description": "RecCli is a tri-layer memory system for AI coding agents: .devproject provides a durable project feature map, .devsession summaries provide compact working memory, and full .devsession conversations remain the linked source of truth. This public repository contains the deployed Next.js website for that product plus historical code from an earlier terminal-recorder direction.",
+    "status": "active",
+    "source": "manual"
+  },
+  "features": [
+    {
+      "feature_id": "feat_terminal_recorder_app",
+      "feature_version": 1,
+      "title": "Legacy Terminal Recorder",
+      "description": "Historical Python/Tkinter terminal recorder retained from an earlier RecCli product direction. It is not the current tri-layer memory product or supported installation path.",
+      "status": "archived",
+      "source": "manual",
+      "files_touched": [
+        "reccli.py"
+      ],
+      "file_boundaries": [
+        "reccli.py"
+      ],
+      "docs": [
+        {
+          "path": "README.md",
+          "title": "🎬 RecCli",
+          "relevance": "primary",
+          "score": 4.0,
+          "signals": [
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature",
+            "doc_references_feature_files"
+          ]
+        }
+      ],
+      "session_ids": [],
+      "last_updated_session": null,
+      "updated_at": "2026-07-26T06:42:34Z",
+      "staleness": {
+        "status": "current",
+        "checked_at": "2026-07-26T06:39:12Z",
+        "signals": []
+      }
+    },
+    {
+      "feature_id": "feat_session_export",
+      "feature_version": 1,
+      "title": "Legacy Recorder Export",
+      "description": "Historical export logic for asciinema recordings from the earlier terminal-recorder product. It is retained as legacy code and is not part of the current tri-layer memory engine.",
+      "status": "archived",
+      "source": "manual",
+      "files_touched": [
+        "src/export/exporters.py"
+      ],
+      "file_boundaries": [
+        "src/export/**"
+      ],
+      "docs": [
+        {
+          "path": "requirements.txt",
+          "title": "RecCli Requirements",
+          "relevance": "primary",
+          "score": 3.5,
+          "signals": [
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        }
+      ],
+      "session_ids": [],
+      "last_updated_session": null,
+      "updated_at": "2026-07-26T06:42:34Z",
+      "staleness": {
+        "status": "current",
+        "checked_at": "2026-07-26T06:39:12Z",
+        "signals": []
+      }
+    },
+    {
+      "feature_id": "feat_desktop_dialogs_and_settings",
+      "feature_version": 1,
+      "title": "Legacy Recorder Dialogs",
+      "description": "Historical Tkinter export and settings dialogs from the earlier terminal-recorder product. They are retained as legacy code and are not part of the current tri-layer memory engine.",
+      "status": "archived",
+      "source": "manual",
+      "files_touched": [
+        "src/ui/dialogs.py"
+      ],
+      "file_boundaries": [
+        "src/ui/**"
+      ],
+      "docs": [
+        {
+          "path": "BENCHMARKING_PLAN.md",
+          "title": "Benchmarking Plan for Reccli",
+          "relevance": "primary",
+          "score": 3.4709,
+          "signals": [
+            "bm25"
+          ]
+        },
+        {
+          "path": "CommercialStrategy.md",
+          "title": "Commercial Strategy for Reccli",
+          "relevance": "primary",
+          "score": 4.6787,
+          "signals": [
+            "bm25"
+          ]
+        }
+      ],
+      "session_ids": [],
+      "last_updated_session": null,
+      "updated_at": "2026-07-26T06:42:34Z",
+      "staleness": {
+        "status": "current",
+        "checked_at": "2026-07-26T06:39:12Z",
+        "signals": []
+      }
+    },
+    {
+      "feature_id": "feat_marketing_website",
+      "feature_version": 1,
+      "title": "Tri-Layer Memory Product Website",
+      "description": "The deployed Next.js website for RecCli, a tri-layer memory system for AI coding agents. It explains .devproject feature maps, compact .devsession summaries, full source-of-truth conversations, cross-session retrieval, and Claude Code/Codex setup.",
+      "status": "in-progress",
+      "source": "manual",
+      "files_touched": [
+        "website/app/browse/[feature_id]/page.tsx",
+        "website/app/browse/page.tsx",
+        "website/app/components/CopyButton.tsx",
+        "website/app/page.tsx",
+        "website/app/privacy/page.tsx",
+        "website/app/terms/page.tsx",
+        "website/screenshot-test.mjs"
+      ],
+      "file_boundaries": [
+        "website/app/**",
+        "website/screenshot-test.mjs"
+      ],
+      "docs": [
+        {
+          "path": "PricingPageDraft.md",
+          "title": "Pricing Page Draft for Reccli",
+          "relevance": "primary",
+          "score": 4.1,
+          "signals": [
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/__next.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 6.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._not-found.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._not-found.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/_not-found/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 6.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 6.8,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next.browse.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/__next.browse.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next.browse.$d$feature_id.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next.browse.$d$feature_id.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/browse/feat_llm_summarization_session_compaction/__next.browse.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 5.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 6.8,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next.privacy.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/privacy/__next.privacy.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next._full.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next._head.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next._index.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next._tree.txt",
+          "title": ":HL[\"/_next/static/chunks/0x_2tjveraes4.css\",\"style\"]",
+          "relevance": "primary",
+          "score": 6.8,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next.terms.__PAGE__.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.4,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        },
+        {
+          "path": "website/out/terms/__next.terms.txt",
+          "title": "1:\"$Sreact.fragment\"",
+          "relevance": "primary",
+          "score": 7.0,
+          "signals": [
+            "doc_title_matches_feature_terms",
+            "doc_name_matches_feature_alias",
+            "doc_semantic_matches_feature"
+          ]
+        }
+      ],
+      "session_ids": [],
+      "last_updated_session": null,
+      "updated_at": "2026-07-26T06:42:34Z",
+      "staleness": {
+        "status": "current",
+        "checked_at": "2026-07-26T06:39:12Z",
+        "signals": []
+      }
+    }
+  ],
+  "hub_files": [
+    "website/app/layout.tsx"
+  ],
+  "shared_infrastructure": [
+    "src/export/__init__.py",
+    "src/ui/__init__.py",
+    "website/next-env.d.ts",
+    "website/next.config.ts",
+    "website/postcss.config.mjs",
+    "website/tailwind.config.ts"
+  ],
+  "unassigned": [
+    "website/out/_next/static/chunks/01xlw8hd842-c.js",
+    "website/out/_next/static/chunks/03~yq9q893hmn.js",
+    "website/out/_next/static/chunks/0b5yd18v4zlw1.js",
+    "website/out/_next/static/chunks/0d3shmwh5_nmn.js",
+    "website/out/_next/static/chunks/0dgq26a5_oy.a.js",
+    "website/out/_next/static/chunks/0ka051yepewro.js",
+    "website/out/_next/static/chunks/0oui10gukf8nf.js",
+    "website/out/_next/static/chunks/0pw7d7dpda1zq.js",
+    "website/out/_next/static/chunks/0wv3aa_9zd6ks.js",
+    "website/out/_next/static/chunks/16g.ca89g7fib.js",
+    "website/out/_next/static/chunks/turbopack-02kii1k-xhy4a.js",
+    "website/out/_next/static/e6kiB0YcID6gyJcKdYMIl/_buildManifest.js",
+    "website/out/_next/static/e6kiB0YcID6gyJcKdYMIl/_clientMiddlewareManifest.js",
+    "website/out/_next/static/e6kiB0YcID6gyJcKdYMIl/_ssgManifest.js"
+  ],
+  "project_docs": [],
+  "session_index": [],
+  "proposals": [],
+  "update_history": []
+}

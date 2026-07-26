@@ -3,6 +3,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch } from 'lucide-react'
 
+const heroProjects = [
+  { name: 'Atlas API', meta: '12 sessions', active: true },
+  { name: 'EstimateFast', meta: '8 sessions' },
+  { name: 'RegWatch', meta: '21 sessions' },
+  { name: 'MathViz', meta: '5 sessions' },
+  { name: 'Signal Room', meta: '14 sessions' },
+  { name: 'Workshop', meta: '3 sessions' },
+  { name: 'Hermes Chat', meta: '17 sessions' },
+  { name: 'Northstar', meta: '9 sessions' },
+]
+
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedMcp, setCopiedMcp] = useState(false)
@@ -414,15 +425,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-hidden">
       {/* Header */}
-      <header className="py-1 bg-gradient-to-r from-[#5b6ef7] to-[#6b5bb8]">
-        <nav className="container mx-auto px-6 md:px-10 flex justify-between items-center max-w-7xl pt-2">
-          <div className="flex items-center gap-3 text-4xl font-bold tracking-tight">
-            <div className="w-5 h-5 bg-[#ff5757] rounded-full"></div>
+      <header className="site-header">
+        <nav className="container mx-auto px-6 md:px-10 flex justify-between items-center max-w-7xl">
+          <div className="flex items-center gap-3 text-3xl font-bold tracking-tight">
+            <div className="w-4 h-4 bg-[#ff655f] rounded-full shadow-[0_0_22px_rgba(255,101,95,0.65)]"></div>
             reccli
           </div>
           <a
             href="https://github.com/reccli/reccli"
-            className="bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl font-semibold inline-flex items-center gap-2 hover:bg-white/30 transition-all hover:-translate-y-0.5"
+            className="site-header-link"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -432,84 +443,97 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Hero - Centered, OpenClaw-style */}
-      <section className="relative overflow-hidden">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/datatothought.PNG)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.7,
-          }}
-        />
+      {/* Hero */}
+      <section className="memory-hero">
+        <div className="memory-hero-grid" aria-hidden="true"></div>
+        <div className="memory-hero-glow memory-hero-glow-one" aria-hidden="true"></div>
+        <div className="memory-hero-glow memory-hero-glow-two" aria-hidden="true"></div>
 
-        {/* Wave Overlay at Top */}
-        <div className="absolute left-0 right-0 pointer-events-none" style={{ top: '-35px', zIndex: 20 }}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full" style={{ display: 'block', height: '100px' }} preserveAspectRatio="none">
-            <path
-              fill="url(#wave-gradient)"
-              fillOpacity="1"
-              d="M0,10 L1440,10 L1440,45 C1380,47 1320,49 1260,48 C1200,47 1140,43 1080,44 C1020,45 960,51 900,53 C840,55 780,53 720,50 C660,47 600,43 540,44 C480,45 420,51 360,54 C300,57 240,57 180,55 C120,53 60,49 30,47 L0,45 Z"
-            ></path>
-            <defs>
-              <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#5b6ef7" stopOpacity="1" />
-                <stop offset="100%" stopColor="#6b5bb8" stopOpacity="1" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
+        <div className="memory-hero-inner">
+          <div className="memory-hero-copy">
+            <div className="memory-eyebrow">
+              <span></span>
+              Tri-layer memory for AI coding agents
+            </div>
+            <h1>
+              Your agent already
+              <span> knows the project.</span>
+            </h1>
+            <p>
+              RecCli reconnects every new coding session to the project map,
+              compact working memory, and the exact conversations behind it.
+            </p>
+            <div className="memory-hero-actions">
+              <a href="#quick-start" className="memory-primary-button">
+                Start with RecCli
+                <span aria-hidden="true">→</span>
+              </a>
+              <a href="#how-it-works" className="memory-secondary-button">See the three layers</a>
+            </div>
+            <div className="memory-layer-key" aria-label="RecCli memory layers">
+              <span><i className="layer-dot layer-dot-project"></i>.devproject</span>
+              <span><i className="layer-dot layer-dot-summary"></i>summary</span>
+              <span><i className="layer-dot layer-dot-source"></i>source conversation</span>
+            </div>
+          </div>
 
-        <div className="relative z-10 px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
-          <div className="mx-auto max-w-5xl">
-            <div className="max-w-3xl rounded-[2rem] bg-[linear-gradient(180deg,rgba(8,9,27,0.42),rgba(8,9,27,0.18))] px-8 py-8 shadow-[0_35px_120px_rgba(0,0,0,0.24)] ring-1 ring-white/6 backdrop-blur-sm sm:px-10 sm:py-10">
-              <div className="max-w-2xl text-left">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-4 h-4 lg:w-5 lg:h-5 bg-[#ff5757] rounded-full flex-shrink-0 mt-6"></div>
-                  <div className="min-w-0">
-                    <p className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white/95 leading-[0.98] mb-2">
-                      Every session starts informed.
-                    </p>
-                    <p className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white/82 leading-tight">
-                      Structured memory for AI coding.
-                    </p>
-                  </div>
+          <div className="mac-terminal-wrap">
+            <div className="terminal-shadow" aria-hidden="true"></div>
+            <div className="mac-terminal">
+              <div className="mac-terminal-bar">
+                <div className="mac-window-controls" aria-hidden="true">
+                  <span className="mac-close"></span>
+                  <span className="mac-minimize"></span>
+                  <span className="mac-expand"></span>
                 </div>
-                <p className="text-base sm:text-lg lg:text-xl text-white/68 leading-relaxed max-w-2xl">
-                  Reccli loads project structure, session summaries, and next steps into each new coding session.
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-3 text-[11px] sm:text-xs font-semibold tracking-[0.16em] uppercase text-white/58">
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Context retrieval</span>
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Project understanding</span>
-                  <span className="rounded-full bg-white/6 px-3 py-2 ring-1 ring-white/8">Session continuity</span>
+                <div className="mac-terminal-title">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <rect x="2" y="3" width="16" height="14" rx="3"></rect>
+                    <path d="m5.5 7 2.5 2.25-2.5 2.25M10 12h4"></path>
+                  </svg>
+                  reccli — zsh
                 </div>
-
-                <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="#quick-start"
-                    className="bg-[#ff5757] px-7 py-3.5 rounded-xl font-semibold text-white hover:bg-[#ff6868] transition-all hover:-translate-y-0.5 inline-flex items-center justify-center"
-                  >
-                    Quick Start
-                  </a>
-                  <a
-                    href="https://github.com/reccli/reccli"
-                    className="bg-white/10 px-6 py-3.5 rounded-xl font-semibold text-white hover:bg-white/16 transition-all inline-flex items-center justify-center gap-2"
-                  >
-                    GitHub
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                  </a>
-                </div>
-
-                <p className="mt-4 text-sm text-white/50">
-                  Works with Claude Code, Cursor, and Windsurf.
-                </p>
+                <div className="mac-terminal-spacer"></div>
               </div>
+
+              <div className="mac-terminal-body">
+                <div className="terminal-command">
+                  <span className="terminal-path">~/code</span>
+                  <span className="terminal-prompt">❯</span>
+                  <span>reccli</span>
+                </div>
+                <div className="terminal-greeting">Hey! Which project would you like to work on today?</div>
+                <div className="terminal-projects">
+                  {heroProjects.map((project, index) => (
+                    <div
+                      className={`terminal-project ${project.active ? 'is-selected' : ''}`}
+                      key={project.name}
+                    >
+                      <span className="terminal-project-index">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="terminal-project-name">{project.name}</span>
+                      <span className="terminal-project-meta">{project.meta}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="terminal-selection">
+                  <span className="terminal-path">Select</span>
+                  <span className="terminal-prompt">❯</span>
+                  <span className="terminal-selected-name">Atlas API</span>
+                  <span className="terminal-cursor" aria-hidden="true"></span>
+                </div>
+                <div className="terminal-context-status">
+                  <span className="terminal-status-check">✓</span>
+                  <span>Project memory ready</span>
+                  <span className="terminal-status-separator">•</span>
+                  <span>last session 2h ago</span>
+                  <span className="terminal-status-separator">•</span>
+                  <span>12 linked sessions</span>
+                </div>
+              </div>
+            </div>
+            <div className="terminal-caption">
+              <span className="terminal-caption-line"></span>
+              Start informed, not from zero.
             </div>
           </div>
         </div>
@@ -591,7 +615,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="py-24 relative overflow-hidden how-it-works-section">
+      <section id="how-it-works" className="py-24 relative overflow-hidden how-it-works-section">
         <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
           <p className="how-it-works-eyebrow text-center mb-4">How it works</p>
           <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">Memory that compounds</h2>

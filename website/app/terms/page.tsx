@@ -28,24 +28,27 @@ export default function Terms() {
             <section>
               <h2 className="text-3xl font-bold mb-4">Description of Service</h2>
               <p className="opacity-90 mb-4">
-                RecCli is a terminal session recording tool available in two tiers:
+                RecCli is a tri-layer memory system for AI coding agents:
               </p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
-                <li><strong>RecCli Base:</strong> Free, open-source terminal recording with local storage</li>
-                <li><strong>RecCli Pro:</strong> Premium tier with AI-powered features (coming soon)</li>
+                <li><strong><code>.devproject</code>:</strong> a durable map of project features and structure</li>
+                <li><strong><code>.devsession</code> summary:</strong> compact working memory for decisions, changes, and next steps</li>
+                <li><strong><code>.devsession</code> conversation:</strong> the full source of truth for exact recovery</li>
               </ul>
+              <p className="opacity-90 mt-4">
+                The open-source engine runs locally and integrates with compatible coding agents through MCP. Optional shared Team features may be offered separately in the future.
+              </p>
             </section>
 
             <section>
               <h2 className="text-3xl font-bold mb-4">License</h2>
-              <h3 className="text-2xl font-semibold mb-2 mt-4">RecCli Base</h3>
               <p className="opacity-90 mb-4">
-                RecCli Base is licensed under the MIT License. You may use, modify, and distribute it freely according to the terms of that license. See <a href="https://github.com/willluecke/reccli/blob/main/LICENSE" className="underline hover:text-purple-200">github.com/willluecke/reccli</a> for details.
+                The RecCli memory engine is licensed under the MIT License. The <code>.devsession</code> and <code>.devproject</code> format specifications are released under CC0. See <a href="https://github.com/reccli/reccli" className="underline hover:text-purple-200">github.com/reccli/reccli</a> for details.
               </p>
 
-              <h3 className="text-2xl font-semibold mb-2 mt-4">RecCli Pro</h3>
+              <h3 className="text-2xl font-semibold mb-2 mt-4">Future Team features</h3>
               <p className="opacity-90">
-                RecCli Pro is proprietary software. When it launches, you'll receive a limited, non-exclusive, non-transferable license to use the service according to your subscription plan.
+                Hosted or shared Team features may be offered under separate commercial terms presented before purchase.
               </p>
             </section>
 
@@ -54,20 +57,20 @@ export default function Terms() {
               <p className="opacity-90 mb-4">You agree to:</p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
                 <li>Use RecCli only for lawful purposes</li>
-                <li>Not record sensitive information without proper authorization</li>
-                <li>Not attempt to reverse engineer, decompile, or hack RecCli Pro</li>
-                <li>Not use RecCli to violate any privacy laws or regulations</li>
-                <li>Maintain the security of your account credentials</li>
+                <li>Use project and conversation data only when you are authorized to do so</li>
+                <li>Protect credentials, API keys, and other secrets in your environment</li>
+                <li>Comply with the terms of any third-party model providers you configure</li>
+                <li>Not use RecCli to violate privacy, intellectual-property, or other applicable laws</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-3xl font-bold mb-4">Data Ownership</h2>
               <p className="opacity-90 mb-4">
-                <strong>You own your data.</strong> All terminal recordings you create belong to you. We claim no ownership over your content.
+                <strong>You own your data.</strong> Your project maps, session summaries, and full session conversations belong to you. We claim no ownership over that content.
               </p>
               <p className="opacity-90">
-                For RecCli Base, all data is stored locally on your machine. For RecCli Pro, you grant us a limited license to process your data solely to provide the AI-powered features you've requested.
+                The open-source engine stores these files locally. If you choose a third-party model provider or a future hosted Team feature, you authorize the processing required to provide the feature you selected.
               </p>
             </section>
 
@@ -75,7 +78,7 @@ export default function Terms() {
               <h2 className="text-3xl font-bold mb-4">Acceptable Use</h2>
               <p className="opacity-90 mb-4">You may not use RecCli to:</p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
-                <li>Record confidential conversations or sessions without consent</li>
+                <li>Capture or process confidential project data without authorization</li>
                 <li>Violate any applicable laws or regulations</li>
                 <li>Infringe on intellectual property rights</li>
                 <li>Transmit malware, viruses, or harmful code</li>
@@ -84,9 +87,9 @@ export default function Terms() {
             </section>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4">Payment Terms (RecCli Pro)</h2>
+              <h2 className="text-3xl font-bold mb-4">Payment Terms (Future Team Features)</h2>
               <p className="opacity-90 mb-4">
-                When RecCli Pro launches:
+                If paid Team features launch:
               </p>
               <ul className="list-disc list-inside space-y-2 opacity-90 ml-4">
                 <li>Pricing will be clearly displayed before purchase</li>
@@ -135,7 +138,7 @@ export default function Terms() {
             <section>
               <h2 className="text-3xl font-bold mb-4">Open Source</h2>
               <p className="opacity-90">
-                RecCli Base is open source software. Contributions, bug reports, and feature requests are welcome at <a href="https://github.com/willluecke/reccli" className="underline hover:text-purple-200">github.com/willluecke/reccli</a>.
+                The RecCli memory engine is open source software. Contributions, bug reports, and feature requests are welcome at <a href="https://github.com/reccli/reccli" className="underline hover:text-purple-200">github.com/reccli/reccli</a>.
               </p>
             </section>
 
