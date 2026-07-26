@@ -634,7 +634,50 @@ body {
   49%, 100% { opacity: 0; }
 }
 
-@media (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1080px) {
+  .memory-hero-inner {
+    grid-template-columns: minmax(15rem, 0.75fr) minmax(25rem, 1.25fr);
+    gap: 2rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .memory-hero-copy h1 {
+    max-width: 10ch;
+    font-size: clamp(2.8rem, 5.7vw, 4.3rem);
+  }
+
+  .memory-hero-copy > p {
+    font-size: 0.95rem;
+  }
+
+  .memory-hero-actions {
+    align-items: stretch;
+  }
+
+  .memory-primary-button,
+  .memory-secondary-button {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  .mac-terminal-body {
+    padding-right: 1.1rem;
+    padding-left: 1.1rem;
+    font-size: 0.68rem;
+  }
+
+  .terminal-project-meta {
+    display: none;
+  }
+
+  .terminal-memory-row {
+    grid-template-columns: 0.9rem minmax(7rem, 0.95fr) minmax(6.5rem, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
   .memory-hero {
     min-height: auto;
   }
@@ -752,6 +795,24 @@ body {
 
   .terminal-story-stage {
     min-height: 18.5rem;
+  }
+
+  .terminal-projects {
+    grid-template-columns: 1fr;
+    gap: 0.14rem;
+  }
+
+  .terminal-project:nth-child(n + 7) {
+    display: none;
+  }
+
+  .terminal-project {
+    padding: 0.34rem 0.42rem;
+  }
+
+  .terminal-project-meta {
+    display: inline;
+    font-size: 0.56rem;
   }
 
   .terminal-memory-list {

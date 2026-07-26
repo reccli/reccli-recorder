@@ -128,18 +128,27 @@ export default function Home() {
       const hero = heroRef.current
       if (!hero) return
 
-      const staticLayout = window.matchMedia('(max-width: 1080px)').matches
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-      if (staticLayout || reducedMotion) {
+      if (reducedMotion) {
         setHeroMemoryLoaded(true)
         return
       }
 
-      const rect = hero.getBoundingClientRect()
-      const scrollDistance = Math.max(hero.offsetHeight - window.innerHeight, 1)
-      const progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
-      const shouldLoadMemory = progress >= 0.34
+      const compactLayout = window.matchMedia('(max-width: 767px)').matches
+      let shouldLoadMemory = false
+
+      if (compactLayout) {
+        const terminal = hero.querySelector('.mac-terminal-wrap')
+        const terminalTop = terminal?.getBoundingClientRect().top ?? window.innerHeight
+        const triggerLine = Math.min(180, window.innerHeight * 0.25)
+        shouldLoadMemory = terminalTop <= triggerLine
+      } else {
+        const rect = hero.getBoundingClientRect()
+        const scrollDistance = Math.max(hero.offsetHeight - window.innerHeight, 1)
+        const progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
+        shouldLoadMemory = progress >= 0.34
+      }
 
       setHeroMemoryLoaded(current => current === shouldLoadMemory ? current : shouldLoadMemory)
     }
