@@ -25,6 +25,7 @@ export default function Home() {
   const [waitlistError, setWaitlistError] = useState('')
   const [waitlistLoading, setWaitlistLoading] = useState(false)
   const [confirmEmail, setConfirmEmail] = useState('')
+  const heroRef = useRef<HTMLElement | null>(null)
   const stage1Ref = useRef<HTMLDivElement | null>(null)
   const stage2Ref = useRef<HTMLDivElement | null>(null)
   const stage3Ref = useRef<HTMLDivElement | null>(null)
@@ -39,6 +40,7 @@ export default function Home() {
   const [stage1Active, setStage1Active] = useState(false)
   const [stage2Active, setStage2Active] = useState(false)
   const [stage3Active, setStage3Active] = useState(false)
+  const [heroMemoryLoaded, setHeroMemoryLoaded] = useState(false)
 
   const sessionList = useMemo(() => {
     const today = new Date()
@@ -116,6 +118,46 @@ export default function Home() {
     })
 
     return () => observers.forEach(o => o.disconnect())
+  }, [])
+
+  useEffect(() => {
+    let frameId = 0
+
+    const updateHeroState = () => {
+      frameId = 0
+      const hero = heroRef.current
+      if (!hero) return
+
+      const staticLayout = window.matchMedia('(max-width: 1080px)').matches
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      if (staticLayout || reducedMotion) {
+        setHeroMemoryLoaded(true)
+        return
+      }
+
+      const rect = hero.getBoundingClientRect()
+      const scrollDistance = Math.max(hero.offsetHeight - window.innerHeight, 1)
+      const progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
+      const shouldLoadMemory = progress >= 0.34
+
+      setHeroMemoryLoaded(current => current === shouldLoadMemory ? current : shouldLoadMemory)
+    }
+
+    const scheduleUpdate = () => {
+      if (frameId) return
+      frameId = window.requestAnimationFrame(updateHeroState)
+    }
+
+    updateHeroState()
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
+      if (frameId) window.cancelAnimationFrame(frameId)
+    }
   }, [])
 
   // Draw tractor beam lines from vertical line to each chip's current position
@@ -423,7 +465,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-clip">
       {/* Header */}
       <header className="site-header">
         <nav className="container mx-auto px-6 md:px-10 flex justify-between items-center max-w-7xl">
@@ -444,7 +486,10 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="memory-hero">
+      <section
+        ref={heroRef}
+        className={`memory-hero ${heroMemoryLoaded ? 'is-memory-loaded' : ''}`}
+      >
         <div className="memory-hero-grid" aria-hidden="true"></div>
         <div className="memory-hero-glow memory-hero-glow-one" aria-hidden="true"></div>
         <div className="memory-hero-glow memory-hero-glow-two" aria-hidden="true"></div>
@@ -502,38 +547,83 @@ export default function Home() {
                   <span className="terminal-prompt">❯</span>
                   <span>reccli</span>
                 </div>
-                <div className="terminal-greeting">Hey! Which project would you like to work on today?</div>
-                <div className="terminal-projects">
-                  {heroProjects.map((project, index) => (
-                    <div
-                      className={`terminal-project ${project.active ? 'is-selected' : ''}`}
-                      key={project.name}
-                    >
-                      <span className="terminal-project-index">{String(index + 1).padStart(2, '0')}</span>
-                      <span className="terminal-project-name">{project.name}</span>
-                      <span className="terminal-project-meta">{project.meta}</span>
+
+                <div className="terminal-story-stage">
+                  <div className="terminal-picker-view" aria-hidden={heroMemoryLoaded}>
+                    <div className="terminal-greeting">Hey! Which project would you like to work on today?</div>
+                    <div className="terminal-projects">
+                      {heroProjects.map((project, index) => (
+                        <div
+                          className={`terminal-project ${project.active ? 'is-selected' : ''}`}
+                          key={project.name}
+                        >
+                          <span className="terminal-project-index">{String(index + 1).padStart(2, '0')}</span>
+                          <span className="terminal-project-name">{project.name}</span>
+                          <span className="terminal-project-meta">{project.meta}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="terminal-selection">
-                  <span className="terminal-path">Select</span>
-                  <span className="terminal-prompt">❯</span>
-                  <span className="terminal-selected-name">Moonbase API</span>
-                  <span className="terminal-cursor" aria-hidden="true"></span>
-                </div>
-                <div className="terminal-context-status">
-                  <span className="terminal-status-check">✓</span>
-                  <span>Project memory ready</span>
-                  <span className="terminal-status-separator">•</span>
-                  <span>last session 2h ago</span>
-                  <span className="terminal-status-separator">•</span>
-                  <span>12 linked sessions</span>
+                    <div className="terminal-selection">
+                      <span className="terminal-path">Select</span>
+                      <span className="terminal-prompt">❯</span>
+                      <span className="terminal-selected-name">Moonbase API</span>
+                      <span className="terminal-cursor" aria-hidden="true"></span>
+                    </div>
+                    <div className="terminal-context-status">
+                      <span className="terminal-status-waiting">○</span>
+                      <span>Choose a project to load its memory</span>
+                    </div>
+                  </div>
+
+                  <div className="terminal-memory-view" aria-hidden={!heroMemoryLoaded}>
+                    <div className="terminal-selection terminal-selection-confirmed">
+                      <span className="terminal-path">Select</span>
+                      <span className="terminal-prompt">❯</span>
+                      <span className="terminal-selected-name">Moonbase API</span>
+                    </div>
+
+                    <div className="terminal-loading-line">
+                      <span className="terminal-loading-spark" aria-hidden="true"></span>
+                      Loading project memory…
+                    </div>
+
+                    <div className="terminal-memory-list">
+                      <div className="terminal-memory-row">
+                        <span className="terminal-memory-check">✓</span>
+                        <span className="terminal-memory-layer">.devproject</span>
+                        <span className="terminal-memory-detail">8 features mapped</span>
+                      </div>
+                      <div className="terminal-memory-row">
+                        <span className="terminal-memory-check">✓</span>
+                        <span className="terminal-memory-layer">session summary</span>
+                        <span className="terminal-memory-detail">3 next steps</span>
+                      </div>
+                      <div className="terminal-memory-row">
+                        <span className="terminal-memory-check">✓</span>
+                        <span className="terminal-memory-layer">source conversation</span>
+                        <span className="terminal-memory-detail">12 sessions linked</span>
+                      </div>
+                      <div className="terminal-memory-row">
+                        <span className="terminal-memory-check">✓</span>
+                        <span className="terminal-memory-layer">hybrid index</span>
+                        <span className="terminal-memory-detail">ready to search</span>
+                      </div>
+                    </div>
+
+                    <div className="terminal-ready-message">
+                      <span className="terminal-ready-icon">✓</span>
+                      <div>
+                        <strong>Context loaded.</strong>
+                        <span>Ready to continue the auth refactor.</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="terminal-caption">
               <span className="terminal-caption-line"></span>
-              Start informed, not from zero.
+              {heroMemoryLoaded ? 'Context loaded from three layers.' : 'Scroll to load project memory.'}
             </div>
           </div>
         </div>
