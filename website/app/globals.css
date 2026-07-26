@@ -55,14 +55,13 @@ body {
 }
 
 .memory-hero {
-  --hero-lift: 0px;
   --terminal-growth: 0px;
   --response-reveal: 0px;
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: flex-start;
-  min-height: 180svh;
+  min-height: calc(100svh - 77px + var(--terminal-growth));
   overflow: clip;
   background:
     radial-gradient(circle at 78% 42%, rgba(99, 102, 241, 0.12), transparent 34%),
@@ -105,24 +104,21 @@ body {
 }
 
 .memory-hero-inner {
-  position: sticky;
-  top: 73px;
+  position: relative;
   width: min(100%, 82rem);
-  min-height: calc(100svh - 73px);
+  min-height: calc(100svh - 77px);
   margin: 0 auto;
-  padding: clamp(3rem, 7vh, 5rem) 2.5rem clamp(3rem, 8vh, 5.5rem);
+  padding: clamp(5.8rem, 13vh, 7.25rem) 2.5rem clamp(3rem, 8vh, 5.5rem);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: minmax(20rem, 0.82fr) minmax(32rem, 1.18fr);
-  align-items: center;
+  align-items: start;
   gap: clamp(3rem, 6vw, 6.5rem);
 }
 
 .memory-hero-copy {
   position: relative;
   z-index: 2;
-  transform: translateY(calc(-1 * var(--hero-lift)));
-  will-change: transform;
 }
 
 .memory-eyebrow {
@@ -250,8 +246,6 @@ body {
   position: relative;
   width: 100%;
   perspective: 1200px;
-  transform: translateY(calc(-1 * var(--hero-lift)));
-  will-change: transform;
 }
 
 .terminal-shadow {

@@ -14,6 +14,8 @@ const heroProjects = [
   { name: 'Relay Chat', meta: '9 sessions' },
 ]
 
+const HERO_REVEAL_LEAD = 64
+
 export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedMcp, setCopiedMcp] = useState(false)
@@ -128,40 +130,26 @@ export default function Home() {
       const hero = heroRef.current
       if (!hero) return
 
+      const response = hero.querySelector('.terminal-response-reveal') as HTMLElement | null
+      const responseHeight = Math.ceil(response?.scrollHeight ?? 205)
+      const expansionLimit = HERO_REVEAL_LEAD + responseHeight
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       if (reducedMotion) {
-        hero.style.setProperty('--hero-lift', '0px')
-        hero.style.setProperty('--terminal-growth', '160px')
-        hero.style.setProperty('--response-reveal', '260px')
+        hero.style.setProperty('--terminal-growth', `${expansionLimit}px`)
+        hero.style.setProperty('--response-reveal', `${responseHeight}px`)
         setHeroMemoryLoaded(true)
         return
       }
 
-      const compactLayout = window.matchMedia('(max-width: 767px)').matches
-      let progress = 0
+      const scrollAmount = Math.max(window.scrollY, 0)
+      const terminalGrowth = Math.min(scrollAmount, expansionLimit)
+      const responseReveal = Math.min(Math.max(scrollAmount - HERO_REVEAL_LEAD, 0), responseHeight)
 
-      if (compactLayout) {
-        const terminal = hero.querySelector('.mac-terminal-wrap')
-        const terminalTop = terminal?.getBoundingClientRect().top ?? window.innerHeight
-        const startLine = window.innerHeight * 0.62
-        const endLine = window.innerHeight * 0.35
-        progress = Math.min(Math.max((startLine - terminalTop) / (startLine - endLine), 0), 1)
-      } else {
-        const rect = hero.getBoundingClientRect()
-        const scrollDistance = Math.max(hero.offsetHeight - window.innerHeight, 1)
-        progress = Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
-      }
+      hero.style.setProperty('--terminal-growth', `${Math.round(terminalGrowth)}px`)
+      hero.style.setProperty('--response-reveal', `${Math.round(responseReveal)}px`)
 
-      const liftDistance = compactLayout ? 0 : Math.min(140, window.innerHeight * 0.17)
-      const growthDistance = compactLayout ? 120 : Math.min(190, window.innerHeight * 0.24)
-      const responseProgress = Math.min(Math.max((progress - 0.34) / 0.66, 0), 1)
-
-      hero.style.setProperty('--hero-lift', `${Math.round(progress * liftDistance)}px`)
-      hero.style.setProperty('--terminal-growth', `${Math.round(progress * growthDistance)}px`)
-      hero.style.setProperty('--response-reveal', `${Math.round(responseProgress * 260)}px`)
-
-      const shouldLoadMemory = progress >= 0.26
+      const shouldLoadMemory = scrollAmount >= 48
       setHeroMemoryLoaded(current => current === shouldLoadMemory ? current : shouldLoadMemory)
     }
 
@@ -178,6 +166,32 @@ export default function Home() {
       window.removeEventListener('scroll', scheduleUpdate)
       window.removeEventListener('resize', scheduleUpdate)
       if (frameId) window.cancelAnimationFrame(frameId)
+    }
+  }, [])
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches
+    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+
+    if (!isMobile || navigation?.type !== 'reload' || window.location.hash) return
+
+    const root = document.documentElement
+    const previousScrollBehavior = root.style.scrollBehavior
+    const previousScrollRestoration = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+
+    const frameId = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0)
+      root.style.scrollBehavior = previousScrollBehavior
+      window.history.scrollRestoration = previousScrollRestoration
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+      root.style.scrollBehavior = previousScrollBehavior
+      window.history.scrollRestoration = previousScrollRestoration
     }
   }, [])
 
@@ -485,6 +499,23 @@ export default function Home() {
     }
   }
 
+  const handleHeroAnchor = (event: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    const target = document.getElementById(targetId)
+    const hero = heroRef.current
+    if (!target || !hero) return
+
+    event.preventDefault()
+
+    const response = hero.querySelector('.terminal-response-reveal') as HTMLElement | null
+    const expansionLimit = HERO_REVEAL_LEAD + Math.ceil(response?.scrollHeight ?? 205)
+    const currentGrowth = Number.parseFloat(getComputedStyle(hero).getPropertyValue('--terminal-growth')) || 0
+    const remainingExpansion = Math.max(expansionLimit - currentGrowth, 0)
+    const targetTop = window.scrollY + target.getBoundingClientRect().top + remainingExpansion
+
+    window.history.pushState(null, '', `#${targetId}`)
+    window.scrollTo({ top: targetTop, behavior: 'smooth' })
+  }
+
   return (
     <div className="min-h-screen bg-[#0d0d1a] text-white overflow-x-clip">
       {/* Header */}
@@ -530,11 +561,21 @@ export default function Home() {
               compact working memory, and the exact conversations behind it.
             </p>
             <div className="memory-hero-actions">
-              <a href="#quick-start" className="memory-primary-button">
+              <a
+                href="#quick-start"
+                className="memory-primary-button"
+                onClick={(event) => handleHeroAnchor(event, 'quick-start')}
+              >
                 Start with RecCli
                 <span aria-hidden="true">→</span>
               </a>
-              <a href="#how-it-works" className="memory-secondary-button">See the three layers</a>
+              <a
+                href="#how-it-works"
+                className="memory-secondary-button"
+                onClick={(event) => handleHeroAnchor(event, 'how-it-works')}
+              >
+                See the three layers
+              </a>
             </div>
             <div className="memory-layer-key" aria-label="RecCli memory layers">
               <span><i className="layer-dot layer-dot-project"></i>.devproject</span>
