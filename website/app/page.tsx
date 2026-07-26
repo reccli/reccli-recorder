@@ -596,34 +596,22 @@ export default function Home() {
                       Loading project memory…
                     </div>
 
-                    <div className="terminal-memory-list">
-                      <div className="terminal-memory-row">
-                        <span className="terminal-memory-check">✓</span>
-                        <span className="terminal-memory-layer">.devproject</span>
-                        <span className="terminal-memory-detail">8 features mapped</span>
-                      </div>
-                      <div className="terminal-memory-row">
-                        <span className="terminal-memory-check">✓</span>
-                        <span className="terminal-memory-layer">session summary</span>
-                        <span className="terminal-memory-detail">3 next steps</span>
-                      </div>
-                      <div className="terminal-memory-row">
-                        <span className="terminal-memory-check">✓</span>
-                        <span className="terminal-memory-layer">source conversation</span>
-                        <span className="terminal-memory-detail">12 sessions linked</span>
-                      </div>
-                      <div className="terminal-memory-row">
-                        <span className="terminal-memory-check">✓</span>
-                        <span className="terminal-memory-layer">hybrid index</span>
-                        <span className="terminal-memory-detail">ready to search</span>
-                      </div>
+                    <div className="terminal-tool-call">
+                      <span className="terminal-tool-check">✓</span>
+                      <span>Called</span>
+                      <strong>reccli</strong>
                     </div>
 
-                    <div className="terminal-ready-message">
-                      <span className="terminal-ready-icon">✓</span>
-                      <div>
-                        <strong>Context loaded.</strong>
-                        <span>Ready to continue the auth refactor.</span>
+                    <div className="terminal-resume">
+                      <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
+                      <div className="terminal-open-items-label">Open items from last session:</div>
+                      <ol className="terminal-open-items">
+                        <li><span>1.</span><span>Finish the auth middleware migration</span></li>
+                        <li><span>2.</span><span>Add refresh-token rotation tests</span></li>
+                        <li><span>3.</span><span>Verify rate-limit headers in staging</span></li>
+                      </ol>
+                      <div className="terminal-resume-meta">
+                        8 features mapped <span>•</span> 12 sessions linked
                       </div>
                     </div>
                   </div>

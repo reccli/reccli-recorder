@@ -521,81 +521,83 @@ body {
   box-shadow: 0 0 14px rgba(181, 154, 255, 0.8);
 }
 
-.terminal-memory-list {
-  display: grid;
-  gap: 0.3rem;
-  margin-top: 1.2rem;
-  padding: 0.7rem 0 0.7rem 0.9rem;
-  border-left: 1px solid rgba(181, 154, 255, 0.2);
-}
-
-.terminal-memory-row {
-  display: grid;
-  grid-template-columns: 1rem minmax(8rem, 0.9fr) minmax(8rem, 1fr);
+.terminal-tool-call {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  min-width: 0;
-  padding: 0.37rem 0.5rem;
-  border-radius: 0.35rem;
-  color: rgba(255, 255, 255, 0.56);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent);
+  gap: 0.42rem;
+  margin-top: 0.8rem;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 0.64rem;
 }
 
-.terminal-memory-check {
+.terminal-tool-check {
   color: #55d784;
+  font-weight: 800;
+}
+
+.terminal-tool-call strong {
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 650;
+}
+
+.terminal-resume {
+  margin-top: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(181, 154, 255, 0.13);
+  border-radius: 0.55rem;
+  background:
+    linear-gradient(110deg, rgba(181, 154, 255, 0.07), rgba(115, 184, 255, 0.025)),
+    rgba(255, 255, 255, 0.012);
+}
+
+.terminal-resume > p {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.terminal-resume > p strong {
+  color: white;
   font-weight: 700;
 }
 
-.terminal-memory-layer {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.terminal-memory-detail {
-  overflow: hidden;
-  color: rgba(255, 255, 255, 0.36);
-  font-size: 0.66rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.terminal-ready-message {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: 1.1rem;
-  padding: 0.8rem 0.9rem;
-  border: 1px solid rgba(85, 215, 132, 0.14);
-  border-radius: 0.55rem;
-  background: linear-gradient(90deg, rgba(85, 215, 132, 0.08), rgba(115, 184, 255, 0.035));
-}
-
-.terminal-ready-icon {
-  display: grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  flex: 0 0 auto;
-  border-radius: 999px;
-  color: #08120c;
-  background: #55d784;
-  font-size: 0.72rem;
-  font-weight: 900;
-  box-shadow: 0 0 18px rgba(85, 215, 132, 0.2);
-}
-
-.terminal-ready-message div {
-  display: grid;
-  gap: 0.12rem;
-}
-
-.terminal-ready-message strong {
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 0.74rem;
-}
-
-.terminal-ready-message div span {
-  color: rgba(255, 255, 255, 0.42);
+.terminal-open-items-label {
+  margin-top: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.64rem;
+  font-weight: 650;
+}
+
+.terminal-open-items {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+}
+
+.terminal-open-items li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.25rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.65rem;
+  line-height: 1.45;
+}
+
+.terminal-open-items li > span:first-child {
+  color: #73b8ff;
+}
+
+.terminal-resume-meta {
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.64rem;
+}
+
+.terminal-resume-meta span {
+  margin: 0 0.3rem;
+  color: rgba(255, 255, 255, 0.14);
 }
 
 .terminal-caption {
@@ -672,9 +674,6 @@ body {
     display: none;
   }
 
-  .terminal-memory-row {
-    grid-template-columns: 0.9rem minmax(7rem, 0.95fr) minmax(6.5rem, 1fr);
-  }
 }
 
 @media (max-width: 767px) {
@@ -815,22 +814,23 @@ body {
     font-size: 0.56rem;
   }
 
-  .terminal-memory-list {
-    margin-top: 0.9rem;
+  .terminal-resume {
+    margin-top: 0.7rem;
+    padding: 0.7rem 0.75rem;
   }
 
-  .terminal-memory-row {
-    grid-template-columns: 0.8rem minmax(6.8rem, 0.9fr) minmax(6rem, 1fr);
-    gap: 0.32rem;
-    padding: 0.3rem 0.38rem;
+  .terminal-resume > p {
+    font-size: 0.64rem;
   }
 
-  .terminal-memory-detail {
-    font-size: 0.56rem;
+  .terminal-open-items-label,
+  .terminal-open-items li,
+  .terminal-resume-meta {
+    font-size: 0.57rem;
   }
 
-  .terminal-ready-message {
-    padding: 0.65rem 0.7rem;
+  .terminal-open-items {
+    gap: 0.22rem;
   }
 
   .terminal-caption {
