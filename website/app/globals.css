@@ -223,6 +223,31 @@ body {
   background: rgba(255, 255, 255, 0.07);
 }
 
+.memory-compatibility {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.38rem;
+  margin-top: 1.2rem;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+.memory-compatibility-label {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.memory-compatibility strong {
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 650;
+}
+
 .memory-layer-key {
   display: flex;
   flex-wrap: wrap;
@@ -482,6 +507,10 @@ body {
   color: rgba(255, 255, 255, 0.4);
 }
 
+.memory-compatibility + .memory-layer-key {
+  margin-top: 1rem;
+}
+
 .terminal-loading-line {
   display: flex;
   align-items: center;
@@ -726,6 +755,16 @@ body {
     margin-top: 1.25rem;
   }
 
+  .memory-compatibility {
+    gap: 0.15rem 0.3rem;
+    margin-top: 0.9rem;
+    font-size: 0.62rem;
+  }
+
+  .memory-compatibility-label {
+    font-size: 0.56rem;
+  }
+
   .memory-primary-button,
   .memory-secondary-button {
     flex: 1 1 0;
@@ -736,7 +775,7 @@ body {
   }
 
   .memory-layer-key {
-    margin-top: 1.05rem;
+    margin-top: 0.85rem;
     gap: 0.55rem 0.8rem;
     font-size: 0.58rem;
   }

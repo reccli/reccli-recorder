@@ -573,6 +573,11 @@ export default function Home() {
                 See the three layers
               </a>
             </div>
+            <p className="memory-compatibility">
+              <span className="memory-compatibility-label">Agent-agnostic</span>
+              <span aria-hidden="true">·</span>
+              Works with <strong>Claude Code</strong> and <strong>Codex CLI</strong> via MCP.
+            </p>
             <div className="memory-layer-key" aria-label="RecCli memory layers">
               <span><i className="layer-dot layer-dot-project"></i>.devproject</span>
               <span><i className="layer-dot layer-dot-summary"></i>summary</span>
@@ -1060,7 +1065,7 @@ export default function Home() {
                 <div className="text-gray-300 mt-1">forever</div>
               </div>
               <ul className="space-y-3 mb-8 text-lg">
-                <li className="flex items-start gap-2"><span className="text-green-400 mt-1">&#10003;</span><span>MCP server for Claude Code, Cursor, Windsurf</span></li>
+                <li className="flex items-start gap-2"><span className="text-green-400 mt-1">&#10003;</span><span>MCP server for Claude Code, Codex CLI, Cursor, and Windsurf</span></li>
                 <li className="flex items-start gap-2"><span className="text-green-400 mt-1">&#10003;</span><span>Project init with Tree-sitter codebase scan</span></li>
                 <li className="flex items-start gap-2"><span className="text-green-400 mt-1">&#10003;</span><span>Cross-session memory and search</span></li>
                 <li className="flex items-start gap-2"><span className="text-green-400 mt-1">&#10003;</span><span>Hybrid retrieval (dense + BM25)</span></li>
@@ -1198,7 +1203,7 @@ export default function Home() {
           <div className="space-y-4">
             <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
               <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">What tools does reccli work with?<span className="text-2xl group-open:rotate-180 transition-transform ml-2">&#9660;</span></summary>
-              <p className="mt-3 text-base opacity-90 leading-relaxed">Any tool that supports MCP (Model Context Protocol). Today that includes Claude Code, Cursor, and Windsurf. The list is growing — MCP is becoming the standard for tool integration.</p>
+              <p className="mt-3 text-base opacity-90 leading-relaxed">Any tool that supports MCP (Model Context Protocol). Today that includes Claude Code, Codex CLI, Cursor, and Windsurf. The list is growing — MCP is becoming the standard for tool integration.</p>
             </details>
             <details className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 group">
               <summary className="text-lg font-bold cursor-pointer list-none flex justify-between items-center">Where is my data stored?<span className="text-2xl group-open:rotate-180 transition-transform">&#9660;</span></summary>
@@ -1228,6 +1233,9 @@ export default function Home() {
             <a href="/privacy" className="hover:text-white/80 transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-white/80 transition-colors">Terms of Service</a>
           </div>
+          <p className="mt-5 max-w-2xl mx-auto text-xs leading-relaxed text-white/35">
+            RecCli is an independent project and is not affiliated with or endorsed by Anthropic or OpenAI. All product names are trademarks of their respective owners.
+          </p>
         </div>
       </footer>
     </div>
