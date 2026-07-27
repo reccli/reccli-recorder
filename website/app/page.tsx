@@ -552,9 +552,9 @@ export default function Home() {
               Your agent already
               <span> knows the project.</span>
             </h1>
-            <p>
-              RecCli reconnects every new coding session to the project map,
-              compact working memory, and the exact conversations behind it.
+            <p className="memory-hero-promise">
+              Any developer. Any coding agent.
+              <span> The same trusted project memory.</span>
             </p>
             <div className="memory-hero-actions">
               <a
@@ -749,7 +749,9 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
           <p className="how-it-works-eyebrow text-center mb-4">How it works</p>
           <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4">Memory that compounds</h2>
-          <p className="text-xl text-center opacity-70 mb-14 max-w-2xl mx-auto">Three layers. One command. Every session starts informed.</p>
+          <p className="how-it-works-positioning">
+            <span>Vendor-neutral, verifiable engineering memory</span> for teams using multiple AI agents.
+          </p>
 
           <div className="flex flex-col gap-10 lg:gap-14 max-w-6xl mx-auto">
 

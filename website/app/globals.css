@@ -158,12 +158,19 @@ body {
   text-shadow: 0 12px 40px rgba(166, 151, 255, 0.08);
 }
 
-.memory-hero-copy > p {
+.memory-hero-promise {
   max-width: 34rem;
   margin-top: 1.65rem;
   color: rgba(255, 255, 255, 0.63);
   font-size: clamp(1rem, 1.4vw, 1.17rem);
-  line-height: 1.65;
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+}
+
+.memory-hero-promise span {
+  display: block;
+  color: rgba(255, 255, 255, 0.93);
+  font-weight: 650;
 }
 
 .memory-hero-actions {
@@ -620,7 +627,7 @@ body {
     font-size: clamp(2.8rem, 5.7vw, 4.3rem);
   }
 
-  .memory-hero-copy > p {
+  .memory-hero-promise {
     font-size: 0.95rem;
   }
 
@@ -700,7 +707,7 @@ body {
     line-height: 0.95;
   }
 
-  .memory-hero-copy > p {
+  .memory-hero-promise {
     margin-top: 1.15rem;
     font-size: 0.9rem;
     line-height: 1.55;
@@ -980,6 +987,20 @@ body {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.56);
+}
+
+.how-it-works-positioning {
+  max-width: 52rem;
+  margin: 0 auto 3.5rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.how-it-works-positioning span {
+  color: rgba(255, 255, 255, 0.94);
+  font-weight: 650;
 }
 
 .how-code {
