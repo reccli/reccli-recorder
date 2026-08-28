@@ -4,11 +4,9 @@ import './globals.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://reccli.com'),
-  title: 'RecCli - Terminal Recorder with One-Click Export | Free & Open Source',
-  description: 'Dead-simple terminal recorder with a floating button. One click to start, one click to stop. Perfect for debugging sessions, AI coding tools, and documentation. Free, open-source alternative to asciinema with GUI.',
-  keywords: ['terminal recorder', 'CLI recorder', 'asciinema', 'terminal', 'recording', 'dev tools', 'Claude Code', 'AI coding', 'screen recording', 'terminal session', 'command line recorder', 'developer tools', 'homebrew', 'mac terminal recorder'],
-  authors: [{ name: 'Will Luecke' }],
-  creator: 'Will Luecke',
+  title: 'RecCli — Temporal Memory Engine for AI Coding Agents',
+  description: 'Give Claude Code long-horizon memory. Tri-layer memory engine that preserves full reasoning, keeps active context small, and recovers exact prior discussion across sessions.',
+  keywords: ['AI memory', 'Claude Code memory', 'coding agent memory', 'temporal memory', 'AI coding tools', 'agent memory', 'session memory', 'cross-session continuity', 'MCP server', 'Anthropic Claude', 'developer tools', 'AI agent context', 'long-horizon memory', 'engineering workflow memory'],
   publisher: 'RecCli',
   icons: {
     icon: '/icon.jpg',
@@ -19,8 +17,8 @@ export const metadata: Metadata = {
     canonical: 'https://reccli.com',
   },
   openGraph: {
-    title: 'RecCli - Terminal Recorder with One-Click Export',
-    description: 'Dead-simple terminal recorder with a floating button. One click to start, one click to stop. Free & open source.',
+    title: 'RecCli — Temporal Memory Engine for AI Coding Agents',
+    description: 'Tri-layer memory for AI coding agents. Preserve full reasoning, keep active context small, recover exact prior discussion across sessions.',
     url: 'https://reccli.com',
     siteName: 'RecCli',
     locale: 'en_US',
@@ -30,14 +28,14 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'RecCli - Terminal Recorder with One-Click Export',
+        alt: 'RecCli — Temporal Memory Engine for AI Coding Agents',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RecCli - Terminal Recorder with One-Click Export',
-    description: 'Dead-simple terminal recorder with a floating button. One click to start, one click to stop. Free & open source.',
+    title: 'RecCli — Temporal Memory Engine for AI Coding Agents',
+    description: 'Tri-layer memory for AI coding agents. Preserve full reasoning, keep active context small, recover exact prior discussion across sessions.',
     creator: '@reccli_app',
     images: ['/og-image.png'],
   },
