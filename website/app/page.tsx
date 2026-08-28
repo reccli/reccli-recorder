@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Brain, FileText, Search, FolderTree, Save, Zap, GitBranch } from 'lucide-react'
 
 const heroProjects = [
-  { name: 'Moonbase API', meta: '12 sessions', active: true },
+  { name: 'Moonbase', meta: '12 sessions', active: true },
   { name: 'Acorn Ledger', meta: '8 sessions' },
   { name: 'Paper Kite', meta: '21 sessions' },
   { name: 'Lantern CRM', meta: '5 sessions' },
@@ -629,7 +629,7 @@ export default function Home() {
                     <div className="terminal-selection">
                       <span className="terminal-path">Select</span>
                       <span className="terminal-prompt">❯</span>
-                      <span className="terminal-selected-name">Moonbase API</span>
+                      <span className="terminal-selected-name">Moonbase</span>
                       <span className="terminal-cursor" aria-hidden="true"></span>
                     </div>
                     <div className="terminal-context-status">
@@ -651,7 +651,7 @@ export default function Home() {
                     </div>
 
                     <div className="terminal-resume">
-                      <p>Loaded <strong>Moonbase API</strong>. Here&apos;s where you left off:</p>
+                      <p>Loaded <strong>Moonbase</strong>. Here&apos;s where you left off:</p>
                       <div className="terminal-open-items-label">Open items from last session:</div>
                       <ol className="terminal-open-items">
                         <li><span>1.</span><span>Finish the auth middleware migration</span></li>
